@@ -64,8 +64,143 @@
 			<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
 		</div>
 	</div>
+	
+	<div class="container">
+		<div class="row">   
+			<div class="col-md-12">   
+				<div class="page-header">
+				  <h1>Enrollment Form<small> for enrollees..</small></h1>
+				</div>
+			</div>
+		</div>   
+	
+	</div>   
+	
+	<div class="container">   
+		<form>
+			<div class="row">     
+				<div class="col-md-6">  
+					
+					<div class="row">   
+						<div class="col-md-4">   
+							<div class="form-group">
+								<label for="sur_name">Sur Name</label>
+								<input type="text" class="form-control" name="sur_name" id="sur_name" placeholder="Sur Name">
+							</div>
+						</div>   
+						
+						<div class="col-md-4">   
+							<div class="form-group">
+								<label for="first_name">First Name</label>
+								<input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name">
+							</div>
+						
+						</div>   
+						
+						<div class="col-md-4">     
+							<div class="form-group">
+								<label for="middle_name">Middle Name</label>
+								<input type="text" class="form-control" name="middle_name" id="middle_name" placeholder="Middle Name">
+							</div>
+						</div>   
+					</div>    
+					
+					<div class="form-group">
+						<label for="lrn">LRN</label>
+						<input type="text" class="form-control" name="lrn" id="lrn" placeholder="LRN">
+					</div>  
+					
+					<div class="form-group">
+						<label for="sex">Sex</label>
+						<input type="text" class="form-control" name="sex" id="sex" placeholder="Sex">
+					</div>  
+					
+					<div class="form-group">
+						<label for="date_of_birth">Date of Birth</label>
+						<input type="text" class="form-control" name="date_of_birth" id="date_of_birth" placeholder="Date of Birth">
+					</div>   
+					
+					<div class="form-group">
+						<label for="place_of_birth">Place of Birth</label>
+						<input type="text" class="form-control" name="place_of_birth" id="place_of_birth" placeholder="Place of Birth">
+					</div>
+				
+					<div class="form-group">
+						<label for="age">Age</label>
+						<input type="text" class="form-control" name="age" id="age" placeholder="Age">
+					</div>
+					
+					<div class="form-group">
+						<label for="present_address">Present Address</label>
+						<input type="text" class="form-control" name="present_address" id="present_address" placeholder="Present Address">
+					</div>   
+					
+					<div class="form-group">
+						<label for="school_last_attended">School Last Attended</label>
+						<input type="text" class="form-control" name="school_last_attended" id="school_last_attended" placeholder="School Last Attended">
+					</div>    
+					
+					<div class="form-group">
+						<label for="school_address">School Address</label>
+						<input type="text" class="form-control" name="school_address" id="school_address" placeholder="School Address">
+					</div>   
+				</div>    
+				
+				<div class="col-md-6">   
+					
+					<div class="form-group">
+						<label for="grade_or_year_level">Grade/Year Level</label>
+						<input type="text" class="form-control" name="grade_or_year_level" id="grade_or_year_level" placeholder="Grade/Year Level">
+					</div>      
+					
+					<div class="form-group">
+						<label for="school_year">School Year</label>
+						<input type="text" class="form-control" name="school_year" id="school_year" placeholder="School Year">
+					</div>    	   
 
-
+					<div class="form-group">
+						<label for="tve_specialization">TVE Specialization (for Grade 9 and 4th Yr. Student Only)</label>
+						<input type="text" class="form-control" name="tve_specialization" id="tve_specialization" placeholder="TVE Specialization (for Grade 9 and 4th Yr. Student Only)">
+					</div>    	
+					
+					<div class="form-group">
+						<label for="father">Father</label>
+						<input type="text" class="form-control" name="father" id="father" placeholder="Father">
+					</div>       
+					
+					<div class="form-group">
+						<label for="mother">Mother</label>
+						<input type="text" class="form-control" name="mother" id="mother" placeholder="Mother">
+					</div>      
+					
+					<div class="form-group">
+						<label for="person_to_notify">Person to Notify in Case of Emergency/Guardian</label>
+						<input type="text" class="form-control" name="person_to_notify" id="person_to_notify" placeholder="Person to Notify">
+					</div>    
+					
+					<div class="form-group">
+						<label for="address">Address</label>
+						<input type="text" class="form-control" name="address" id="address" placeholder="Address">
+					</div>  
+					
+					<div class="form-group">
+						<label for="contact_number">Tel. #/Cell #</label>
+						<input type="text" class="form-control" name="contact_number" id="contact_number" placeholder="Tel. #/Cell #">
+					</div> 
+					
+				</div>
+				
+			</div>   
+			
+			<div class="row">  
+				<div class="col-md-12">  
+					<button type="submit" class="btn btn-info">Submit</button>
+				</div>
+			</div>
+			
+		
+		</form>    
+	</div>  
 
 	<div class="container">  
 		<hr>
