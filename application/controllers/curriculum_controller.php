@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Home extends CI_Controller { 
-	
+class Curriculum_controller extends CI_Controller {   
+
 	public function debug($data) {
 		echo "<pre>";  
 			print_r($data);
@@ -15,20 +15,16 @@ class Home extends CI_Controller {
 	
 	public function index() {
 		
-		$data['main_content'] = "home_view";
-		$this->load->view('template/content', $data);
-		
-	}       
+		$data['main_content'] = "curriculum_view";
+		$this->load->view('template/content', $data);    
 	
-	function bootstrap() {
-		$this->load->view('bootstrap_view');
+	}         
+	
+	
+	
+	public function add_curriculum() { 
+		$this->debug($this->input->post());
 	}
-	
-	
-	
-
-}   
 
 
-
-
+}

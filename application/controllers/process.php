@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Home extends CI_Controller { 
-	
+class Process extends CI_Controller {  
+
 	public function debug($data) {
 		echo "<pre>";  
 			print_r($data);
@@ -11,24 +11,14 @@ class Home extends CI_Controller {
 	public function __construct() {
 		parent::__construct();  
 		date_default_timezone_set("Asia/Manila");
-	}   
+	}     
 	
-	public function index() {
-		
-		$data['main_content'] = "home_view";
-		$this->load->view('template/content', $data);
-		
-	}       
 	
-	function bootstrap() {
-		$this->load->view('bootstrap_view');
+	public function register_enrollee() {
+	
+		$this->debug($this->input->post());
 	}
 	
 	
-	
 
-}   
-
-
-
-
+ }

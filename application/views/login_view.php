@@ -30,7 +30,6 @@
 </head>
 <body>   
 	
-
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
@@ -77,7 +76,7 @@
 	</div>   
 	
 	<div class="container">   
-		<form>
+		<form id='register_enrollee_form' method='post' action="<?php echo base_url(); ?>index.php/process/register_enrollee">
 			<div class="row">     
 				<div class="col-md-6">  
 					
@@ -202,6 +201,7 @@
 		</form>    
 	</div>  
 
+	
 	<div class="container">  
 		<hr>
 		<footer>
@@ -209,23 +209,6 @@
 		</footer>
 	
 	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	<!-- scripts below -->
 	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/jquery2.js"></script>   
@@ -239,4 +222,6 @@
 	<!--main script is below-->
 	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/script.js"></script>   
 </body>
-</html>
+</html>   
+
+
