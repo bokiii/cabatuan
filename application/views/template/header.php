@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en-US">
+<html lang="en-US" ng-app="cabatuan">
 <head>
 	<meta charset="UTF-8">
 	<title>Student Information System</title>  
