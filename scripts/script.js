@@ -7,6 +7,45 @@ jQuery.fn.extend({
 	}
 });
 
+
+var alertModule = (function() {
+
+	var modalAlertOpen = function(data, containerToAppend) {
+		if(data.status) {
+			containerToAppend.children(".form-group").addClass("hidden");
+			containerToAppend.children(".my_alert_container").html("<div class='alert alert-success'  data-dismiss='alert' role='alert'> <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> <strong>Success</strong></div> ");                                                    
+		} else {
+			containerToAppend.children(".form-group").addClass("hidden");
+			containerToAppend.children(".my_alert_container").html("<div class='alert alert-danger' data-dismiss='alert' role='alert'> <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" + data.errors + "</div> ");                                                    
+		}	
+	};        
+	
+	var modalAlertClose = function() {
+		
+		$(document).on('click', '#modal_add_form .modal-body button.close', function () {
+			$(document).find(".hidden").removeClass('hidden');
+			$(document).find("#modal_add_form").trigger("reset");
+		});  
+		
+		
+		$(document).on('click', '#modal_update_form .modal-body button.close', function () {
+			$(document).find(".hidden").removeClass('hidden');
+		});
+	
+	};
+	
+
+
+	return {
+		modalAlertOpen:		modalAlertOpen, 
+		modalAlertClose:	modalAlertClose
+	}
+
+})()
+
+alertModule.modalAlertClose();   
+
+
 var modalModule = (function() {
 
 	var modalAddShow = function() {
@@ -17,7 +56,8 @@ var modalModule = (function() {
 	
 	var modalAddHide = function() {
 		$('#myAddModal').on('hide.bs.modal', function (e) {
-			$(document).find("#modal_add_form").trigger("reset");
+			$(document).find("#modal_add_form").trigger("reset");     
+			$(document).find("#modal_add_form .modal-body button.close").trigger("click");     
 		});   
 	};
 	
@@ -34,10 +74,14 @@ var modalModule = (function() {
 		}   
 		
 		function success_status(data) {
+			
+			var containerToAppend = $("#modal_add_form .modal-body");
+			
 			if(data.status) {
 				$(document).find(".curriculum_angular_trigger").trigger("click");
+				alertModule.modalAlertOpen(data, containerToAppend);
 			} else {
-				console.log(data.errors);
+				alertModule.modalAlertOpen(data, containerToAppend);
 			}
 		}
 		
@@ -62,12 +106,10 @@ var modalModule = (function() {
 	};   
 	
 	var modalUpdateHide = function() {
-		$('#myUpdateModal').on('hide.bs.modal', function (e) {  
-			$(document).find("#curriculum_update").attr("value", "");
-			$(document).find("#update_id").attr("value", "");
+		$('#myUpdateModal').on('hide.bs.modal', function (e) {
+			$(document).find("#modal_update_form .modal-body button.close").trigger("click");   
 		});   
-	};   
-	
+	};
 	
 	
 	var modalUpdateSubmit = function() {
@@ -84,24 +126,26 @@ var modalModule = (function() {
 		}   
 		
 		function success_status(data) {
+			var containerToAppend = $("#modal_update_form .modal-body");
+			
 			if(data.status) {
 				$(document).find(".curriculum_angular_trigger").trigger("click");       
+				alertModule.modalAlertOpen(data, containerToAppend);
 			} else {
-				console.log(data.errors);
+				alertModule.modalAlertOpen(data, containerToAppend);
 			}
 		}
 		
 	};
 
-	
-	
+
 	return {
 		modalAddShow: 			modalAddShow, 
 		modalAddHide: 			modalAddHide, 
 		modalAddFormSubmit: 	modalAddFormSubmit, 
-		modalUpdateShow: 		modalUpdateShow, 
-		modalUpdateSubmit:		modalUpdateSubmit, 
-		modalUpdateHide:		modalUpdateHide
+		modalUpdateShow: 		modalUpdateShow,   
+		modalUpdateHide:		modalUpdateHide,
+		modalUpdateSubmit:		modalUpdateSubmit
 	}
 
 })()
@@ -109,9 +153,9 @@ var modalModule = (function() {
 modalModule.modalAddShow();   
 modalModule.modalAddHide();      
 modalModule.modalAddFormSubmit();     
-modalModule.modalUpdateSubmit();  
-modalModule.modalUpdateShow();  
-//modalModule.modalUpdateHide();
+modalModule.modalUpdateShow();     
+modalModule.modalUpdateHide();
+modalModule.modalUpdateSubmit(); 
 
 
 var deleteFormModule = (function() {  
@@ -169,6 +213,7 @@ var deleteFormModule = (function() {
 
 deleteFormModule.executeCheckBox();   
 deleteFormModule.deleteFormSubmit();
+
 
 
 

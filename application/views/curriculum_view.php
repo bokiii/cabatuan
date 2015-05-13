@@ -12,9 +12,13 @@
 					<div class="form-group">
 						<label for="curriculum" class="control-label">Curriculum</label>
 						<input type="text" name="curriculum" class="form-control" id="curriculum">
-					</div>  
+					</div>           
+					
+					<div class='my_alert_container'>  
+					</div>
+					
+				</div>  
 				
-				</div>
 				<div class="modal-footer">  
 					<button type="reset" class="btn btn-primary">Reset</button>  
 					<button type="submit" class="btn btn-primary">Add</button>  
@@ -38,7 +42,10 @@
 						<label for="curriculum_update" class="control-label">Curriculum</label>
 						<input type="text" name="curriculum_update" class="form-control" id="curriculum_update" value="">  
 					</div>    
-					<input type="hidden" name="update_id" id="update_id" value=""/>
+					<input type="hidden" name="update_id" id="update_id" value=""/>  
+					
+					<div class='my_alert_container'>  
+					</div>
 				</div>
 				<div class="modal-footer">  
 					<button type="reset" class="btn btn-primary">Reset</button>  
