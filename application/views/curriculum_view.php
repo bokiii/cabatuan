@@ -118,13 +118,13 @@
 			<div class="row">    
 				<div class="col-md-12">   
 					
-					<button type="submit" class="my_button btn btn-danger">
-						<span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span> Delete
-					</button>
-				
 					<button type="button" class="my_button btn btn-primary" data-toggle="modal" data-target="#myAddModal">
 						<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add
-					</button>   
+					</button>      
+					
+					<button id="my_form_delete_button" type="submit" class="my_button btn btn-danger">
+						<span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span> Delete
+					</button>
 					
 				</div>  
 			</div>    

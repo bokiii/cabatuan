@@ -8,7 +8,8 @@
 	<!-- scripts below -->
 	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/jquery2.js"></script>   
 	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/jquery.form.js"></script>
-	<script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/js/bootstrap.js"></script>  
+	<script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/js/bootstrap.js"></script>     
+	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/bootbox.min.js"></script>
 	
 	<script src="<?php echo base_url(); ?>scripts/holder.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

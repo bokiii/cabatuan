@@ -25,10 +25,19 @@ var alertModule = (function() {
 		$(document).on('click', '#modal_add_form .modal-body button.close', function () {
 			$(document).find(".hidden").removeClass('hidden');
 			$(document).find("#modal_add_form").trigger("reset");
+		});    
+		
+		$(document).on('click', '#modal_add_form .modal-body div.alert', function () {
+			$(document).find(".hidden").removeClass('hidden');
+			$(document).find("#modal_add_form").trigger("reset");
 		});  
 		
-		
+	
 		$(document).on('click', '#modal_update_form .modal-body button.close', function () {
+			$(document).find(".hidden").removeClass('hidden');
+		});     
+		
+		$(document).on('click', '#modal_update_form .modal-body div.alert', function () {
 			$(document).find(".hidden").removeClass('hidden');
 		});
 	
@@ -184,18 +193,42 @@ var deleteFormModule = (function() {
 		
 	};  
 	
+	var deleteClick = function() {
+		
+		$(document).on('click', "#my_form_delete_button", function(e){
+		
+			e.preventDefault();
+			
+			bootbox.confirm("Are you sure?", function(result) {
+				if(result) {
+					$(document).find("#delete_form").submit();
+				}
+			});        
+			
+		
+		});
+		
+	
+	};
+
 	var deleteFormSubmit = function() {
+		
+		var returnValue = false; 
+		var isCancelled = false;
+		
 		$("#delete_form").ajaxForm({
 			dataType: 'json',
 			forceSync: true,
 			beforeSubmit: loading,
 			success: success_status
-		});   
+		});     
+		
 		
 		function loading() {
 			return true;
-		}  
+		}
 		
+
 		function success_status(data) {
 			if(data.status) {
 				$(document).find(".curriculum_angular_trigger").trigger("click");
@@ -205,13 +238,15 @@ var deleteFormModule = (function() {
 	};
 	
 	return {
-		executeCheckBox:	executeCheckBox, 
+		executeCheckBox:	executeCheckBox,    
+		deleteClick:		deleteClick,
 		deleteFormSubmit:	deleteFormSubmit
 	}
 
 })()   
 
-deleteFormModule.executeCheckBox();   
+deleteFormModule.executeCheckBox();      
+deleteFormModule.deleteClick();
 deleteFormModule.deleteFormSubmit();
 
 
