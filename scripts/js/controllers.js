@@ -21,25 +21,30 @@ controllers.controller('curriculumYear', function($scope, $http){
 	};
 	
 	
-	/*var studentAcademicUrl = fullUrl.replace("manage_students", "get_student_academic_data_group_by_school_year_and_term_id");
-	
-	$scope.subjects;
-	
-	$http.get(studentAcademicUrl).success(function(data){
-		$scope.subjects = data.subjects; 	    
-	});
-	
-	$scope.getSubjects = function() {
-		$http.get(studentAcademicUrl).success(function(data){
-			$scope.subjects = data.subjects;     
-		});
-	};*/  
-	
-	
 });
 
 
+controllers.controller('curriculumSubject', function($scope, $http){
+	
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;   
+	
+	var curriculumSubjectUrl = fullUrl.replace("curriculum_subjects_controller", "curriculum_subjects_controller/get_curriculum_subject");
 
+	$scope.curriculumSubjects;      
+	
+	$http.get(curriculumSubjectUrl).success(function(data){
+		$scope.curriculumSubjects = data.curriculum_subjects;           
+	}); 
+	
+	$scope.getCurriculumSubjects = function() {
+		$http.get(curriculumSubjectUrl).success(function(data){
+			$scope.curriculumSubjects = data.curriculum_subjects;     
+		});  
+	};
+	
+	
+});
 
 
 

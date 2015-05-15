@@ -43,8 +43,6 @@ var alertModule = (function() {
 	
 	};
 	
-
-
 	return {
 		modalAlertOpen:		modalAlertOpen, 
 		modalAlertClose:	modalAlertClose
@@ -87,7 +85,13 @@ var modalModule = (function() {
 			var containerToAppend = $("#modal_add_form .modal-body");
 			
 			if(data.status) {
-				$(document).find(".curriculum_angular_trigger").trigger("click");
+				
+				// below is the angular trigger for curriculum
+				$(document).find(".curriculum_angular_trigger").trigger("click");   
+				
+				// below is the angular trigger for curriculum subject
+				$(document).find(".curriculum_subject_angular_trigger").trigger("click");   
+				
 				alertModule.modalAlertOpen(data, containerToAppend);
 			} else {
 				alertModule.modalAlertOpen(data, containerToAppend);
@@ -104,9 +108,19 @@ var modalModule = (function() {
 			
 			var getUrl = $(this).attr("href");   
 			$.get(getUrl, function(data){
-				var datas = eval('msg=' + data);     
-				$(document).find("#curriculum_update").attr("value", datas.curriculum);
-				$(document).find("#update_id").attr("value", datas.id);
+				var datas = eval('msg=' + data);        
+				
+				if(datas.curriculum != undefined) {
+					console.log(datas.curriculum);
+					$(document).find("#curriculum_update").attr("value", datas.curriculum);
+					$(document).find("#update_id").attr("value", datas.id);
+				}  
+				
+				if(datas.subject != undefined) {
+					$(document).find("#subject_update").attr("value", datas.subject);
+					$(document).find("#update_id").attr("value", datas.id);
+				}
+				
 			});
 			
 			return false;
@@ -119,7 +133,6 @@ var modalModule = (function() {
 			$(document).find("#modal_update_form .modal-body button.close").trigger("click");   
 		});   
 	};
-	
 	
 	var modalUpdateSubmit = function() {
 		
@@ -138,7 +151,13 @@ var modalModule = (function() {
 			var containerToAppend = $("#modal_update_form .modal-body");
 			
 			if(data.status) {
-				$(document).find(".curriculum_angular_trigger").trigger("click");       
+			
+				// below is the angular trigger for curriculum
+				$(document).find(".curriculum_angular_trigger").trigger("click");   
+				
+				// below is the angular trigger for curriculum subject
+				$(document).find(".curriculum_subject_angular_trigger").trigger("click");   
+				
 				alertModule.modalAlertOpen(data, containerToAppend);
 			} else {
 				alertModule.modalAlertOpen(data, containerToAppend);
@@ -231,7 +250,12 @@ var deleteFormModule = (function() {
 
 		function success_status(data) {
 			if(data.status) {
-				$(document).find(".curriculum_angular_trigger").trigger("click");
+				
+				// below is the angular trigger for curriculum
+				$(document).find(".curriculum_angular_trigger").trigger("click");   
+				
+				// below is the angular trigger for curriculum subject
+				$(document).find(".curriculum_subject_angular_trigger").trigger("click");   
 			}
 		}
 		
