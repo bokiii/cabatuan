@@ -40,8 +40,15 @@
 					</div>		   
 
 					<div class="form-group">
+				
 						<label for="birth_date" class="control-label">Birth Date</label>
-						<input type="text" name="birth_date" class="form-control" id="birth_date">
+						<div class='input-group date' id='add_birth_date_picker'>
+							<input type='text' name="birth_date" id="birth_date" class="form-control" />
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar"></span>
+							</span>
+						</div>
+					
 					</div>						
 					
 					<div class='my_alert_container'>  
@@ -100,8 +107,18 @@
 					</div>		   
 
 					<div class="form-group">
+						<!--<label for="birth_date_update" class="control-label">Birth Date</label>
+						<input type="text" name="birth_date_update" class="form-control" id="birth_date_update" value="">-->
+						
 						<label for="birth_date_update" class="control-label">Birth Date</label>
-						<input type="text" name="birth_date_update" class="form-control" id="birth_date_update" value="">
+						<div class='input-group date' id='update_birth_date_picker'>
+							<input type='text' name="birth_date_update" id="birth_date_update" class="form-control" />
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar"></span>
+							</span>
+						</div>
+						
+					
 					</div>				
 					
 					<input type="hidden" name="update_id" id="update_id" value=""/>  

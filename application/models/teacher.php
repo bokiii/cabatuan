@@ -31,7 +31,7 @@ class Teacher extends Datamapper {
 		),    
 		'birth_date' => array(
 			'label' => 'Birth Date', 
-			'rules' => array('required', 'trim')
+			'rules' => array('required', 'trim', 'valid_date')
 		)
 	);
 

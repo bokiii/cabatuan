@@ -7,7 +7,6 @@ jQuery.fn.extend({
 	}
 });
 
-
 var alertModule = (function() {
 
 	var modalAlertOpen = function(data, containerToAppend) {
@@ -51,7 +50,6 @@ var alertModule = (function() {
 })()
 
 alertModule.modalAlertClose();   
-
 
 var modalModule = (function() {
 
@@ -205,7 +203,6 @@ modalModule.modalUpdateShow();
 modalModule.modalUpdateHide();
 modalModule.modalUpdateSubmit(); 
 
-
 var deleteFormModule = (function() {  
 
 	var executeCheckBox = function() {
@@ -299,8 +296,29 @@ deleteFormModule.executeCheckBox();
 deleteFormModule.deleteClick();
 deleteFormModule.deleteFormSubmit();
 
+var datePickerModule = (function() {
+	
+	var getBirthDate = function() {
+		
+		$('#add_birth_date_picker').datetimepicker({
+			format: 'YYYY-MM-DD', 
+			keepInvalid: true
+		});      
+		
+		$('#update_birth_date_picker').datetimepicker({
+			format: 'YYYY-MM-DD', 
+			keepInvalid: true
+		});
+	
+	};  
+	
+	return {
+		getBirthDate: 	getBirthDate
+	}
+	
+})()
 
-
+datePickerModule.getBirthDate();
 
 
 

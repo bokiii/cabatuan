@@ -9,6 +9,8 @@
 	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/jquery2.js"></script>   
 	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/jquery.form.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/js/bootstrap.js"></script>     
+	<script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/js/moment-with-locales.js"></script> 
+	<script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/js/bootstrap-datetimepicker.js"></script> 
 	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/bootbox.min.js"></script>
 	
 	<script src="<?php echo base_url(); ?>scripts/holder.js"></script>

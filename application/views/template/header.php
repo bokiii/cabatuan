@@ -11,7 +11,8 @@
     <link rel="icon" href="<?php echo base_url(); ?>images/hide.ico">
 	
 
-	<link rel="stylesheet" href="<?php echo base_url(); ?>bootstrap/css/bootstrap.css" />    
+	<link rel="stylesheet" href="<?php echo base_url(); ?>bootstrap/css/bootstrap.css" />     
+	<link rel="stylesheet" href="<?php echo base_url(); ?>bootstrap/css/bootstrap-datetimepicker.css" /> 
 	<link rel="stylesheet" href="<?php echo base_url(); ?>styles/jumbotron.css" />   
 	
 	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
