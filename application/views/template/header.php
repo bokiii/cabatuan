@@ -56,11 +56,7 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Teachers <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu"> 
-							<li><a href="#">Manage Teachers</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Manage Teachers Subjects</a></li>    
-							<li class="divider"></li>
-							<li><a href="#">Manage Teachers Assigned Sections</a></li>
+							<li><a href="<?php echo base_url(); ?>index.php/teachers_controller">Manage Teachers</a></li>
 						</ul>
 					</li>   
 					<li class="dropdown">

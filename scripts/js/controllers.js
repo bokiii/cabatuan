@@ -47,9 +47,28 @@ controllers.controller('curriculumSubject', function($scope, $http){
 });
 
 
+controllers.controller('teacher', function($scope, $http){
+	
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;   
+	
+	var teacherUrl = fullUrl + "/get_teacher"; 
 
+	$scope.teachers;      
+	
+	$http.get(teacherUrl).success(function(data){
+	
+		$scope.teachers = data.teachers;  
 
-
+	}); 
+	
+	$scope.getTeachers = function() {
+		$http.get(teacherUrl).success(function(data){
+			$scope.teachers = data.teachers;
+		}); 
+	};
+	
+});
 
 
 

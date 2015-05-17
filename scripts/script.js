@@ -90,7 +90,10 @@ var modalModule = (function() {
 				$(document).find(".curriculum_angular_trigger").trigger("click");   
 				
 				// below is the angular trigger for curriculum subject
-				$(document).find(".curriculum_subject_angular_trigger").trigger("click");   
+				$(document).find(".curriculum_subject_angular_trigger").trigger("click");     
+				
+				// below is the trigger for the teachers 
+				$(document).find(".teacher_angular_trigger").trigger("click");  
 				
 				alertModule.modalAlertOpen(data, containerToAppend);
 			} else {
@@ -110,14 +113,28 @@ var modalModule = (function() {
 			$.get(getUrl, function(data){
 				var datas = eval('msg=' + data);        
 				
+				// below is for the curriculum update 
 				if(datas.curriculum != undefined) {
 					console.log(datas.curriculum);
 					$(document).find("#curriculum_update").attr("value", datas.curriculum);
 					$(document).find("#update_id").attr("value", datas.id);
 				}  
 				
+				// below is for the subject update 
 				if(datas.subject != undefined) {
 					$(document).find("#subject_update").attr("value", datas.subject);
+					$(document).find("#update_id").attr("value", datas.id);
+				}  
+				
+				// below is for the teacher update   
+				if(datas.user_type != undefined) {   
+					$(document).find("#first_name_update").attr("value", datas.first_name);     
+					$(document).find("#last_name_update").attr("value", datas.last_name);  
+					$(document).find("#middle_name_update").attr("value", datas.middle_name);
+					$(document).find("#address_update").attr("value", datas.address);
+					$(document).find("#civilstatus_update").attr("value", datas.civilstatus);
+					$(document).find("#religion_update").attr("value", datas.religion);
+					$(document).find("#birth_date_update").attr("value", datas.birth_date);
 					$(document).find("#update_id").attr("value", datas.id);
 				}
 				
@@ -156,7 +173,10 @@ var modalModule = (function() {
 				$(document).find(".curriculum_angular_trigger").trigger("click");   
 				
 				// below is the angular trigger for curriculum subject
-				$(document).find(".curriculum_subject_angular_trigger").trigger("click");   
+				$(document).find(".curriculum_subject_angular_trigger").trigger("click");      
+				
+				// below is the trigger for the teachers 
+				$(document).find(".teacher_angular_trigger").trigger("click");  
 				
 				alertModule.modalAlertOpen(data, containerToAppend);
 			} else {
@@ -251,11 +271,17 @@ var deleteFormModule = (function() {
 		function success_status(data) {
 			if(data.status) {
 				
+				$(document).find(".main_check").uncheck();  
+				$(document).find(".sub_check").uncheck();
+				
 				// below is the angular trigger for curriculum
 				$(document).find(".curriculum_angular_trigger").trigger("click");   
 				
 				// below is the angular trigger for curriculum subject
-				$(document).find(".curriculum_subject_angular_trigger").trigger("click");   
+				$(document).find(".curriculum_subject_angular_trigger").trigger("click");     
+				
+				// below is the trigger for the teachers 
+				$(document).find(".teacher_angular_trigger").trigger("click");  
 			}
 		}
 		
