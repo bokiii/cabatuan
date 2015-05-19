@@ -71,7 +71,26 @@ controllers.controller('teacher', function($scope, $http){
 });
 
 
+controllers.controller('teacherSubject', function($scope, $http){
+	
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;   
+	
+	var teacherSubjectUrl = fullUrl.replace("teacher_subjects_controller", "teacher_subjects_controller/get_teacher_subjects");
 
+	$scope.teacherSubjects;      
+	
+	$http.get(teacherSubjectUrl).success(function(data){
+		$scope.teacherSubjects = data.teacher_subjects;   
+	}); 
+	
+	$scope.getTeacherSubjects = function() {
+		$http.get(teacherSubjectUrl).success(function(data){
+			$scope.teacherSubjects = data.teacher_subjects;   	
+		}); 
+	};
+	
+});
 
 
 

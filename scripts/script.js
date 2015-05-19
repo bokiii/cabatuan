@@ -184,7 +184,6 @@ var modalModule = (function() {
 		
 	};
 
-
 	return {
 		modalAddShow: 			modalAddShow, 
 		modalAddHide: 			modalAddHide, 
@@ -278,7 +277,10 @@ var deleteFormModule = (function() {
 				$(document).find(".curriculum_subject_angular_trigger").trigger("click");     
 				
 				// below is the trigger for the teachers 
-				$(document).find(".teacher_angular_trigger").trigger("click");  
+				$(document).find(".teacher_angular_trigger").trigger("click");     
+				
+				// below is the trigger for the teacher subjects 
+				$(document).find(".teacher_subject_angular_trigger").trigger("click");  
 			}
 		}
 		
@@ -318,7 +320,86 @@ var datePickerModule = (function() {
 	
 })()
 
-datePickerModule.getBirthDate();
+datePickerModule.getBirthDate();  
+
+
+var listModalModule = (function() {
+
+	var listAddModalHide = function() {
+
+		$('#listAddModal').on('hide.bs.modal', function (e) {
+			$(document).find("#list_add_form").trigger("reset");    
+		});   
+	
+	};
+
+	var listAddFormSubmit = function() {
+		
+		$("#list_add_form").ajaxForm({
+			dataType: 'json',
+			forceSync: true,
+			beforeSubmit: loading,
+			success: success_status
+		});   
+		
+		function loading() {   
+			return true;
+		}   
+		
+		function success_status(data) {
+			
+			$('#listAddModal').modal('hide');
+			
+			if(data.status == true) {
+				bootbox.alert("Success");
+			} else {
+				bootbox.alert("Failed");
+			} 
+			
+			// below is the trigger for the teacher subjects 
+			$(document).find(".teacher_subject_angular_trigger").trigger("click");  
+		}
+	
+	};  
+	
+	return {
+		listAddFormSubmit: 		listAddFormSubmit, 
+		listAddModalHide:		listAddModalHide
+	}
+
+})()
+
+listModalModule.listAddFormSubmit();   
+listModalModule.listAddModalHide();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

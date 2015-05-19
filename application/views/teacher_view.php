@@ -107,8 +107,6 @@
 					</div>		   
 
 					<div class="form-group">
-						<!--<label for="birth_date_update" class="control-label">Birth Date</label>
-						<input type="text" name="birth_date_update" class="form-control" id="birth_date_update" value="">-->
 						
 						<label for="birth_date_update" class="control-label">Birth Date</label>
 						<div class='input-group date' id='update_birth_date_picker'>
@@ -118,7 +116,6 @@
 							</span>
 						</div>
 						
-					
 					</div>				
 					
 					<input type="hidden" name="update_id" id="update_id" value=""/>  
@@ -192,7 +189,7 @@
 										<a class="my_update_link" href="<?php echo base_url(); ?>index.php/teachers_controller/get_teacher_update_content_by_id?id={{teacher.id}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="modal" data-target="#myUpdateModal"></span></a>
 									</td>
 									<td>  
-										<a href="#"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+										<a href="<?php echo base_url(); ?>index.php/teacher_subjects_controller?teacher_id={{teacher.id}}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
 									</td>  
 									<td>  
 										<a href="#"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
