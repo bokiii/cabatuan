@@ -11,7 +11,7 @@ class Teacher_subject extends Datamapper {
 		),     
 		'subject_id' => array(
 			'label' => 'Subject', 
-			'rules' => array('required', 'unique')
+			'rules' => array('required')
 		)
 	);
 
