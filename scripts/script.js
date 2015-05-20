@@ -351,9 +351,13 @@ var listModalModule = (function() {
 			$('#listAddModal').modal('hide');
 			
 			if(data.status == true) {
-				bootbox.alert("Success");
+				bootbox.alert("Success", function() {
+					document.location.reload(true);
+				});
 			} else {
-				bootbox.alert("Failed");
+				bootbox.alert("Failed", function() {
+					document.location.reload(true);
+				});
 			} 
 			
 			// below is the trigger for the teacher subjects 

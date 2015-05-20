@@ -29,6 +29,16 @@ class Teacher_subjects_model extends CI_Model {
 		
 	}
 
+	function check_teacher_subject_by_subject_id_and_teacher_id($id, $teacher_id) {
+	
+		$this->db->where('subject_id', $id);      
+		$this->db->where('teacher_id', $teacher_id);
+		$query = $this->db->get('teachers_subjects');   
+		
+		return $query->result();
+	
+	}
+	
 }  
 
 

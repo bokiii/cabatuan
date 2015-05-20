@@ -29,7 +29,7 @@ class Teacher_subjects_controller extends CI_Controller {
 			$data['middle_name'] = $row->middle_name; 
 		}           
 		
-		$data['curriculum_subjects'] = $this->get_curriculum_subjects();
+		$data['curriculum_subjects'] = $this->get_curriculum_subjects($teacher_id);
 		$data['teacher_id'] = $teacher_id; 
 		$data['main_content'] = "teacher_subject_view";
 		$this->load->view('template/content', $data);        
@@ -62,7 +62,7 @@ class Teacher_subjects_controller extends CI_Controller {
 		
 	}
 
-	private function get_curriculum_subjects() {
+	private function get_curriculum_subjects($teacher_id) {
 	
 		$data = "";
 	
@@ -79,15 +79,25 @@ class Teacher_subjects_controller extends CI_Controller {
 			";
 			
 			$get_curriculum_subjects_by_curriculum_id = $this->curriculum_subjects_model->get_curriculum_subjects_by_curriculum_id($curriculum_id);                            
+			
 			foreach($get_curriculum_subjects_by_curriculum_id as $row_b) {
+				
 				$id = $row_b->id;
-				$subject =  $row_b->subject;   
+				$subject =  $row_b->subject;      
 				
-				$data .= "
-					<option value='{$id}'>{$subject}</option>
-				";
-				
-			}
+				$check_teacher_subject_by_subject_id_and_teacher_id = $this->teacher_subjects_model->check_teacher_subject_by_subject_id_and_teacher_id($id, $teacher_id);
+				if($check_teacher_subject_by_subject_id_and_teacher_id != NULL) {
+					
+					$data .= "
+						<option disabled style='color: #DFDFDF;' value='{$id}'>{$subject} - Already Added</option>
+					";   
+					
+				} else {
+					$data .= "
+						<option value='{$id}'>{$subject}</option>
+					";   
+				}
+			}   
 			
 			$data .= "
 					</select>
