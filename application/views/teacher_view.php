@@ -174,7 +174,6 @@
 									<th>Birth Date</th>   
 									<th>Edit Data</th>  
 									<th>Manage Subjects</th>  
-									<th>Manage Sections</th>
 								</tr>
 							</thead>   
 							<tbody>   
@@ -191,9 +190,6 @@
 									<td>  
 										<a href="<?php echo base_url(); ?>index.php/teacher_subjects_controller?teacher_id={{teacher.id}}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
 									</td>  
-									<td>  
-										<a href="#"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
-									</td>
 								</tr>
 							</tbody>
 						</table>

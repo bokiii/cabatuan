@@ -88,7 +88,10 @@ var modalModule = (function() {
 				$(document).find(".curriculum_angular_trigger").trigger("click");   
 				
 				// below is the angular trigger for curriculum subject
-				$(document).find(".curriculum_subject_angular_trigger").trigger("click");     
+				$(document).find(".curriculum_subject_angular_trigger").trigger("click");        
+				
+				// below is the angular trigger for curriculum section
+				$(document).find(".curriculum_section_angular_trigger").trigger("click");       
 				
 				// below is the trigger for the teachers 
 				$(document).find(".teacher_angular_trigger").trigger("click");  
@@ -118,11 +121,18 @@ var modalModule = (function() {
 					$(document).find("#update_id").attr("value", datas.id);
 				}  
 				
-				// below is for the subject update 
+				// below is for the curriculum subject update 
 				if(datas.subject != undefined) {
 					$(document).find("#subject_update").attr("value", datas.subject);
 					$(document).find("#update_id").attr("value", datas.id);
-				}  
+				}          
+				
+				// below is for the curriculum section update 
+				if(datas.section != undefined) {
+					$(document).find("#section_update").attr("value", datas.section);
+					$(document).find("#update_id").attr("value", datas.id);
+				}    
+				
 				
 				// below is for the teacher update   
 				if(datas.user_type != undefined) {   
@@ -171,7 +181,10 @@ var modalModule = (function() {
 				$(document).find(".curriculum_angular_trigger").trigger("click");   
 				
 				// below is the angular trigger for curriculum subject
-				$(document).find(".curriculum_subject_angular_trigger").trigger("click");      
+				$(document).find(".curriculum_subject_angular_trigger").trigger("click");     
+
+				// below is the angular trigger for curriculum section
+				$(document).find(".curriculum_section_angular_trigger").trigger("click");       
 				
 				// below is the trigger for the teachers 
 				$(document).find(".teacher_angular_trigger").trigger("click");  
@@ -274,7 +287,10 @@ var deleteFormModule = (function() {
 				$(document).find(".curriculum_angular_trigger").trigger("click");   
 				
 				// below is the angular trigger for curriculum subject
-				$(document).find(".curriculum_subject_angular_trigger").trigger("click");     
+				$(document).find(".curriculum_subject_angular_trigger").trigger("click");       
+				
+				// below is the angular trigger for curriculum section
+				$(document).find(".curriculum_section_angular_trigger").trigger("click");       
 				
 				// below is the trigger for the teachers 
 				$(document).find(".teacher_angular_trigger").trigger("click");     

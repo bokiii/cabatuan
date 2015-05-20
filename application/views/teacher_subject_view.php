@@ -61,14 +61,18 @@
 								<tr>
 									<th><input type="checkbox" class="main_check" /></th>
 									<th>Subject</th>     
-									<th>Curriculum</th>  
+									<th>Curriculum</th>     
+									<th>Assigned Sections</th>
 								</tr>
 							</thead>   
 							<tbody>   
 								<tr ng-repeat="teacherSubject in teacherSubjects | filter: query">
 									<td><input type="checkbox" name="teacher_subject_id[]" value="{{teacherSubject.id}}" class="sub_check" /></td>
 									<td>{{teacherSubject.subject}}</td>      
-									<td>{{teacherSubject.curriculum}}</td>   
+									<td>{{teacherSubject.curriculum}}</td>     
+									<td>  
+										<a href="#"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+									</td>  									
 								</tr>
 							</tbody>
 						</table>
