@@ -34,7 +34,13 @@ class Curriculum_subjects_model extends CI_Model {
 		return $query->result();
 	}
 	
-	
+	function get_curriculum_sections_by_curriculum_id($id) {
+		$this->db->select("id, section");     
+		$this->db->from('curriculum_sections');          
+		$this->db->where('curriculum_id', $id);		
+		$query = $this->db->get();   
+		return $query->result();
+	}
 
 
 }    

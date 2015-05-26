@@ -296,7 +296,10 @@ var deleteFormModule = (function() {
 				$(document).find(".teacher_angular_trigger").trigger("click");     
 				
 				// below is the trigger for the teacher subjects 
-				$(document).find(".teacher_subject_angular_trigger").trigger("click");  
+				$(document).find(".teacher_subject_angular_trigger").trigger("click");      
+				
+				// below is the trigger for the teacher subject sections
+				$(document).find(".teacher_subject_section_angular_trigger").trigger("click");  
 			}
 		}
 		
@@ -377,7 +380,10 @@ var listModalModule = (function() {
 			} 
 			
 			// below is the trigger for the teacher subjects 
-			$(document).find(".teacher_subject_angular_trigger").trigger("click");  
+			$(document).find(".teacher_subject_angular_trigger").trigger("click");      
+			
+			// below is the trigger for the teacher subject sections
+			$(document).find(".teacher_subject_section_angular_trigger").trigger("click");  
 		}
 	
 	};  

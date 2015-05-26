@@ -39,13 +39,8 @@ class Teacher_subjects_model extends CI_Model {
 	
 	}
 	
-}  
 
-
-
-
-
-
+}
 
 
 

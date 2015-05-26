@@ -115,6 +115,30 @@ controllers.controller('teacherSubject', function($scope, $http){
 });
 
 
+controllers.controller('teacherSubjectSection', function($scope, $http){
+	
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;   
+	
+	var teacherSubjectSectionUrl = fullUrl.replace("teacher_subject_sections_controller", "teacher_subject_sections_controller/get_teacher_subject_section");
+
+	$scope.teacherSubjectSections;      
+	
+	$http.get(teacherSubjectSectionUrl).success(function(data){
+		$scope.teacherSubjectSections = data.teacher_subject_sections;       
+	}); 
+	
+	$scope.getTeacherSubjectSections = function() {
+		$http.get(teacherSubjectSectionUrl).success(function(data){
+			$scope.teacherSubjectSections = data.teacher_subject_sections;       
+		}); 
+	};
+	
+});
+
+
+
+
 
 
 

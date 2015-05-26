@@ -2,16 +2,18 @@
 <div class="modal fade" id="listAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
-			<form id="list_add_form" action="<?php echo base_url(); ?>index.php/teacher_subjects_controller/add_teacher_subject" method="post">
+			<form id="list_add_form" action="<?php echo base_url(); ?>index.php/teacher_subject_sections_controller/add_teacher_subject_section" method="post">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Subjects <small>(press ctrl to select and deselect)</small></h4>
+					<h4 class="modal-title" id="myModalLabel">Assigned Section <small>(press ctrl to select and deselect)</small></h4>
 				</div>
 				<div class="modal-body">  
 					
-					<?php echo $curriculum_subjects; ?>    
+					<?php   
+						echo $curriculum_sections;
+					?>
 					
-					<input type="hidden" name="teacher_id" value="<?php echo $teacher_id; ?>" />
+					<input type="hidden" name="teacher_subject_id" value="<?php echo $teacher_subject_id; ?>" />
 					<div class='my_alert_container'>  
 					</div>
 					
@@ -27,13 +29,13 @@
 </div>  
 
 
-<div class="main_container" ng-controller='teacherSubject'>
+<div class="main_container" ng-controller='teacherSubjectSection'>
 	<div class="container">   
 		
 		<div class="row">   
 			<div class="col-md-12">   
 				<div class="page-header">
-					<h1><?php echo $last_name . ", " . $first_name . " " . $middle_name;  ?> <small>Subjects</small></h1>
+					<h1><?php echo $last_name . ", " . $first_name . " " . $middle_name . " (" . $subject . ")";  ?> <small>assigned sections</small></h1>
 				</div>
 			</div>  
 		</div>         
@@ -51,7 +53,7 @@
 			</div>  
 		</div>   
 		
-		<form id="delete_form" action="<?php echo base_url(); ?>index.php/teacher_subjects_controller/delete_teacher_subject" method='post'>
+		<form id="delete_form" action="<?php echo base_url(); ?>index.php/teacher_subject_sections_controller/delete_teacher_subject_section" method='post'>
 			<div class="row">  
 				<div class="col-md-12">
 				
@@ -60,18 +62,18 @@
 							<thead>  
 								<tr>
 									<th><input type="checkbox" class="main_check" /></th>
-									<th>Subject</th>     
+									<th>Section</th>     
 									<th>Curriculum</th>     
-									<th>Assigned Sections</th>
+									<th>Manage Students</th>
 								</tr>
 							</thead>   
 							<tbody>   
-								<tr ng-repeat="teacherSubject in teacherSubjects | filter: query">
-									<td><input type="checkbox" name="teacher_subject_id[]" value="{{teacherSubject.id}}" class="sub_check" /></td>
-									<td>{{teacherSubject.subject}}</td>      
-									<td>{{teacherSubject.curriculum}}</td>     
+								<tr ng-repeat="teacherSubjectSection in teacherSubjectSections | filter: query">
+									<td><input type="checkbox" name="teacher_subject_section_id[]" value="{{teacherSubjectSection.id}}" class="sub_check" /></td>
+									<td>{{teacherSubjectSection.section}}</td>      
+									<td>{{teacherSubjectSection.curriculum}}</td>     
 									<td>  
-										<a href="<?php echo base_url(); ?>index.php/teacher_subject_sections_controller?teacher_subject_id={{teacherSubject.id}}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+										<a href="#"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
 									</td>  									
 								</tr>
 							</tbody>
@@ -100,7 +102,7 @@
 		<!-- below is the hidden div for the angular trigger -->
 		<div class="row my_hidden_div">   
 			<div class="col-md-12">   
-				<button type="button" ng-click="getTeacherSubjects()" class="btn btn-primary teacher_subject_angular_trigger">Get Teacher Subjects</button>   
+				<button type="button" ng-click="getTeacherSubjectSections()" class="btn btn-primary teacher_subject_section_angular_trigger">Get Teacher Subject Sections</button>   
 			</div>
 		</div>
 		
