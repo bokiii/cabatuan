@@ -13,36 +13,46 @@ class Teacher_subject_sections_controller extends CI_Controller {
 		date_default_timezone_set("Asia/Manila");  
 		
 		$this->load->model('teacher_subject_sections_model');      
-		$this->load->model('curriculum_subjects_model');
+		$this->load->model('curriculum_subjects_model');  
+		$this->load->model('teacher_subjects_model');   
+		$this->load->model('curriculum_model');    
+		$this->load->model('teacher_model');   
 	}   
 
 	public function index() {
 		
-		$teacher_subject_id = $this->input->get('teacher_subject_id');  
+		$teacher_subject_id = $this->input->get('teacher_subject_id');     
+		
+		$get_teacher_subject_curriculumm_id_by_teacher_subject_id = $this->teacher_subjects_model->get_teacher_subject_curriculumm_id_by_teacher_subject_id($teacher_subject_id);
+		
+		foreach($get_teacher_subject_curriculumm_id_by_teacher_subject_id as $row_a) {
+			$curriculum_id = $row_a->curriculum_id;
+		}
 		
 		$get_teacher_subject_data_by_teacher_subject_id = $this->teacher_subject_sections_model->get_teacher_subject_data_by_teacher_subject_id($teacher_subject_id);                  
   
 		foreach($get_teacher_subject_data_by_teacher_subject_id as $row){
+			$subject_id = $row->subject_id;
+			
 			$data['first_name'] = $row->first_name;   
 			$data['last_name'] = $row->last_name;   
 			$data['middle_name'] = $row->middle_name;   
 			$data['subject'] = $row->subject;
 		}   
 		
-		$data['curriculum_sections'] = $this->get_curriculum_sections($teacher_subject_id);
+		$data['curriculum_sections'] = $this->get_curriculum_sections($teacher_subject_id, $curriculum_id, $subject_id);
 		$data['teacher_subject_id'] = $teacher_subject_id;
 		$data['main_content'] = "teacher_subject_section_view";
 		$this->load->view('template/content', $data); 
 	}     
 	
-	private function get_curriculum_sections($teacher_subject_id) {
+	private function get_curriculum_sections($teacher_subject_id, $curriculum_id, $subject_id) {
 	
 		$data = "";
 	
-		$get_curriculum = $this->curriculum_subjects_model->get_curriculum();      
+		$get_curriculum = $this->curriculum_model->get_curriculum_by_id($curriculum_id);      
 	
 		foreach($get_curriculum as $row_a) {
-			$curriculum_id = $row_a->curriculum_id;    
 			$curriculum = $row_a->curriculum;     
 
 			$data .= "
@@ -56,11 +66,23 @@ class Teacher_subject_sections_controller extends CI_Controller {
 				$id = $row_b->id;   
 				$section = $row_b->section;    
 				
-				$check_teacher_subject_section_by_section_id_and_teacher_subject_id = $this->teacher_subject_sections_model->check_teacher_subject_section_by_section_id_and_teacher_subject_id($id, $teacher_subject_id);
-				if($check_teacher_subject_section_by_section_id_and_teacher_subject_id != NULL) {
+				$check_teacher_subject_section_by_section_id_and_subject_id = $this->teacher_subject_sections_model->check_teacher_subject_section_by_section_id_and_subject_id($id, $subject_id);
+				if($check_teacher_subject_section_by_section_id_and_subject_id != NULL) {
+					
+					foreach($check_teacher_subject_section_by_section_id_and_subject_id as $row_c) {
+						$teacher_id = $row_c->teacher_id;
+					}    
+					
+					$get_teacher_by_teacher_id = $this->teacher_model->get_teacher_by_teacher_id($teacher_id);  
+					foreach($get_teacher_by_teacher_id as $row_d) {
+						$teacher_full_name = $row_d->last_name . ", " . $row_d->first_name . " " .  $row_d->middle_name;
+					}
+					
 					$data .= "   
-						<option disabled style='color: #DFDFDF;' value='{$id}'>{$section} - Already Added</option>
-					";
+						<option disabled style='color: #337AB7;' value='{$id}'>{$section} ({$teacher_full_name})</option>
+					";  
+					
+					
 				} else {
 					$data .= "   
 					<option value='{$id}'>{$section}</option>

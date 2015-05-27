@@ -39,6 +39,19 @@ class Teacher_subjects_model extends CI_Model {
 	
 	}
 	
+	function get_teacher_subject_curriculumm_id_by_teacher_subject_id($teacher_subject_id) {
+	
+		$this->db->select('curriculum_subjects.curriculum_id');   
+		$this->db->from('teachers_subjects');     
+		$this->db->join('curriculum_subjects', 'curriculum_subjects.id = teachers_subjects.subject_id');
+		$this->db->where('teachers_subjects.id', $teacher_subject_id);   
+		$query = $this->db->get();  
+		
+		return $query->result();
+	
+	}
+	
+	
 
 }
 

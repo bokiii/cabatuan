@@ -15,6 +15,12 @@ class Teacher_model extends CI_model {
 			return false;
 		}
 		
+	}  
+	
+	function get_teacher_by_teacher_id($teacher_id) {
+		$this->db->where('id', $teacher_id);
+		$query = $this->db->get('teachers');   
+		return $query->result();
 	}
 
 }

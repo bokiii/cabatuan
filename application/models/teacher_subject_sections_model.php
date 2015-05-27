@@ -18,7 +18,7 @@ class Teacher_subject_sections_model extends CI_Model {
 	
 	function get_teacher_subject_data_by_teacher_subject_id($id) { 
 	
-		$this->db->select("teachers.first_name, teachers.last_name, teachers.middle_name, curriculum_subjects.subject");
+		$this->db->select("teachers_subjects.subject_id, teachers.first_name, teachers.last_name, teachers.middle_name, curriculum_subjects.subject");
 		$this->db->from("teachers_subjects");   
 		$this->db->join("teachers", "teachers.id = teachers_subjects.teacher_id", "left");   
 		$this->db->join('curriculum_subjects', 'curriculum_subjects.id = teachers_subjects.subject_id', "left");
@@ -42,17 +42,34 @@ class Teacher_subject_sections_model extends CI_Model {
 	
 	}
 	
-	function check_teacher_subject_section_by_section_id_and_teacher_subject_id($id, $teacher_subject_id) {
-	
-		$this->db->where('section_id', $id);      
-		$this->db->where('teacher_subject_id', $teacher_subject_id);
-		$query = $this->db->get('teachers_subjects_sections');   
-		
+	function check_teacher_subject_section_by_section_id_and_subject_id($id, $subject_id) {
+		$this->db->select('*');  
+		$this->db->from("teachers_subjects_sections");      
+		$this->db->join("teachers_subjects", "teachers_subjects.id = teachers_subjects_sections.teacher_subject_id");
+		$this->db->where("teachers_subjects_sections.section_id", $id);   
+		$this->db->where("teachers_subjects.subject_id", $subject_id);
+		$query = $this->db->get();   
 		return $query->result();
-	
 	}
+
 	
-}   
+	
+}     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

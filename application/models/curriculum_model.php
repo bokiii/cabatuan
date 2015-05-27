@@ -15,6 +15,14 @@ class Curriculum_model extends CI_Model {
 			return false;
 		}
 		
+	}   
+	
+	function get_curriculum_by_id($id) {
+		$this->db->select('curriculum');   
+		$this->db->from('curriculums');   
+		$this->db->where('id', $id);  
+		$query = $this->db->get();  
+		return $query->result();
 	}
 
 }
