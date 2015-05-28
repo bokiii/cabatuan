@@ -78,7 +78,7 @@
 	</div>   
 	
 	<div class="container">   
-		<form id='register_enrollee_form' method='post' action="<?php echo base_url(); ?>index.php/process/register_enrollee">
+		<form id='register_enrollee_form' method='post' action="<?php echo base_url(); ?>index.php/login/register_enrollee">
 			<div class="row">     
 				<div class="col-md-6">  
 					

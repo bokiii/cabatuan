@@ -11,39 +11,39 @@
 					
 					<div class="form-group">
 						<label for="first_name" class="control-label">First Name</label>
-						<input type="text" name="first_name" class="form-control" id="first_name">
+						<input type="text" name="first_name" class="form-control" id="first_name" placeholder="First name">
 					</div>        
 
 					<div class="form-group">
 						<label for="last_name" class="control-label">Last Name</label>
-						<input type="text" name="last_name" class="form-control" id="last_name">
+						<input type="text" name="last_name" class="form-control" id="last_name" placeholder="Last name">
 					</div>       
 
 					<div class="form-group">
 						<label for="middle_name" class="control-label">Middle Name</label>
-						<input type="text" name="middle_name" class="form-control" id="middle_name">
+						<input type="text" name="middle_name" class="form-control" id="middle_name" placeholder="Middle name">
 					</div>		   
 
 					<div class="form-group">
 						<label for="address" class="control-label">Address</label>
-						<input type="text" name="address" class="form-control" id="address">
+						<input type="text" name="address" class="form-control" id="address" placeholder="Address">
 					</div>			   
 
 					<div class="form-group">
 						<label for="civilstatus" class="control-label">Civil Status</label>
-						<input type="text" name="civilstatus" class="form-control" id="civilstatus">
+						<input type="text" name="civilstatus" class="form-control" id="civilstatus" placeholder="Civil status">
 					</div>					   
 
 					<div class="form-group">
 						<label for="religion" class="control-label">Religion</label>
-						<input type="text" name="religion" class="form-control" id="religion">
+						<input type="text" name="religion" class="form-control" id="religion" placeholder="Religion">
 					</div>		   
 
 					<div class="form-group">
 				
 						<label for="birth_date" class="control-label">Birth Date</label>
 						<div class='input-group date' id='add_birth_date_picker'>
-							<input type='text' name="birth_date" id="birth_date" class="form-control" />
+							<input type='text' name="birth_date" id="birth_date" class="form-control" placeholder="Birth date" />
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span>

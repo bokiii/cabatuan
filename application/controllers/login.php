@@ -22,7 +22,13 @@ class Login extends CI_Controller {
 		
 		$this->load->view('login_view');
 		
-	}  
+	}       
+	
+	public function register_enrollee() {
+	
+		$this->debug($this->input->post());
+	}
+	
 
 
 }

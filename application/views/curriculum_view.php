@@ -11,7 +11,7 @@
 					
 					<div class="form-group">
 						<label for="curriculum" class="control-label">Curriculum</label>
-						<input type="text" name="curriculum" class="form-control" id="curriculum">
+						<input type="text" name="curriculum" class="form-control" id="curriculum" placeholder="Curriculum">
 					</div>           
 					
 					<div class='my_alert_container'>  

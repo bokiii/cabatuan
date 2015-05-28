@@ -11,7 +11,7 @@
 					
 					<div class="form-group">
 						<label for="section" class="control-label">Section</label>
-						<input type="text" name="section" class="form-control" id="section">
+						<input type="text" name="section" class="form-control" id="section" placeholder="Section">
 					</div>           
 					
 					<input type="hidden" name="curriculum_id" value="<?php echo $curriculum_id; ?>" />

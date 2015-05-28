@@ -11,7 +11,7 @@
 					
 					<div class="form-group">
 						<label for="subject" class="control-label">Subject</label>
-						<input type="text" name="subject" class="form-control" id="subject">
+						<input type="text" name="subject" class="form-control" id="subject" placeholder="Subject">
 					</div>           
 					
 					<input type="hidden" name="curriculum_id" value="<?php echo $curriculum_id; ?>" />
