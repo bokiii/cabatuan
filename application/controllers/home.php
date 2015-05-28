@@ -11,6 +11,11 @@ class Home extends CI_Controller {
 	public function __construct() {
 		parent::__construct();  
 		date_default_timezone_set("Asia/Manila");
+		
+		if($this->session->userdata('logged_in') != true) {
+			redirect("login");
+		}
+	
 	}   
 	
 	public function index() {
@@ -23,7 +28,6 @@ class Home extends CI_Controller {
 	function bootstrap() {
 		$this->load->view('bootstrap_view');
 	}
-	
 	
 	
 

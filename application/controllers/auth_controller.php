@@ -23,7 +23,6 @@ class Auth_controller extends CI_Controller {
 		
 	}
 	
-	
 	public function process_auth() {
 	
 		$username = trim($this->input->post("username"));    
