@@ -41,7 +41,7 @@ class Auth_controller extends CI_Controller {
 			
 			$this->session->set_userdata($account_data);  
 			
-			$data['redirect'] = base_url() . "index.php/home";
+			$data['redirect'] = base_url() . "index.php/home_controller";
 			$data['status'] = true;
 			
 		} else {
