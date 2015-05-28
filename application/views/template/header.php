@@ -65,6 +65,12 @@
 						<ul class="dropdown-menu" role="menu"> 
 							<li><a href="<?php echo base_url(); ?>index.php/curriculum_controller">Manage Curriculum Years</a></li>
 						</ul>
+					</li>   
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Account<span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu"> 
+							<li><a href="<?php echo base_url(); ?>index.php/auth_controller">Logout</a></li>
+						</ul>
 					</li>
 					
 				</ul>   

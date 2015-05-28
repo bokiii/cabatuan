@@ -341,7 +341,6 @@ var datePickerModule = (function() {
 
 datePickerModule.getBirthDate();  
 
-
 var listModalModule = (function() {
 
 	var listAddModalHide = function() {
@@ -399,8 +398,36 @@ listModalModule.listAddFormSubmit();
 listModalModule.listAddModalHide();
 
 
+var loginModule = (function() {
 
+	var loginFormSubmit = function() {
+		$("#login_form").ajaxForm({
+			dataType: 'json',
+			forceSync: true,
+			beforeSubmit: loading,
+			success: success_status
+		});      
+		
+		function loading() {
+			return true;
+		}   
+		
+		function success_status(data) {
+			if(data.status) {
+				window.location = data.redirect;
+			} else {
+				bootbox.alert("Invalid username or password");
+			} 
+		}
+	};    
+	
+	return {
+		loginFormSubmit:	loginFormSubmit
+	}
+	
+})()   
 
+loginModule.loginFormSubmit();
 
 
 

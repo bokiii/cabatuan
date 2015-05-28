@@ -42,13 +42,15 @@
 				<a class="navbar-brand" href="#">CNCHS Information System</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
-				<form class="navbar-form navbar-right">
+				<form id="login_form" method="post" action="<?php echo base_url(); ?>index.php/auth_controller/process_auth" class="navbar-form navbar-right">
 					<div class="form-group">
-						<input type="text" placeholder="Username" class="form-control">
+						<input type="text" name="username" placeholder="Username" class="form-control">
 					</div>
 					<div class="form-group">
-						<input type="password" placeholder="Password" class="form-control">
-					</div>
+						<input type="password" name="password" placeholder="Password" class="form-control">
+					</div>   
+					<input style="display:none" type="text" name="fakeusernameremembered"/>
+					<input style="display:none" type="password" name="fakepasswordremembered"/>
 					<button type="submit" class="btn btn-success">Sign in</button>
 				</form>
 			</div><!--/.navbar-collapse -->
@@ -212,16 +214,65 @@
 	
 	<!-- scripts below -->
 	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/jquery2.js"></script>   
-	<script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/js/bootstrap.js"></script>  
+	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/jquery.form.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/js/bootstrap.js"></script>     
+	<script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/js/moment-with-locales.js"></script> 
+	<script type="text/javascript" src="<?php echo base_url(); ?>bootstrap/js/bootstrap-datetimepicker.js"></script> 
+	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/bootbox.min.js"></script>
 	
 	<script src="<?php echo base_url(); ?>scripts/holder.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="<?php echo base_url(); ?>scripts/ie10-viewport-bug-workaround.js"></script>
 	
-
 	<!--main script is below-->
-	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/script.js"></script>   
+	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/script.js"></script>      
+
+	<!-- link scripts for angular js below -->  
+	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/lib/angular/angular.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/js/app.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/js/services.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/js/controllers.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/js/filters.js"></script>    
+	
+	
 </body>
-</html>   
+</html>     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
