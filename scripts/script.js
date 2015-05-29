@@ -11,10 +11,22 @@ var alertModule = (function() {
 
 	var modalAlertOpen = function(data, containerToAppend) {
 		if(data.status) {
+			// below is for the hide off addModal for students 
+			containerToAppend.children("#studentAddModal").addClass("hidden");
+			// below is for the hide off updateModal for students 
+			containerToAppend.children("#studentUpdateModal").addClass("hidden");
+			// below is the standard hide of addModal
 			containerToAppend.children(".form-group").addClass("hidden");
+			
 			containerToAppend.children(".my_alert_container").html("<div class='alert alert-success'  data-dismiss='alert' role='alert'> <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> <strong>Success</strong></div> ");                                                    
 		} else {
+			// below is for the hide off addModal for students 
+			containerToAppend.children("#studentAddModal").addClass("hidden");
+			// below is for the hide off updateModal for students 
+			containerToAppend.children("#studentUpdateModal").addClass("hidden");
+			// below is the standard hide of addModal
 			containerToAppend.children(".form-group").addClass("hidden");
+		
 			containerToAppend.children(".my_alert_container").html("<div class='alert alert-danger' data-dismiss='alert' role='alert'> <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>" + data.errors + "</div> ");                                                    
 		}	
 	};        
@@ -94,7 +106,10 @@ var modalModule = (function() {
 				$(document).find(".curriculum_section_angular_trigger").trigger("click");       
 				
 				// below is the trigger for the teachers 
-				$(document).find(".teacher_angular_trigger").trigger("click");  
+				$(document).find(".teacher_angular_trigger").trigger("click");     
+				
+				// below is the trigger for the students 
+				$(document).find(".student_angular_trigger").trigger("click"); 
 				
 				alertModule.modalAlertOpen(data, containerToAppend);
 			} else {
@@ -133,9 +148,8 @@ var modalModule = (function() {
 					$(document).find("#update_id").attr("value", datas.id);
 				}    
 				
-				
 				// below is for the teacher update   
-				if(datas.user_type != undefined) {   
+				if(datas.user_type != undefined && datas.user_type == "teacher" ) {   
 					$(document).find("#first_name_update").attr("value", datas.first_name);     
 					$(document).find("#last_name_update").attr("value", datas.last_name);  
 					$(document).find("#middle_name_update").attr("value", datas.middle_name);
@@ -144,7 +158,32 @@ var modalModule = (function() {
 					$(document).find("#religion_update").attr("value", datas.religion);
 					$(document).find("#birth_date_update").attr("value", datas.birth_date);
 					$(document).find("#update_id").attr("value", datas.id);
-				}
+				}    
+				
+				// below is for the student update   
+				if(datas.user_type != undefined && datas.user_type == "student" ) {   
+					$(document).find("#sur_name_update").attr("value", datas.sur_name);     
+					$(document).find("#first_name_update").attr("value", datas.first_name);  
+					$(document).find("#middle_name_update").attr("value", datas.middle_name);
+					$(document).find("#lrn_update").attr("value", datas.lrn);
+					$(document).find("#sex_update").attr("value", datas.sex);  
+					$(document).find("#date_of_birth_update").attr("value", datas.date_of_birth);   
+					$(document).find("#place_of_birth_update").attr("value", datas.place_of_birth);
+					$(document).find("#age_update").attr("value", datas.age);   
+					$(document).find("#present_address_update").attr("value", datas.present_address);   
+					$(document).find("#school_last_attended_update").attr("value", datas.school_last_attended);
+					$(document).find("#school_address_update").attr("value", datas.school_address);
+					$(document).find("#grade_or_year_level_update").attr("value", datas.grade_or_year_level);     
+					$(document).find("#school_year_update").attr("value", datas.school_year);    					
+					$(document).find("#tve_specialization_update").attr("value", datas.tve_specialization);    
+					$(document).find("#father_update").attr("value", datas.father);     
+					$(document).find("#mother_update").attr("value", datas.mother);      
+					$(document).find("#person_to_notify_update").attr("value", datas.person_to_notify); 
+					$(document).find("#address_update").attr("value", datas.address);    
+					$(document).find("#contact_number_update").attr("value", datas.contact_number); 
+				
+					$(document).find("#update_id").attr("value", datas.id);
+				}  
 				
 			});
 			
@@ -299,7 +338,10 @@ var deleteFormModule = (function() {
 				$(document).find(".teacher_subject_angular_trigger").trigger("click");      
 				
 				// below is the trigger for the teacher subject sections
-				$(document).find(".teacher_subject_section_angular_trigger").trigger("click");  
+				$(document).find(".teacher_subject_section_angular_trigger").trigger("click");    
+
+				// below is the trigger for the students 
+				$(document).find(".student_angular_trigger").trigger("click"); 				
 			}
 		}
 		

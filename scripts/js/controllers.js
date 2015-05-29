@@ -136,7 +136,26 @@ controllers.controller('teacherSubjectSection', function($scope, $http){
 	
 });
 
+controllers.controller('student', function($scope, $http){
+	
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;   
+	
+	var teacherUrl = fullUrl + "/get_student"; 
 
+	$scope.students;      
+	
+	$http.get(teacherUrl).success(function(data){
+		$scope.students = data.students;    
+	}); 
+	
+	$scope.getStudents = function() {
+		$http.get(teacherUrl).success(function(data){
+			$scope.students = data.students;    
+		}); 
+	};
+	
+});
 
 
 

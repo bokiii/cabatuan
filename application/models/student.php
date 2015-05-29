@@ -27,7 +27,7 @@ class Student extends Datamapper {
 		), 
 		'date_of_birth' => array(
 			'label' => 'Date of Birth', 
-			'rules' => array('required', 'trim')
+			'rules' => array('required', 'trim', 'valid_date')
 		), 
 		'place_of_birth' => array(
 			'label' => 'Place of Birth', 
@@ -35,7 +35,7 @@ class Student extends Datamapper {
 		), 
 		'age' => array(
 			'label' => 'Age', 
-			'rules' => array('required', 'trim')
+			'rules' => array('required', 'trim', 'is_natural_no_zero')
 		), 
 		'present_address' => array(
 			'label' => 'Present Address', 
