@@ -49,9 +49,6 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Students <span class="caret"></span></a>                                  
 						<ul class="dropdown-menu" role="menu"> 
 							<li><a href="<?php echo base_url(); ?>index.php/students_controller">Manage Students</a></li>
-							<li class="divider"></li>
-							<li><a href="#">Manage Student Applicants</a></li>
-						
 						</ul>
 					</li>  
 					<li class="dropdown">
