@@ -113,6 +113,54 @@ class Teacher_subjects_controller extends CI_Controller {
 	
 	}   
 	
+	public function get_curriculum_subjects_via_angular() {
+	
+		$teacher_id = $this->input->get('teacher_id');
+	
+		$data['curriculum_subjects'] = "";
+	
+		$get_curriculum = $this->curriculum_subjects_model->get_curriculum();      
+	
+		foreach($get_curriculum as $row_a) {
+			$curriculum_id = $row_a->curriculum_id;    
+			$curriculum = $row_a->curriculum;     
+
+			$data['curriculum_subjects'] .= "
+				<label for='subject_id' class='control-label'>{$curriculum}</label>
+				<select multiple name='subject_id[]' id='subject_id' class='form-control'>
+			";
+			
+			$get_curriculum_subjects_by_curriculum_id = $this->curriculum_subjects_model->get_curriculum_subjects_by_curriculum_id($curriculum_id);                            
+			
+			foreach($get_curriculum_subjects_by_curriculum_id as $row_b) {
+				
+				$id = $row_b->id;
+				$subject =  $row_b->subject;      
+				
+				$check_teacher_subject_by_subject_id_and_teacher_id = $this->teacher_subjects_model->check_teacher_subject_by_subject_id_and_teacher_id($id, $teacher_id);
+				if($check_teacher_subject_by_subject_id_and_teacher_id != NULL) {
+					
+					$data['curriculum_subjects'] .= "
+						<option disabled style='color: #DFDFDF;' value='{$id}'>{$subject} - Already Added</option>
+					";   
+					
+				} else {
+					$data['curriculum_subjects'] .= "
+						<option value='{$id}'>{$subject}</option>
+					";   
+				}
+			}   
+			
+			$data['curriculum_subjects'] .= "
+				</select>
+			";
+			
+		}   
+		
+		echo json_encode($data);
+	
+	}   
+	
 	public function get_teacher_subjects() {   
 	
 		$data = array();

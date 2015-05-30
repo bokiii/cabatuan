@@ -2,20 +2,27 @@
 <div class="modal fade" id="listAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
-			<form id="list_add_form" action="<?php echo base_url(); ?>index.php/teacher_subjects_controller/add_teacher_subject" method="post">
+			<form ng-controller='teacherSubject' id="list_add_form" action="<?php echo base_url(); ?>index.php/teacher_subjects_controller/add_teacher_subject" method="post">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title" id="myModalLabel">Subjects <small>(press ctrl to select and deselect)</small></h4>
 				</div>
 				<div class="modal-body">  
 					
-					<?php echo $curriculum_subjects; ?>    
+					<div class='form-group' ng-bind-html="curriculumSubjects">  
+					</div>
 					
 					<input type="hidden" name="teacher_id" value="<?php echo $teacher_id; ?>" />
 					<div class='my_alert_container'>  
+					</div>  
+					
+					<div class="row my_hidden_div">   
+						<div class="col-md-12">   
+							<button type="button" ng-click="getTeacherCurriculumSubjects()" class="btn btn-primary teacher_curriculum_subject_angular_trigger">Get Teacher Curriculum Subjects</button>   
+						</div>
 					</div>
 					
-				</div>  
+				</div>     
 				
 				<div class="modal-footer">  
 					<button type="reset" class="btn btn-primary">Reset</button>  

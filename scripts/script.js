@@ -335,7 +335,9 @@ var deleteFormModule = (function() {
 				$(document).find(".teacher_angular_trigger").trigger("click");     
 				
 				// below is the trigger for the teacher subjects 
-				$(document).find(".teacher_subject_angular_trigger").trigger("click");      
+				$(document).find(".teacher_subject_angular_trigger").trigger("click");    
+				// below is the trigger for the teacher curriculum subjects 
+				$(document).find(".teacher_curriculum_subject_angular_trigger").trigger("click");      				
 				
 				// below is the trigger for the teacher subject sections
 				$(document).find(".teacher_subject_section_angular_trigger").trigger("click");    
@@ -411,20 +413,16 @@ var listModalModule = (function() {
 			$('#listAddModal').modal('hide');
 			
 			if(data.status == true) {
-				bootbox.alert("Success", function() {
-					document.location.reload(true);
-				});
+				bootbox.alert("Success")
 			} else {
-				bootbox.alert("Failed", function() {
-					document.location.reload(true);
-				});
+				bootbox.alert("Failed");
 			} 
 			
 			// below is the trigger for the teacher subjects 
-			$(document).find(".teacher_subject_angular_trigger").trigger("click");      
-			
-			// below is the trigger for the teacher subject sections
-			$(document).find(".teacher_subject_section_angular_trigger").trigger("click");  
+			$(document).find(".teacher_subject_angular_trigger").trigger("click");        
+			// below is the trigger for the teacher curriculum subjects 
+			$(document).find(".teacher_curriculum_subject_angular_trigger").trigger("click");      
+		
 		}
 	
 	};  
