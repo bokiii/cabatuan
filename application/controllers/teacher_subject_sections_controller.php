@@ -105,6 +105,75 @@ class Teacher_subject_sections_controller extends CI_Controller {
 	
 	}   
 	
+	public function get_curriculum_sections_via_angular() {
+		
+		$teacher_subject_id = $this->input->get('teacher_subject_id'); 
+		
+		$get_teacher_subject_curriculumm_id_by_teacher_subject_id = $this->teacher_subjects_model->get_teacher_subject_curriculumm_id_by_teacher_subject_id($teacher_subject_id);
+		foreach($get_teacher_subject_curriculumm_id_by_teacher_subject_id as $row_a) {
+			$curriculum_id = $row_a->curriculum_id;
+		}  
+		
+		$get_teacher_subject_data_by_teacher_subject_id = $this->teacher_subject_sections_model->get_teacher_subject_data_by_teacher_subject_id($teacher_subject_id);                  
+		foreach($get_teacher_subject_data_by_teacher_subject_id as $row){
+			$subject_id = $row->subject_id;
+		}   
+		
+		
+		$data['curriculum_sections'] = "";
+	
+		$get_curriculum = $this->curriculum_model->get_curriculum_by_id($curriculum_id);      
+	
+		foreach($get_curriculum as $row_a) {
+			$curriculum = $row_a->curriculum;     
+
+			$data['curriculum_sections'] .= "
+				<label for='section_id' class='control-label'>{$curriculum}</label>
+				<select multiple name='section_id[]' id='section_id' class='form-control'>
+			";
+			
+			$get_curriculum_sections_by_curriculum_id = $this->curriculum_subjects_model->get_curriculum_sections_by_curriculum_id($curriculum_id);                             
+			foreach($get_curriculum_sections_by_curriculum_id as $row_b) {
+				$id = $row_b->id;   
+				$section = $row_b->section;    
+				
+				$check_teacher_subject_section_by_section_id_and_subject_id = $this->teacher_subject_sections_model->check_teacher_subject_section_by_section_id_and_subject_id($id, $subject_id);
+				if($check_teacher_subject_section_by_section_id_and_subject_id != NULL) {
+					
+					foreach($check_teacher_subject_section_by_section_id_and_subject_id as $row_c) {
+						$teacher_id = $row_c->teacher_id;
+					}    
+					
+					$get_teacher_by_teacher_id = $this->teacher_model->get_teacher_by_teacher_id($teacher_id);  
+					foreach($get_teacher_by_teacher_id as $row_d) {
+						$teacher_full_name = $row_d->last_name . ", " . $row_d->first_name . " " .  $row_d->middle_name;
+					}
+					
+					$data['curriculum_sections'] .= "   
+						<option disabled style='color: #337AB7;' value='{$id}'>{$section} ({$teacher_full_name})</option>
+					";  
+					
+					
+				} else {
+					$data['curriculum_sections'] .= "   
+					<option value='{$id}'>{$section}</option>
+				";
+				}
+				
+				
+			}
+			
+			$data['curriculum_sections'] .= "
+				</select>
+			";
+		}   
+		
+		echo json_encode($data);
+	
+	}      
+
+	
+	
 	public function add_teacher_subject_section() {   
 		
 		$section_ids = $this->input->post('section_id');     

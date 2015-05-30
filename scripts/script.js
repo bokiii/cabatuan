@@ -340,7 +340,9 @@ var deleteFormModule = (function() {
 				$(document).find(".teacher_curriculum_subject_angular_trigger").trigger("click");      				
 				
 				// below is the trigger for the teacher subject sections
-				$(document).find(".teacher_subject_section_angular_trigger").trigger("click");    
+				$(document).find(".teacher_subject_section_angular_trigger").trigger("click");     
+				// below is the trigger for the teacher subject curriculum section 
+				$(document).find(".teacher_subject_curriculum_section_angular_trigger").trigger("click"); 
 
 				// below is the trigger for the students 
 				$(document).find(".student_angular_trigger").trigger("click"); 				
@@ -421,7 +423,12 @@ var listModalModule = (function() {
 			// below is the trigger for the teacher subjects 
 			$(document).find(".teacher_subject_angular_trigger").trigger("click");        
 			// below is the trigger for the teacher curriculum subjects 
-			$(document).find(".teacher_curriculum_subject_angular_trigger").trigger("click");      
+			$(document).find(".teacher_curriculum_subject_angular_trigger").trigger("click");         
+			
+			// below is the trigger for the section subject teachers   
+			$(document).find(".teacher_subject_section_angular_trigger").trigger("click");         
+			// below is the trigger for the teacher subject curriculum section 
+			$(document).find(".teacher_subject_curriculum_section_angular_trigger").trigger("click");     
 		
 		}
 	

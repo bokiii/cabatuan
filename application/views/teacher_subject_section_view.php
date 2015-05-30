@@ -2,20 +2,27 @@
 <div class="modal fade" id="listAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
-			<form id="list_add_form" action="<?php echo base_url(); ?>index.php/teacher_subject_sections_controller/add_teacher_subject_section" method="post">
+			<form ng-controller='teacherSubjectSection' id="list_add_form" action="<?php echo base_url(); ?>index.php/teacher_subject_sections_controller/add_teacher_subject_section" method="post">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title" id="myModalLabel">Assigned Section <small>(press ctrl to select and deselect)</small></h4>
 				</div>
 				<div class="modal-body">  
 					
-					<?php   
-						echo $curriculum_sections;
-					?>
+					<div class='form-group' ng-bind-html="curriculumSections">    
+					</div>
 					
 					<input type="hidden" name="teacher_subject_id" value="<?php echo $teacher_subject_id; ?>" />
 					<div class='my_alert_container'>  
+					</div>   
+					
+					<!-- below is the hidden div for the angular trigger -->
+					<div class="row my_hidden_div">   
+						<div class="col-md-12">   
+							<button type="button" ng-click="getTeacherSubjectCurriculumSections()" class="btn btn-primary teacher_subject_curriculum_section_angular_trigger">Get Teacher Subject Curriculum Sections</button>                                      
+						</div>
 					</div>
+					
 					
 				</div>  
 				

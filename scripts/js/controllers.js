@@ -104,50 +104,60 @@ controllers.controller('teacherSubject', function($scope, $http, $sce){
 		$scope.teacherSubjects = data.teacher_subjects;   
 	});   
 	
-	var getCurriculumSubjectsUrl = fullUrl.replace("teacher_subjects_controller", "teacher_subjects_controller/get_curriculum_subjects_via_angular");                   
-	$scope.curriculumSubjects;
-	$http.get(getCurriculumSubjectsUrl).success(function(data){
-		$scope.curriculumSubjects = $sce.trustAsHtml(data.curriculum_subjects);    
-	});   
-	
 	$scope.getTeacherSubjects = function() {
 		$http.get(teacherSubjectUrl).success(function(data){
 			$scope.teacherSubjects = data.teacher_subjects;     		
 		}); 
-	};       
+	};          
+	
+	
+	// below is for the curriculum subjects of a teacher 
+	var getCurriculumSubjectsUrl = fullUrl.replace("teacher_subjects_controller", "teacher_subjects_controller/get_curriculum_subjects_via_angular");                   
+	$scope.curriculumSubjects;
+	$http.get(getCurriculumSubjectsUrl).success(function(data){
+		$scope.curriculumSubjects = $sce.trustAsHtml(data.curriculum_subjects);    
+	});  
 	
 	$scope.getTeacherCurriculumSubjects = function() {
 		$http.get(getCurriculumSubjectsUrl).success(function(data){
 			$scope.curriculumSubjects = $sce.trustAsHtml(data.curriculum_subjects);  
 		});      
-	};
+	};  
 	
-
 });  
 
 
-
-
-controllers.controller('teacherSubjectSection', function($scope, $http){
+controllers.controller('teacherSubjectSection', function($scope, $http, $sce){
 	
 	var protocol = window.location.protocol + "//" + window.location.host;
 	var fullUrl = protocol + window.location.pathname + window.location.search;   
 	
-	var teacherSubjectSectionUrl = fullUrl.replace("teacher_subject_sections_controller", "teacher_subject_sections_controller/get_teacher_subject_section");
-
+	var teacherSubjectSectionUrl = fullUrl.replace("teacher_subject_sections_controller", "teacher_subject_sections_controller/get_teacher_subject_section");               
 	$scope.teacherSubjectSections;      
-	
 	$http.get(teacherSubjectSectionUrl).success(function(data){
 		$scope.teacherSubjectSections = data.teacher_subject_sections;       
-	}); 
+	});    
 	
 	$scope.getTeacherSubjectSections = function() {
 		$http.get(teacherSubjectSectionUrl).success(function(data){
 			$scope.teacherSubjectSections = data.teacher_subject_sections;       
 		}); 
-	};
+	};   
 	
-});
+	var curriculumSectionUrl = fullUrl.replace("teacher_subject_sections_controller", "teacher_subject_sections_controller/get_curriculum_sections_via_angular");             
+	$scope.curriculumSections;    
+	$http.get(curriculumSectionUrl).success(function(data){
+		$scope.curriculumSections = $sce.trustAsHtml(data.curriculum_sections);         
+	});    
+	
+	$scope.getTeacherSubjectCurriculumSections = function() {
+		$http.get(curriculumSectionUrl).success(function(data){
+			$scope.curriculumSections = $sce.trustAsHtml(data.curriculum_sections);         
+		});    
+	};   
+	
+});     
+
 
 controllers.controller('student', function($scope, $http){
 	
@@ -169,10 +179,6 @@ controllers.controller('student', function($scope, $http){
 	};
 	
 });
-
-
-
-
 
 
 controllers.controller('test', function($scope, $sce, $http){
