@@ -21,7 +21,8 @@
 	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/script.js"></script>      
 
 	<!-- link scripts for angular js below -->  
-	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/lib/angular/angular.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/lib/angular/angular.min.js"></script>   
+	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/lib/angular/angular-sanitize.min.js"></script> 
 	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/js/app.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/js/services.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/js/controllers.js"></script>

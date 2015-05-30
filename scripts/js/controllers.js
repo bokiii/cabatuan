@@ -162,6 +162,24 @@ controllers.controller('student', function($scope, $http){
 
 
 
+controllers.controller('test', function($scope, $sce, $http){
+	
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;   
+	
+	var testUrl = fullUrl + "/get_sample_data";
+	$scope.sample_content;      
+	
+	$http.get(testUrl).success(function(data){
+		$scope.sample_content = $sce.trustAsHtml(data.sample_content);        
+	});  
+	
+	
+});
+
+
+
+
 
 
 
