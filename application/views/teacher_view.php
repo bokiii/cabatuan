@@ -163,7 +163,7 @@
 				<div class="col-md-12">
 				
 					<div class="table-responsive">
-						<table class="table">
+						<table class="table table-hover">
 							<thead>  
 								<tr>
 									<th><input type="checkbox" class="main_check" /></th>

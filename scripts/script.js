@@ -226,7 +226,10 @@ var modalModule = (function() {
 				$(document).find(".curriculum_section_angular_trigger").trigger("click");       
 				
 				// below is the trigger for the teachers 
-				$(document).find(".teacher_angular_trigger").trigger("click");  
+				$(document).find(".teacher_angular_trigger").trigger("click");     
+				
+				// below is the trigger for the students 
+				$(document).find(".student_angular_trigger").trigger("click"); 
 				
 				alertModule.modalAlertOpen(data, containerToAppend);
 			} else {
