@@ -16,6 +16,7 @@ class Students_controller extends CI_Controller {
 		}
 		
 		$this->load->model('student_model');  
+		$this->load->model('curriculum_subjects_model');
 	}     
 	
 	public function index() {
@@ -32,9 +33,20 @@ class Students_controller extends CI_Controller {
 		
 		$data['students'] = $students->all_to_array();  
 		
-		echo json_encode($data);   
-	}
+		echo json_encode($data);     
 
+	}   
+	
+	public function get_student_via_standard_model() {
+	
+		$get_students = $this->student_model->get_students();  
+		
+		$data['students'] = $get_students;     
+		
+		echo json_encode($data);      
+		
+	}
+	
 	public function add_student() {
 		
 		$data = array();
@@ -130,7 +142,6 @@ class Students_controller extends CI_Controller {
 
 	}              
 	
-	
 	public function get_student_update_content_by_id() {
 		
 		$data = array();
@@ -166,7 +177,54 @@ class Students_controller extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function get_curriculum_sections_by_curriculum_id() {
+	
+		$curriculum_id = $this->input->get("curriculum_id");   
+		$curriculum_section = new Curriculum_section(); 
+		$curriculum_sections = $curriculum_section->where('curriculum_id', $curriculum_id)->get();       
+
+		$data['curriculum_sections'] = $curriculum_sections->all_to_array();   
+		
+		echo json_encode($data);
+	
+	}
+	
+	public function enroll_student() {
+	
+		$data = array(); 
+		
+		$curriculum_id = $this->input->post("curriculum_selection");  
+		$section_id = $this->input->post('section_selection');    
+		$school_year = trim($this->input->post("school_year"));
+		$student_id = $this->input->post('student_id_selection');  
+		
+		$enrolled_student_data = array(  
+			"curriculum_id" => $curriculum_id,
+			"section_id" => $section_id, 
+			"student_id" => $student_id, 
+			"school_year" => $school_year,
+			"current" => true, 
+			"accomplished" => false,
+			"created" => date("Y-m-d H:i:s")
+		);       
+		
+		$get_curriculum_subjects_by_curriculum_id = $this->curriculum_subjects_model->get_curriculum_subjects_by_curriculum_id($curriculum_id);              
+		
+		$insert_enrolled_student = $this->student_model->insert_enrolled_student($enrolled_student_data, $get_curriculum_subjects_by_curriculum_id);
+		
+		if($insert_enrolled_student) {
+			$data['status'] = true;
+		} else {  
+			$data['status'] = false;
+		} 
+		
+		echo json_encode($data);
+	
+	}   
+	
 }  
+
+
 
 
 

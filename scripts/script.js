@@ -19,6 +19,7 @@ var alertModule = (function() {
 			containerToAppend.children(".form-group").addClass("hidden");
 			
 			containerToAppend.children(".my_alert_container").html("<div class='alert alert-success'  data-dismiss='alert' role='alert'> <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button> <strong>Success</strong></div> ");                                                    
+		
 		} else {
 			// below is for the hide off addModal for students 
 			containerToAppend.children("#studentAddModal").addClass("hidden");
@@ -447,7 +448,6 @@ var listModalModule = (function() {
 listModalModule.listAddFormSubmit();   
 listModalModule.listAddModalHide();
 
-
 var loginModule = (function() {
 
 	var loginFormSubmit = function() {
@@ -479,6 +479,75 @@ var loginModule = (function() {
 
 loginModule.loginFormSubmit();
 
+var studentModule = (function() {
+
+	var enrollProcess = function() {
+		$(document).on("click", ".enroll_button", function(){
+			var id = $(this).parent("td").siblings(".has_student_id").children("input").val();
+			var student = $(this).parent("td").siblings(".student_name").text();   
+			$("#student_enrollment_form #myModalLabel").text(student);      
+			$("#student_enrollment_form #student_id_selection").val(id);  
+		});
+	};       
+	
+	var enrollModalHide = function() {  
+		$('#enrollModal').on('hide.bs.modal', function (e) {
+			$(document).find("#student_enrollment_form").trigger("reset");    
+			$("#student_enrollment_form .show").removeClass("show").addClass("hidden");
+		});   
+	};  
+	
+	var enrollModalShow = function() {
+		$('#enrollModal').on('show.bs.modal', function (e) {
+			console.log("showing");
+			$(document).find("#student_enrollment_form").trigger("reset");    
+			$("#student_enrollment_form .alert").addClass("hidden");
+		});   
+	};
+	
+	var enrollmentFormSubmit = function() {
+		
+		$("#student_enrollment_form").ajaxForm({
+			dataType: 'json',
+			forceSync: true,
+			beforeSubmit: loading,
+			success: success_status
+		});      
+		
+		function loading() {
+			if($("#student_enrollment_form #curriculum_selection").val() == "" || $("#student_enrollment_form #section_selection").val() == "" || $("#student_enrollment_form #school_year").val() == "") {                                           
+				$("#student_enrollment_form .hidden").removeClass("hidden").addClass("show");
+				return false;
+			} else {  
+				return true;
+			}
+		}   
+		
+		function success_status(data) {
+			$('#enrollModal').modal('hide'); 
+			
+			if(data.status == true) {
+				bootbox.alert("Success")
+			} else {
+				bootbox.alert("Failed");
+			} 
+		}
+	
+	};
+	
+	return {
+		enrollProcess: 			enrollProcess,    
+		enrollModalHide:		enrollModalHide,   
+		enrollModalShow:		enrollModalShow, 
+		enrollmentFormSubmit:	enrollmentFormSubmit
+	}
+	
+})()      
+
+studentModule.enrollProcess();   
+studentModule.enrollModalHide();  
+studentModule.enrollModalShow();
+studentModule.enrollmentFormSubmit();
 
 
 

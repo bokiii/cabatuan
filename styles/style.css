@@ -13,4 +13,8 @@
 
 .my_search_box {
 	margin-bottom: 20px;
+}   
+
+table.academic th, table.academic td{   
+	text-align: center;
 }

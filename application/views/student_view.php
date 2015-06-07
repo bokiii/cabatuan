@@ -288,6 +288,66 @@
 	</div>  
 </div>
 
+<!-- Modal Form for Enroll-->  
+<div class="modal fade" id="enrollModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<form ng-controller='student' id="student_enrollment_form" action="<?php echo base_url(); ?>index.php/students_controller/enroll_student" method="post">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Enrollment Process</h4>
+				</div>
+				<div class="modal-body">
+					
+					<div class="row">     
+						<div class="col-md-4">    
+							<div class="form-group">
+								<label for="curriculum_selection" class="control-label">Select Curriculum Year</label>
+								<select name="curriculum_selection" ng-model="curriculum_id" ng-change="curriculumChange()" id="curriculum_selection" class="form-control">
+									<option value></option>
+									<option ng-repeat="curriculum in curriculums" value="{{curriculum.id}}">{{curriculum.curriculum}}</option>
+								</select>
+							</div>       
+						</div>   
+						
+						<div class="col-md-4">    
+							<div class="form-group">
+								<label for="section_selection" class="control-label">Select Section</label>
+								<select name="section_selection" disabled ng-model="section_id"  id="section_selection" class="form-control">
+									<option value></option>
+									<option ng-repeat="curriculumSection in curriculumSections" value="{{curriculumSection.id}}">{{curriculumSection.section}}</option>
+								</select>
+							</div>       
+						</div>       
+
+						<div class="col-md-4">    
+							<div class="form-group">
+								<label for="school_year" class="control-label">School Year</label>
+								<input type="text" class="form-control" name="school_year" id="school_year" placeholder="School Year">
+							</div>       
+						</div>  
+
+						<input type="hidden" name="student_id_selection" id="student_id_selection" value=""/>  
+						
+					</div>        
+
+				
+					<div class="row">   
+						<div class="col-md-12">      
+							<div class="hidden alert alert-danger" role="alert">Select curriculum year, section and enter school year to proceed...</div>
+						</div>
+					</div>
+					
+
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">Enroll</button>
+				</div>    
+			</form>
+		</div>
+	</div>
+</div>
+
 
 <div class="main_container" ng-controller='student'>
 	<div class="container">   
@@ -325,15 +385,17 @@
 									<th><input type="checkbox" class="main_check" /></th>
 									<th>Student</th>  
 									<th>Edit Data</th>  
+									<th>Status</th>
 								</tr>
 							</thead>   
 							<tbody>   
 								<tr ng-repeat="student in students | filter: query">
-									<td><input type="checkbox" name="student_id[]" value="{{student.id}}" class="sub_check" /></td>
-									<td>{{student.sur_name}}, {{student.first_name}} {{student.middle_name}}</td>   
+									<td class="has_student_id"><input type="checkbox" name="student_id[]" value="{{student.id}}" class="sub_check" /></td>
+									<td class="student_name">{{student.sur_name}}, {{student.first_name}} {{student.middle_name}}</td>   
 									<td>
 										<a class="my_update_link" href="<?php echo base_url(); ?>index.php/students_controller/get_student_update_content_by_id?id={{student.id}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="modal" data-target="#myUpdateModal"></span></a>
-									</td>
+									</td>   
+									<td ng-bind-html="student.status"></td>
 								</tr>  
 							</tbody>
 						</table>

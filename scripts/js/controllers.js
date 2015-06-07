@@ -126,7 +126,6 @@ controllers.controller('teacherSubject', function($scope, $http, $sce){
 	
 });  
 
-
 controllers.controller('teacherSubjectSection', function($scope, $http, $sce){
 	
 	var protocol = window.location.protocol + "//" + window.location.host;
@@ -158,27 +157,101 @@ controllers.controller('teacherSubjectSection', function($scope, $http, $sce){
 	
 });     
 
-
-controllers.controller('student', function($scope, $http){
+controllers.controller('student', function($scope, $http, $sce){
 	
 	var protocol = window.location.protocol + "//" + window.location.host;
 	var fullUrl = protocol + window.location.pathname + window.location.search;   
 	
-	var teacherUrl = fullUrl + "/get_student"; 
-
+	// below is for the students 
+	var studentUrl = fullUrl + "/get_student_via_standard_model"; 
 	$scope.students;      
 	
-	$http.get(teacherUrl).success(function(data){
-		$scope.students = data.students;    
-	}); 
+	$http.get(studentUrl).success(function(data){
+		
+		var enrolledStudentUrl = fullUrl.replace("students_controller", "enrolled_student_controller");
+		var i; 
+		for(i = 0; i < data.students.length; i++) {
+			if(data.students[i].enrolled_student_id != null) {
+				var enrolledStudentLink = enrolledStudentUrl + "?enrolled_student_id=" + data.students[i].enrolled_student_id;
+				data.students[i].status = "<a href='" + enrolledStudentLink +"'>(Enrolled) View Academic Status</a>";
+			} else {
+				data.students[i].status = '<button type="button" class="my_button btn btn-info enroll_button" data-toggle="modal" data-target="#enrollModal"><span class="glyphicon glyphicon-education" aria-hidden="true"></span> Enroll</button>';                                                 
+			} 
+		}
+	
+		$scope.students = data.students;     
+		var a; 
+		for(a = 0; a < $scope.students.length; a++) {  
+			$scope.students[a].status = $sce.trustAsHtml($scope.students[a].status);
+		}
+
+	});   
 	
 	$scope.getStudents = function() {
-		$http.get(teacherUrl).success(function(data){
-			$scope.students = data.students;    
+		$http.get(studentUrl).success(function(data){
+		
+			var enrolledStudentUrl = fullUrl.replace("students_controller", "enrolled_student_controller");
+			var i; 
+			for(i = 0; i < data.students.length; i++) {
+				if(data.students[i].enrolled_student_id != null) {
+					var enrolledStudentLink = enrolledStudentUrl + "?enrolled_student_id=" + data.students[i].enrolled_student_id;
+					data.students[i].status = "<a href='" + enrolledStudentLink +"'>(Enrolled) View Academic Status</a>";
+				} else {
+					data.students[i].status = '<button type="button" class="my_button btn btn-info enroll_button" data-toggle="modal" data-target="#enrollModal"><span class="glyphicon glyphicon-education" aria-hidden="true"></span> Enroll</button>';                                                 
+				} 
+			}
+		
+			$scope.students = data.students;     
+			var a; 
+			for(a = 0; a < $scope.students.length; a++) {  
+				$scope.students[a].status = $sce.trustAsHtml($scope.students[a].status);
+			}
+
 		}); 
-	};
+	};   
+	
+	// below is get the curriculum years    
+	$scope.curriculums;  
+	
+	var curriculumYearsUrl = fullUrl.replace("students_controller", "curriculum_controller/get_curriculum");
+	$http.get(curriculumYearsUrl).success(function(data){
+		$scope.curriculums = data.curriculums;        
+	});     
+	
+	
+	// below is for the enrollment process     
+	// curriculum change 
+	$scope.curriculumChange = function() {
+		
+		if($scope.curriculum_id == "") {
+			$("#section_selection").attr("disabled", "");  
+		} else {
+			$("#section_selection").removeAttr("disabled");    
+			var curriculumSectionsUrl = fullUrl + "/get_curriculum_sections_by_curriculum_id?curriculum_id=" + $scope.curriculum_id; 
+			$http.get(curriculumSectionsUrl).success(function(data){  
+				$scope.curriculumSections = data.curriculum_sections;      
+			});
+		}
+	};       
+	
 	
 });
+
+controllers.controller('enrolledStudentController', function($scope, $sce, $http){
+	
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;   
+	
+	var enrolledStudentUrl = fullUrl.replace("enrolled_student_controller", "enrolled_student_controller/get_student_academic_data");
+	
+	$scope.academicDatas;      
+	$http.get(enrolledStudentUrl).success(function(data){
+		$scope.academicDatas = data.academic_datas;   
+	});
+	
+	
+});
+
 
 
 controllers.controller('test', function($scope, $sce, $http){
