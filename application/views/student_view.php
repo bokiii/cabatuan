@@ -348,6 +348,55 @@
 	</div>
 </div>
 
+<!-- Model for view Academic Status -->
+
+<div class="modal fade" id="academicStatusModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			
+			<form ng-controller='academic' id="view_academic" id="enrolled" method="post" action="#">
+			
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Academic Status</h4>
+				</div>
+				<div class="modal-body">
+					
+					<table class="table table-hover">
+						<thead>  
+							<tr>  
+								<th><input type="checkbox" class="main_check" /></th>
+								<th>Curriculum Year</th>  
+								<th>Section</th>  
+								<th>School Year</th>  
+								<th>View</th>
+							</tr>
+						</thead>   
+						<tbody>   
+							<tr ng-repeat="listAcademic in listAcademics">
+								<td><input type="checkbox" name="enrolled_student_id[]" value="{{listAcademic.id}}" class="sub_check" /></td>
+								<td>{{listAcademic.curriculum}}</td>
+								<td>{{listAcademic.section}}</td>
+								<td>{{listAcademic.school_year}}</td>
+								<td ng-bind-html="listAcademic.viewLink"></td>
+							</tr>  
+						</tbody>
+					</table>
+				
+				</div>   
+				
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">Enroll</button>
+				</div>      
+			
+			</form>
+			
+		</div>
+	</div>
+</div>
+
+
+
 
 <div class="main_container" id="student_angular_container" ng-controller='student'>
 	<div class="container">   
@@ -385,7 +434,8 @@
 									<th><input type="checkbox" class="main_check" /></th>
 									<th>Student</th>  
 									<th>Edit Data</th>  
-									<th>Status</th>
+									<th>Enrollment</th>  
+									<th>Academic Status</th>
 								</tr>
 							</thead>   
 							<tbody>   
@@ -395,7 +445,8 @@
 									<td>
 										<a class="my_update_link" href="<?php echo base_url(); ?>index.php/students_controller/get_student_update_content_by_id?id={{student.id}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="modal" data-target="#myUpdateModal"></span></a>
 									</td>   
-									<td ng-bind-html="student.status"></td>
+									<td ng-bind-html="student.status"></td>  
+									<td ng-bind-html="student.viewAcademic"></td>
 								</tr>  
 							</tbody>
 						</table>

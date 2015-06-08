@@ -24,6 +24,8 @@ class Enrolled_student_controller extends CI_Controller {
 		$get_student_personal_data_by_enrolled_student_id = $this->enrolled_student_model->get_student_personal_data_by_enrolled_student_id($enrolled_student_id);                              
 		foreach($get_student_personal_data_by_enrolled_student_id as $row) {
 			$data["student_name"] = $row->student_name;
+			$data["curriculum"] = $row->curriculum;   
+			$data["section"] = $row->section;
 		}
 		
 		$data['main_content'] = "enrolled_student_view";
@@ -38,5 +40,39 @@ class Enrolled_student_controller extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	
+}   
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

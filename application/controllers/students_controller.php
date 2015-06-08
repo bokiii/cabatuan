@@ -222,6 +222,19 @@ class Students_controller extends CI_Controller {
 	
 	}   
 	
+	public function list_student_enrolled_academic() {  
+	
+		$data = array();
+		
+		$student_id = $this->input->get("student_id");    
+		$get_student_enrolled_academic_list_by_student_id = $this->student_model->get_student_enrolled_academic_list_by_student_id($student_id);
+	
+		$data['list_academics'] = $get_student_enrolled_academic_list_by_student_id;   
+		echo json_encode($data);
+	
+	}
+	
+	
 }  
 
 

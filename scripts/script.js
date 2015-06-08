@@ -263,24 +263,41 @@ var deleteFormModule = (function() {
 	var executeCheckBox = function() {
 		
 		$(document).on('click', "#delete_form .main_check", function(){
-		
 			if($(this).is(":checked")) {
 				$("#delete_form .sub_check").check();
 			} else {
 				$("#delete_form .sub_check").uncheck();
 			}
-	
 		});
 		
 		$(document).on('click', "#delete_form .sub_check", function(){
-			
 			if($("#delete_form .sub_check:checked").length === $("#delete_form .sub_check").length) {
 				$("#delete_form .main_check").check();
 			} else {
 				$("#delete_form .main_check").uncheck();
 			}
-			
+		});          
+		
+		
+		
+		// below is the checkbox for the view academic
+		$(document).on('click', "#view_academic .main_check", function(){
+			if($(this).is(":checked")) {
+				$("#view_academic .sub_check").check();
+			} else {
+				$("#view_academic .sub_check").uncheck();
+			}
 		});
+		
+		$(document).on('click', "#view_academic .sub_check", function(){
+			if($("#view_academic .sub_check:checked").length === $("#view_academic .sub_check").length) {
+				$("#view_academic .main_check").check();
+			} else {
+				$("#view_academic .main_check").uncheck();
+			}
+		});      
+		
+		
 		
 	};  
 	
@@ -499,7 +516,6 @@ var studentModule = (function() {
 	
 	var enrollModalShow = function() {
 		$('#enrollModal').on('show.bs.modal', function (e) {
-			console.log("showing");
 			$(document).find("#student_enrollment_form").trigger("reset");    
 			$("#student_enrollment_form .alert").addClass("hidden");
 		});   
@@ -539,11 +555,21 @@ var studentModule = (function() {
 	
 	};
 	
+	var viewAcademicStatusShow = function() {   
+		$(document).on("click", ".view_academic", function(){
+			var studentId = $(this).attr("id");
+			angular.element($("#view_academic")).scope().getStudentEnrolledAcademicData(studentId);
+		});
+		
+	};  
+	
+
 	return {
-		enrollProcess: 			enrollProcess,    
-		enrollModalHide:		enrollModalHide,   
-		enrollModalShow:		enrollModalShow, 
-		enrollmentFormSubmit:	enrollmentFormSubmit
+		enrollProcess: 				enrollProcess,    
+		enrollModalHide:			enrollModalHide,   
+		enrollModalShow:			enrollModalShow, 
+		enrollmentFormSubmit:		enrollmentFormSubmit, 
+		viewAcademicStatusShow:		viewAcademicStatusShow
 	}
 	
 })()      
@@ -551,7 +577,8 @@ var studentModule = (function() {
 studentModule.enrollProcess();   
 studentModule.enrollModalHide();  
 studentModule.enrollModalShow();
-studentModule.enrollmentFormSubmit();
+studentModule.enrollmentFormSubmit();  
+studentModule.viewAcademicStatusShow();
 
 
 

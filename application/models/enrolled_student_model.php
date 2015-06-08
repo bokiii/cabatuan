@@ -7,10 +7,13 @@ class Enrolled_student_model extends CI_Model {
 	}   
 	
 	function get_student_personal_data_by_enrolled_student_id($enrolled_student_id) {
-		$this->db->select("concat(students.sur_name,' ',students.first_name, ', ',students.middle_name) as student_name", FALSE);                            
+		$this->db->select("concat(students.sur_name,' ',students.first_name, ', ',students.middle_name) as student_name, curriculums.curriculum, curriculum_sections.section", FALSE);                            
 		$this->db->from("enrolled_students");  
-		$this->db->join("students", "students.id = enrolled_students.student_id"); 
+		$this->db->join("students", "students.id = enrolled_students.student_id");   
+		$this->db->join("curriculums", "curriculums.id = enrolled_students.curriculum_id");
+		$this->db->join("curriculum_sections", "curriculum_sections.id = enrolled_students.section_id");
 		$this->db->where("enrolled_students.id", $enrolled_student_id);  
+		
 		$query = $this->db->get(); 
 		return $query->result();
 	}  
