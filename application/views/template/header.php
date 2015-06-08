@@ -46,22 +46,13 @@
 				
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Students <span class="caret"></span></a>                                  
-						<ul class="dropdown-menu" role="menu"> 
-							<li><a href="<?php echo base_url(); ?>index.php/students_controller">Manage Students</a></li>
-						</ul>
+						<a href="<?php echo base_url(); ?>index.php/students_controller">Students</a>                                  
 					</li>  
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Teachers <span class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu"> 
-							<li><a href="<?php echo base_url(); ?>index.php/teachers_controller">Manage Teachers</a></li>
-						</ul>
+						<a href="<?php echo base_url(); ?>index.php/teachers_controller">Teachers</a>
 					</li>   
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Curriculum Years<span class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu"> 
-							<li><a href="<?php echo base_url(); ?>index.php/curriculum_controller">Manage Curriculum Years</a></li>
-						</ul>
+						<a href="<?php echo base_url(); ?>index.php/curriculum_controller">Curriculum Years</a>
 					</li>   
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Account<span class="caret"></span></a>

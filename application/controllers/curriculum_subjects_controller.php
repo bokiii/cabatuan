@@ -51,6 +51,8 @@ class Curriculum_subjects_controller extends CI_Controller {
 	
 	public function add_curriculum_subject() {   
 		
+		$this->load->library("form_validation");
+		
 		$data = array(); 
 		$curriculum_id = $this->input->post('curriculum_id');
 		
