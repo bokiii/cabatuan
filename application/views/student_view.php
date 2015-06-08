@@ -349,7 +349,7 @@
 </div>
 
 
-<div class="main_container" ng-controller='student'>
+<div class="main_container" id="student_angular_container" ng-controller='student'>
 	<div class="container">   
 		
 		<div class="row">   

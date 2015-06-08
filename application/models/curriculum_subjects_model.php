@@ -42,6 +42,60 @@ class Curriculum_subjects_model extends CI_Model {
 		return $query->result();
 	}
 
+	
+	private function check_curriculum_id_in_enrolled_students($curriculum_id) {  
+		$this->db->where('curriculum_id', $curriculum_id);  
+		$this->db->from("enrolled_students");    
+		$count = $this->db->count_all_results();  
+		return $count;
+	}   
+	
+	private function get_student_enrolled_data_by_curriculum_id($curriculum_id) {  
+		$this->db->select("*");  
+		$this->db->from("enrolled_students"); 
+		$this->db->where("curriculum_id", $curriculum_id);
+		$query = $this->db->get();  
+		return $query->result();
+	}
+	
+	function insert_curriculum_subject($data, $curriculum_id) {   
+		$this->db->trans_start();
+		
+		$this->db->insert("curriculum_subjects", $data);  
+		$subject_id = $this->db->insert_id();  
+		
+		if($this->check_curriculum_id_in_enrolled_students($curriculum_id) != 0) {  
+			$get_student_enrolled_data_by_curriculum_id = $this->get_student_enrolled_data_by_curriculum_id($curriculum_id);
+			
+			foreach($get_student_enrolled_data_by_curriculum_id as $row) { 
+			
+				$enrolled_student_id = $row->id;
+				$accomplished = $row->accomplished;  
+				
+				if(!$accomplished) {    
+					$this->db->set('subject_id', $subject_id);
+					$this->db->set('enrolled_student_id', $enrolled_student_id);  
+					$this->db->insert("enrolled_student_subjects");  
+					
+					$enrolled_student_subject_id = $this->db->insert_id();   
+					$this->db->set("enrolled_student_subject_id", $enrolled_student_subject_id) ;
+					$this->db->insert("students_subjects_grades");  
+				} 
+			}
+		}
+	
+		if($this->db->trans_complete()) {
+			return true;
+		} else {  
+			return false;
+		}
+		
+	}   
+	
+	
+
+	
+	
 }    
 
 

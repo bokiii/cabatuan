@@ -23,7 +23,6 @@ controllers.controller('curriculumYear', function($scope, $http){
 	
 });
 
-
 controllers.controller('curriculumSubject', function($scope, $http){
 	
 	var protocol = window.location.protocol + "//" + window.location.host;
@@ -46,7 +45,6 @@ controllers.controller('curriculumSubject', function($scope, $http){
 	
 });
 
-
 controllers.controller('curriculumSection', function($scope, $http){
 	
 	var protocol = window.location.protocol + "//" + window.location.host;
@@ -67,7 +65,6 @@ controllers.controller('curriculumSection', function($scope, $http){
 	};
 	
 });
-
 
 controllers.controller('teacher', function($scope, $http){
 	
@@ -91,7 +88,6 @@ controllers.controller('teacher', function($scope, $http){
 	};
 	
 });
-
 
 controllers.controller('teacherSubject', function($scope, $http, $sce){
 	
@@ -251,8 +247,6 @@ controllers.controller('enrolledStudentController', function($scope, $sce, $http
 	
 	
 });
-
-
 
 controllers.controller('test', function($scope, $sce, $http){
 	

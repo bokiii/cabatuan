@@ -531,6 +531,10 @@ var studentModule = (function() {
 			} else {
 				bootbox.alert("Failed");
 			} 
+		
+			// below is the trigger for the students 
+			//$(document).find(".student_angular_trigger").trigger("click"); 
+			angular.element(document.getElementById('student_angular_container')).scope().getStudents();
 		}
 	
 	};

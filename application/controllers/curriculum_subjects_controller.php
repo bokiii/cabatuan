@@ -51,21 +51,34 @@ class Curriculum_subjects_controller extends CI_Controller {
 	
 	public function add_curriculum_subject() {   
 		
-		$data = array();
-	
-		$curriculum_subject = new Curriculum_subject(); 
-		$curriculum_subject->subject = $this->input->post('subject');     
-		$curriculum_subject->curriculum_id = $this->input->post('curriculum_id');    		
+		$data = array(); 
+		$curriculum_id = $this->input->post('curriculum_id');
 		
-		
-		if(!$curriculum_subject->save()) {  
+		$this->form_validation->set_rules("subject", "Subject", "required|min_length[3]|trim|is_unique[curriculum_subjects.subject]");                          
+		if($this->form_validation->run() == FALSE) {  
 			$data['status'] = false;   
-			$data['errors'] = $curriculum_subject->error->string;
-		} else {
-			$data['status'] = true;
-		}  
+			$data['errors'] = validation_errors();
+		} else {   
+			
+			$curriculum_subject_data = array(  
+				"subject" => trim($this->input->post('subject')), 
+				"curriculum_id" => $this->input->post('curriculum_id'), 
+				"created" => date("Y-m-d H:i:s")
+			);  
+			
+			$insert_curriculum_subject = $this->curriculum_subjects_model->insert_curriculum_subject($curriculum_subject_data, $curriculum_id);
+			
+			if($insert_curriculum_subject) {
+				$data['status'] = true;
+			} else {  
+				$data['status'] = false;   
+				$data['errors'] = "<p>Saving failed.</p>";
+			}
+			
+		}
 		
 		echo json_encode($data);
+	
 	}   
 	
 	public function delete_curriculum_subject() {  
