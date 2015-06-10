@@ -46,7 +46,7 @@ class Student_model extends CI_Model {
 
 		$this->db->from("students");     
 		$this->db->join("enrolled_students", "enrolled_students.student_id = students.id", "left");
-		$this->db->group_by("students.id");
+		$this->db->group_by("enrolled_students.student_id");
 		$query = $this->db->get();    
 
 		return $query->result_array();

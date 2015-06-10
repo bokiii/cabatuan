@@ -16,7 +16,8 @@ class Students_controller extends CI_Controller {
 		}
 		
 		$this->load->model('student_model');  
-		$this->load->model('curriculum_subjects_model');
+		$this->load->model('curriculum_subjects_model');  
+		$this->load->model('enrolled_student_model');
 	}     
 	
 	public function index() {
@@ -207,6 +208,8 @@ class Students_controller extends CI_Controller {
 			"accomplished" => false,
 			"created" => date("Y-m-d H:i:s")
 		);       
+
+		$data['student_id'] = $student_id;
 		
 		$get_curriculum_subjects_by_curriculum_id = $this->curriculum_subjects_model->get_curriculum_subjects_by_curriculum_id($curriculum_id);              
 		
@@ -234,8 +237,52 @@ class Students_controller extends CI_Controller {
 	
 	}
 	
+	public function delete_student_enrolled_academic() {   
+
+		$enrolled_student_id = $this->input->post("enrolled_student_id");
+	
+		$data = array();                   
+		
+		$get_student_id_by_enrolled_student_id = $this->enrolled_student_model->get_student_id_by_enrolled_student_id($enrolled_student_id[0]);                                                         
+		foreach($get_student_id_by_enrolled_student_id as $row) {   
+			$data["student_id"] = $row->student_id;
+		}
+	
+		$enrolled_student_id = $this->input->post("enrolled_student_id");  
+		$delete_student_enrolled_curriculum = $this->enrolled_student_model->delete_student_enrolled_curriculum($enrolled_student_id);
+		
+		if($delete_student_enrolled_curriculum) {   
+			$data['status'] = true;
+		} else {  
+			$data['status'] = false;
+		}   
+		
+		echo json_encode($data);
+	
+	}
+	
 	
 }  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

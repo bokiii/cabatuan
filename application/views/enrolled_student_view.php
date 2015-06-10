@@ -3,7 +3,7 @@
 		<div class="row">   
 			<div class="col-md-12">   
 				<div class="page-header">
-					<h1><?php echo $student_name; ?><small> (<?php echo $curriculum . " - " . $section; ?>)</small></h1>
+					<h1><?php echo $student_name; ?><small> (<?php echo $curriculum . " - " . $section . " - " . $school_year; ?>) </small></h1>
 				</div>
 			</div>    
 			

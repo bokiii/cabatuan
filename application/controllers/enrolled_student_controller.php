@@ -25,7 +25,8 @@ class Enrolled_student_controller extends CI_Controller {
 		foreach($get_student_personal_data_by_enrolled_student_id as $row) {
 			$data["student_name"] = $row->student_name;
 			$data["curriculum"] = $row->curriculum;   
-			$data["section"] = $row->section;
+			$data["section"] = $row->section;  
+			$data["school_year"] = $row->school_year;
 		}
 		
 		$data['main_content'] = "enrolled_student_view";

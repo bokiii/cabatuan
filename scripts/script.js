@@ -301,6 +301,7 @@ var deleteFormModule = (function() {
 		
 	};  
 	
+	
 	var deleteClick = function() {
 		
 		$(document).on('click', "#my_form_delete_button", function(e){
@@ -372,17 +373,56 @@ var deleteFormModule = (function() {
 		
 	};
 	
+	var academicListDeleteClick = function() {  
+		
+		$(document).on('click', "#academic_list_form_delete_button", function(e){
+			e.preventDefault();
+			
+			bootbox.confirm("Are you sure?", function(result) {
+				if(result) {
+					$(document).find("#view_academic").submit();
+				}
+			});        
+		
+		});
+	
+	};     
+	
+	var viewAcademicFormSubmit = function() {  
+		$("#view_academic").ajaxForm({
+			dataType: 'json',
+			forceSync: true,
+			beforeSubmit: loading,
+			success: success_status
+		});    
+		
+		function loading() {  
+			return true;
+		}   
+		
+		function success_status(data) {    
+			var studentId = data.student_id;
+			angular.element($("#view_academic")).scope().getStudentEnrolledAcademicData(studentId);
+		}   
+		
+	};
+	
+	
 	return {
-		executeCheckBox:	executeCheckBox,    
-		deleteClick:		deleteClick,
-		deleteFormSubmit:	deleteFormSubmit
+		executeCheckBox:			executeCheckBox,    
+		deleteClick:				deleteClick,
+		deleteFormSubmit:			deleteFormSubmit, 
+		academicListDeleteClick:	academicListDeleteClick, 
+		viewAcademicFormSubmit:		viewAcademicFormSubmit
 	}
 
 })()   
 
 deleteFormModule.executeCheckBox();      
 deleteFormModule.deleteClick();
-deleteFormModule.deleteFormSubmit();
+deleteFormModule.deleteFormSubmit();   
+deleteFormModule.academicListDeleteClick();  
+deleteFormModule.viewAcademicFormSubmit();
 
 var datePickerModule = (function() {
 	
@@ -543,14 +583,18 @@ var studentModule = (function() {
 			$('#enrollModal').modal('hide'); 
 			
 			if(data.status == true) {
-				bootbox.alert("Success")
+				bootbox.alert("Success");
 			} else {
 				bootbox.alert("Failed");
 			} 
 		
+			var studentId = data.student_id;
+		
 			// below is the trigger for the students 
-			//$(document).find(".student_angular_trigger").trigger("click"); 
-			angular.element(document.getElementById('student_angular_container')).scope().getStudents();
+			angular.element(document.getElementById('student_angular_container')).scope().getStudents();   
+			
+			// below is the trigger for the view list academic  
+			angular.element($("#view_academic")).scope().getStudentEnrolledAcademicData(studentId);
 		}
 	
 	};

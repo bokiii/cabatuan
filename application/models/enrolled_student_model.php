@@ -6,8 +6,19 @@ class Enrolled_student_model extends CI_Model {
 		parent::__construct();
 	}   
 	
+	function delete_student_enrolled_curriculum($id) {
+		$this->db->where_in('id', $id);   
+		$query = $this->db->delete('enrolled_students');    
+		if($query) {
+			return true; 
+		} else {
+			return false;
+		}
+		
+	}  
+	
 	function get_student_personal_data_by_enrolled_student_id($enrolled_student_id) {
-		$this->db->select("concat(students.sur_name,' ',students.first_name, ', ',students.middle_name) as student_name, curriculums.curriculum, curriculum_sections.section", FALSE);                            
+		$this->db->select("enrolled_students.school_year, concat(students.sur_name,' ',students.first_name, ', ',students.middle_name) as student_name, curriculums.curriculum, curriculum_sections.section", FALSE);                            
 		$this->db->from("enrolled_students");  
 		$this->db->join("students", "students.id = enrolled_students.student_id");   
 		$this->db->join("curriculums", "curriculums.id = enrolled_students.curriculum_id");
@@ -30,7 +41,18 @@ class Enrolled_student_model extends CI_Model {
 		return $query->result_array();
 	}
 
+	function get_student_id_by_enrolled_student_id($enrolled_student_id) {     
+	
+		$this->db->select("student_id");   
+		$this->db->from("enrolled_students");  
+		$this->db->where("id", $enrolled_student_id);  
+		$query = $this->db->get();
 
+		return $query->result();
+	
+	}
+	
+	
 }   
 
 

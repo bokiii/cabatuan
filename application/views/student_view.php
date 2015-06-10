@@ -354,7 +354,7 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			
-			<form ng-controller='academic' id="view_academic" id="enrolled" method="post" action="#">
+			<form ng-controller='academic' id="view_academic" id="enrolled" method="post" action="<?php echo base_url(); ?>index.php/students_controller/delete_student_enrolled_academic">
 			
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -381,12 +381,16 @@
 								<td ng-bind-html="listAcademic.viewLink"></td>
 							</tr>  
 						</tbody>
-					</table>
+					</table>   
+					
+					
 				
 				</div>   
 				
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary">Enroll</button>
+					<button id="academic_list_form_delete_button" type="submit" class="my_button btn btn-danger">
+						<span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span> Delete
+					</button>
 				</div>      
 			
 			</form>
