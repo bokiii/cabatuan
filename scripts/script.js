@@ -401,7 +401,8 @@ var deleteFormModule = (function() {
 		}   
 		
 		function success_status(data) {    
-			var studentId = data.student_id;
+			angular.element(document.getElementById('student_angular_container')).scope().getStudents(); 
+			var studentId = data.student_id;  
 			angular.element($("#view_academic")).scope().getStudentEnrolledAcademicData(studentId);
 		}   
 		
@@ -588,26 +589,25 @@ var studentModule = (function() {
 				bootbox.alert("Failed");
 			} 
 		
-			var studentId = data.student_id;
-		
 			// below is the trigger for the students 
-			angular.element(document.getElementById('student_angular_container')).scope().getStudents();   
-			
+			angular.element(document.getElementById('student_angular_container')).scope().getStudents();     
+		
+			var studentId = data.student_id;
 			// below is the trigger for the view list academic  
-			angular.element($("#view_academic")).scope().getStudentEnrolledAcademicData(studentId);
+			angular.element($("#view_academic")).scope().getStudentEnrolledAcademicData(studentId);   
+			
 		}
 	
 	};
 	
 	var viewAcademicStatusShow = function() {   
 		$(document).on("click", ".view_academic", function(){
-			var studentId = $(this).attr("id");
-			angular.element($("#view_academic")).scope().getStudentEnrolledAcademicData(studentId);
+			var studentId = $(this).attr("id");   
+			angular.element($("#view_academic")).scope().getStudentEnrolledAcademicData(studentId);  
 		});
-		
-	};  
+	};    
 	
-
+	
 	return {
 		enrollProcess: 				enrollProcess,    
 		enrollModalHide:			enrollModalHide,   
@@ -622,7 +622,8 @@ studentModule.enrollProcess();
 studentModule.enrollModalHide();  
 studentModule.enrollModalShow();
 studentModule.enrollmentFormSubmit();  
-studentModule.viewAcademicStatusShow();
+studentModule.viewAcademicStatusShow();  
+
 
 
 
