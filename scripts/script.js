@@ -378,11 +378,17 @@ var deleteFormModule = (function() {
 		$(document).on('click', "#academic_list_form_delete_button", function(e){
 			e.preventDefault();
 			
-			bootbox.confirm("Are you sure?", function(result) {
-				if(result) {
-					$(document).find("#view_academic").submit();
-				}
-			});        
+			if($("#view_academic .sub_check:checked").length != 0) {  
+			
+				bootbox.confirm("Are you sure?", function(result) {
+					if(result) {
+						$(document).find("#view_academic").submit();
+					}
+				});        
+			
+			} else {   
+				bootbox.alert("Select item to delete..");
+			}
 		
 		});
 	
@@ -403,7 +409,9 @@ var deleteFormModule = (function() {
 		function success_status(data) {    
 			angular.element(document.getElementById('student_angular_container')).scope().getStudents(); 
 			var studentId = data.student_id;  
-			angular.element($("#view_academic")).scope().getStudentEnrolledAcademicData(studentId);
+			angular.element($("#view_academic")).scope().getStudentEnrolledAcademicData(studentId);   
+			
+			$("#view_academic .main_check").uncheck();
 		}   
 		
 	};
