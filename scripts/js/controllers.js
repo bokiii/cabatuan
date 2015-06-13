@@ -286,6 +286,44 @@ controllers.controller('academic', function($scope, $sce, $http){
 
 });
 
+controllers.controller('sectionStudents', function($scope, $sce, $http){   
+
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;   
+	
+	var sectionStudentsUrl = fullUrl.replace("section_students_controller", "section_students_controller/get_student_enrolled_school_year");
+
+	$scope.schoolYears;      
+	
+	$http.get(sectionStudentsUrl).success(function(data){
+		$scope.schoolYears = data.school_years;
+	});     
+	
+
+});   
+
+controllers.controller('viewStudents', function($scope, $sce, $http){
+	
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;   
+	
+	$scope.students;
+	$scope.schoolYear = "hi";    
+	
+	$scope.viewStudent = function(sectionId, schoolYear) {  
+		$scope.schoolYear = schoolYear;  
+		var getSectionStudentsUrl = protocol + window.location.pathname + "/get_section_students_by_section_id_and_school_year?section_id=" + sectionId + "&school_year=" + schoolYear;
+		
+		$http.get(getSectionStudentsUrl).success(function(data){
+			$scope.students = data.section_students;        
+			$('#sectionStudentsModal').modal('show');
+		});
+
+	};
+	
+});
+ 
+
 controllers.controller('test', function($scope, $sce, $http){
 	
 	var protocol = window.location.protocol + "//" + window.location.host;

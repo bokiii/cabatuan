@@ -71,7 +71,7 @@
 									<th><input type="checkbox" class="main_check" /></th>
 									<th>Section</th>     
 									<th>Curriculum</th>     
-									<th>Manage Students</th>
+									<th>Students</th>
 								</tr>
 							</thead>   
 							<tbody>   
@@ -80,7 +80,7 @@
 									<td>{{teacherSubjectSection.section}}</td>      
 									<td>{{teacherSubjectSection.curriculum}}</td>     
 									<td>  
-										<a href="#"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+										<a href="<?php echo base_url(); ?>index.php/section_students_controller?section_id={{teacherSubjectSection.section_id}}&teacher_subject_id=<?php echo $teacher_subject_id; ?>" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
 									</td>  									
 								</tr>
 							</tbody>

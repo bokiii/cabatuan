@@ -632,6 +632,26 @@ studentModule.enrollModalShow();
 studentModule.enrollmentFormSubmit();  
 studentModule.viewAcademicStatusShow();  
 
+var sectionStudentModule = (function() { 
+
+	var viewSectionStudentsClick = function() {  
+		$(document).on("click", ".viewSectionStudentsLink", function(e){   
+			e.preventDefault();
+			var sectionId = $(this).attr("id");     
+			var schoolYear = $(this).parent("td").prev("td").text();
+			
+			angular.element($("#section_students")).scope().viewStudent(sectionId, schoolYear);   
+			
+		});
+	};   
+	
+	return {   
+		viewSectionStudentsClick:	viewSectionStudentsClick
+	}
+	
+})()   
+
+sectionStudentModule.viewSectionStudentsClick();
 
 
 

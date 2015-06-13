@@ -31,7 +31,7 @@ class Teacher_subject_sections_model extends CI_Model {
 	
 	function get_teacher_subject_sections_by_teacher_subject_id($teacher_subject_id) {
 	
-		$this->db->select("teachers_subjects_sections.id, curriculum_sections.section, curriculums.curriculum");
+		$this->db->select("teachers_subjects_sections.id, teachers_subjects_sections.section_id, curriculum_sections.section, curriculums.curriculum");
 		$this->db->from('teachers_subjects_sections');     
 		$this->db->join("curriculum_sections", "curriculum_sections.id = teachers_subjects_sections.section_id");
 		$this->db->join("curriculums", "curriculums.id = curriculum_sections.curriculum_id");
