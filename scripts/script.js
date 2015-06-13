@@ -638,9 +638,10 @@ var sectionStudentModule = (function() {
 		$(document).on("click", ".viewSectionStudentsLink", function(e){   
 			e.preventDefault();
 			var sectionId = $(this).attr("id");     
-			var schoolYear = $(this).parent("td").prev("td").text();
-			
-			angular.element($("#section_students")).scope().viewStudent(sectionId, schoolYear);   
+			var schoolYear = $(this).parent("td").prev("td").text();     
+			var subjectId = $("#subject_id").text();   
+	
+			angular.element($("#section_students")).scope().viewStudent(sectionId, schoolYear, subjectId);   
 			
 		});
 	};   

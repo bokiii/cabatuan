@@ -5,17 +5,25 @@
 			<div id="section_students" ng-controller='viewStudents'>  
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">{{schoolYear}}</h4>
+					<h4 class="modal-title" id="myModalLabel">School Year {{schoolYear}} (<?php echo $subject; ?>)</h4>
 				</div>
 				<div class="modal-body">  
 					<div class="table-responsive">   
 						<table class="table table-hover">   
 							<thead>  
-								<th>Student</th>
+								<th>Student</th>   
+								<th>First Quarter</th>   
+								<th>Second Quarter</th>   
+								<th>Third Quarter</th>   
+								<th>Fourth Quarter</th>
 							</thead>  
 							<tbody>  
 								<tr ng-repeat="student in students">  
-									<td>{{student.student_name}}</td>  
+									<td>{{student.student_name}}</td>     
+									<td>{{student.first_quarter}}</td>
+									<td>{{student.second_quarter}}</td>
+									<td>{{student.third_quarter}}</td>
+									<td>{{student.fourth_quarter}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -73,9 +81,10 @@
 								<td ng-controller="viewStudents">
 									<a id="<?php echo $section_id; ?>" class="viewSectionStudentsLink" href="#"><span class="glyphicon glyphicon-search"></span></a>
 								</td>
-							</tr> 
+							</tr>     
 						</tbody>
-					</table>
+					</table>   
+					<p id="subject_id" class="hidden"><?php echo $subject_id; ?></p>
 				</div>
 			
 			</div>

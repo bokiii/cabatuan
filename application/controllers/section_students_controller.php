@@ -28,7 +28,10 @@ class Section_students_controller extends CI_Controller {
 		$data["section_id"] = $section_id;
 		
 		$get_teacher_subject_data_by_teacher_subject_id = $this->teacher_subject_sections_model->get_teacher_subject_data_by_teacher_subject_id($teacher_subject_id);               
+		$this->debug($get_teacher_subject_data_by_teacher_subject_id);
+		
 		foreach($get_teacher_subject_data_by_teacher_subject_id as $row_a) {   
+			$data['subject_id'] = $row_a->subject_id;
 			$data['teacher_name'] = $row_a->last_name . ", " . $row_a->first_name . " " . $row_a->middle_name; 
 			$data['subject'] = $row_a->subject;
 		}
@@ -55,15 +58,39 @@ class Section_students_controller extends CI_Controller {
 	
 	public function get_section_students_by_section_id_and_school_year() {  
 		$section_id = $this->input->get("section_id");     
-		$school_year = $this->input->get("school_year");         
+		$school_year = $this->input->get("school_year");            
 		
 		$get_section_students_by_section_id_and_school_year = $this->section_students_model->get_section_students_by_section_id_and_school_year($section_id, $school_year);
 		$data["section_students"] = $get_section_students_by_section_id_and_school_year;  
 		
 		echo json_encode($data);
+	}      
+	
+	public function get_section_students_by_section_id_school_year_and_subject_id() {   
+	
+		$section_id = $this->input->get("section_id");     
+		$school_year = $this->input->get("school_year");        
+		$subject_id = $this->input->get("subject_id"); 		
 		
+		$get_section_students_by_section_id_school_year_and_subject_id = $this->section_students_model->get_section_students_by_section_id_school_year_and_subject_id($section_id, $school_year, $subject_id);
+		$data["section_students"] = $get_section_students_by_section_id_school_year_and_subject_id;  
+		
+		echo json_encode($data);
+	
 	}
+	
+	
 	
 
 
-}
+}   
+
+
+
+
+
+
+
+
+
+

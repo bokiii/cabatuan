@@ -310,12 +310,15 @@ controllers.controller('viewStudents', function($scope, $sce, $http){
 	$scope.students;
 	$scope.schoolYear = "hi";    
 	
-	$scope.viewStudent = function(sectionId, schoolYear) {  
-		$scope.schoolYear = schoolYear;  
-		var getSectionStudentsUrl = protocol + window.location.pathname + "/get_section_students_by_section_id_and_school_year?section_id=" + sectionId + "&school_year=" + schoolYear;
+	$scope.viewStudent = function(sectionId, schoolYear, subjectId) {  
 		
+		$scope.schoolYear = schoolYear;  
+		//var getSectionStudentsUrl = protocol + window.location.pathname + "/get_section_students_by_section_id_and_school_year?section_id=" + sectionId + "&school_year=" + schoolYear;
+		var getSectionStudentsUrl = protocol + window.location.pathname + "/get_section_students_by_section_id_school_year_and_subject_id?section_id=" + sectionId + "&school_year=" + schoolYear + "&subject_id=" + subjectId;
+	
 		$http.get(getSectionStudentsUrl).success(function(data){
-			$scope.students = data.section_students;        
+			$scope.students = data.section_students;     
+			console.log($scope.students);			
 			$('#sectionStudentsModal').modal('show');
 		});
 
