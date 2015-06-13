@@ -23,34 +23,38 @@
 					<!-- Tab panes -->
 					<div class="tab-content">
 						<div role="tabpanel" class="tab-pane active" id="home"> 
-							<table class="table table-bordered academic">
-								<thead>  
-									<th rowspan="2">Learning Areas</th>
-									<th colspan="4">Quarter</th>
-									<th rowspan="2">Final Grade</th>
-									<th rowspan="2">Remarks</th>
-								</thead>    
-								<tbody>  
-									<tr>  
-										<td>&nbsp;</td>
-										<td>1</td>
-										<td>2</td>
-										<td>3</td>  
-										<td>4</td>
-										<td>&nbsp;</td>
-										<td>&nbsp;</td>
-									</tr>   
-									<tr ng-repeat="academicData in academicDatas">  
-										<td>{{academicData.subject}}</td>  
-										<td>{{academicData.first_quarter}}</td>  
-										<td>{{academicData.second_quarter}}</td>  
-										<td>{{academicData.third_quarter}}</td>  
-										<td>{{academicData.fourth_quarter}}</td>
-										<td>{{academicData.final_grade}}</td>  
-										<td>{{academicData.remarks}}</td>
-									</tr>
-								</tbody>
-							</table>  
+							
+							<div class="table-responsive">
+								<table class="table table-bordered academic">
+									<thead>  
+										<th rowspan="2">Learning Areas</th>
+										<th colspan="4">Quarter</th>
+										<th rowspan="2">Final Grade</th>
+										<th rowspan="2">Remarks</th>
+									</thead>    
+									<tbody>  
+										<tr>  
+											<td>&nbsp;</td>
+											<td>1</td>
+											<td>2</td>
+											<td>3</td>  
+											<td>4</td>
+											<td>&nbsp;</td>
+											<td>&nbsp;</td>
+										</tr>   
+										<tr ng-repeat="academicData in academicDatas">  
+											<td>{{academicData.subject}}</td>  
+											<td>{{academicData.first_quarter}}</td>  
+											<td>{{academicData.second_quarter}}</td>  
+											<td>{{academicData.third_quarter}}</td>  
+											<td>{{academicData.fourth_quarter}}</td>
+											<td>{{academicData.final_grade}}</td>  
+											<td>{{academicData.remarks}}</td>
+										</tr>
+									</tbody>
+								</table>  
+							</div>
+						
 						</div>
 						<!--<div role="tabpanel" class="tab-pane" id="profile">...</div>-->
 					
