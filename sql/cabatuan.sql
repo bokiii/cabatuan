@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2015 at 03:36 PM
+-- Generation Time: Jun 13, 2015 at 07:32 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `curriculums` (
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `curriculums`
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `curriculum_subjects` (
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `curriculum_subjects_ibfk_1` (`curriculum_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
 
 --
 -- Dumping data for table `curriculum_subjects`
@@ -127,7 +127,72 @@ INSERT INTO `curriculum_subjects` (`id`, `subject`, `curriculum_id`, `created`, 
 (22, 'Math 104', 8, '2015-05-26 15:31:07', '0000-00-00 00:00:00'),
 (23, 'English 104', 8, '2015-05-26 15:31:15', '0000-00-00 00:00:00'),
 (24, 'Filipino 104', 8, '2015-05-26 15:31:24', '0000-00-00 00:00:00'),
-(25, 'Math 101', 5, '2015-05-28 10:17:24', '0000-00-00 00:00:00');
+(29, 'Math 101', 5, '2015-06-07 22:26:06', '0000-00-00 00:00:00'),
+(30, 'Math 102', 6, '2015-06-07 22:27:24', '0000-00-00 00:00:00'),
+(31, 'Sibika 101', 5, '2015-06-08 21:55:19', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `enrolled_students`
+--
+
+CREATE TABLE IF NOT EXISTS `enrolled_students` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `curriculum_id` int(10) unsigned NOT NULL,
+  `section_id` int(10) unsigned NOT NULL,
+  `student_id` int(10) unsigned NOT NULL,
+  `school_year` varchar(175) NOT NULL,
+  `current` tinyint(1) NOT NULL,
+  `accomplished` tinyint(1) NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `enrolled_students_ibfk_1` (`student_id`),
+  KEY `enrolled_students_ibfk_2` (`curriculum_id`),
+  KEY `enrolled_students_ibfk_3` (`section_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
+
+--
+-- Dumping data for table `enrolled_students`
+--
+
+INSERT INTO `enrolled_students` (`id`, `curriculum_id`, `section_id`, `student_id`, `school_year`, `current`, `accomplished`, `created`, `updated`) VALUES
+(43, 5, 24, 13, '2015-2016', 1, 0, '2015-06-11 16:19:24', '0000-00-00 00:00:00'),
+(44, 5, 24, 14, '2015-2016', 1, 0, '2015-06-11 16:20:23', '0000-00-00 00:00:00'),
+(45, 5, 24, 13, '2016-2017', 1, 0, '2015-06-12 23:39:48', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `enrolled_student_subjects`
+--
+
+CREATE TABLE IF NOT EXISTS `enrolled_student_subjects` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `subject_id` int(10) unsigned NOT NULL,
+  `enrolled_student_id` int(10) unsigned NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `enrolled_student_subjects_ibfk_2` (`subject_id`),
+  KEY `enrolled_student_subjects_ibfk_1` (`enrolled_student_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=123 ;
+
+--
+-- Dumping data for table `enrolled_student_subjects`
+--
+
+INSERT INTO `enrolled_student_subjects` (`id`, `subject_id`, `enrolled_student_id`, `created`, `updated`) VALUES
+(114, 15, 43, '2015-06-11 16:19:24', '0000-00-00 00:00:00'),
+(115, 29, 43, '2015-06-11 16:19:24', '0000-00-00 00:00:00'),
+(116, 31, 43, '2015-06-11 16:19:24', '0000-00-00 00:00:00'),
+(117, 15, 44, '2015-06-11 16:20:23', '0000-00-00 00:00:00'),
+(118, 29, 44, '2015-06-11 16:20:23', '0000-00-00 00:00:00'),
+(119, 31, 44, '2015-06-11 16:20:23', '0000-00-00 00:00:00'),
+(120, 15, 45, '2015-06-12 23:39:49', '0000-00-00 00:00:00'),
+(121, 29, 45, '2015-06-12 23:39:49', '0000-00-00 00:00:00'),
+(122, 31, 45, '2015-06-12 23:39:49', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -160,16 +225,53 @@ CREATE TABLE IF NOT EXISTS `students` (
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `students`
 --
 
 INSERT INTO `students` (`id`, `sur_name`, `first_name`, `middle_name`, `lrn`, `sex`, `date_of_birth`, `place_of_birth`, `age`, `present_address`, `school_last_attended`, `school_address`, `grade_or_year_level`, `school_year`, `tve_specialization`, `father`, `mother`, `person_to_notify`, `address`, `contact_number`, `user_type`, `created`, `updated`) VALUES
-(1, 'dfgdgfs', 'gfdgfdgf', 'dgfdgfdgf', 'reerewrew', 'ewrewr', '2015-05-21', 'dfgdfgdfgfdg', 25, 'dfgdfgdfgdfgdf', 'fdgdfgdfdfgdf', 'gfgdfgdfdfgfgdfgdf', 'dgfdgfdgf', 'dgfdgfdgfdgfdgf', 'dgfdgfdgfdgf', 'dgfdgfdgfdgf', 'dgfdgfdgfdgf', 'fddgfdgfdfg', 'dfdgfdgfdgfdgf', 'dgfdfdgdfgdfg', 'student', '2015-05-29 09:04:08', '0000-00-00 00:00:00'),
-(3, 'asdhnsadjabsdbasd', 'akskdfbsdfbdasf', 'ajwodbeasdbabsdasd', 'dsdnfnsdndsf', 'asfndnfsdnfs', '2015-05-12', 'asdbasdbbasdbasd', 24, 'asfdndnsandnasdnasdsad', 'nsadnasdnnasd', 'sandnasdnasdasdasdasdsa', 'sdsdbsjdbsdb', 'dsfdsfnsdfsdf', 'dsfnsdnfsndfsdf', 'fsdfsadgasgfagsd', 'asdbasdbsabdbasd', 'ansfdnasnasdsad', 'nsadfnsdfnsdf', 'ansdnasdnasd', 'student', '2015-05-29 15:13:04', '0000-00-00 00:00:00'),
-(4, 'jzdsfhadsgfsdf', 'sd nnsdsd', 'sfdgdgfd', 'sdfsdfdsff', 'dfsdfsdfdsf', '2015-05-13', 'adsfsdfsdfsdfdsf', 45, 'safsdfdsfsdfsdf', 'zdfsdfsdfsdfdsfdsf', 'sddssadsadsadsad', 'zdfxdfsdfsd', 'sdgfsdfsdf', 'sdfsdfdsf nadsfn df', 'sm dmsdmsmdmsd', 'asdfdsfsdsdfsdf', 'sdfgdfsdfsdf', 'zsdfsdfsdffsd', 'fdgdfgfdg', 'student', '2015-05-29 15:21:16', '0000-00-00 00:00:00');
+(13, 'Boribor', 'Mark', 'Babon', 'dfdf', 'dfdf', '2015-06-24', 'dfdf', 34, 'dfdfdfdf', 'dfdf', 'dfdfdfdfdf', 'dfdf', 'dfdfdf', 'dfdfdf', 'dfdfdf', 'dfdf', 'dfdf', 'dfdfdf', 'dfdfdf', 'student', '2015-06-11 00:05:48', '2015-06-11 00:07:44'),
+(14, 'Trocho', 'John Neal', 'Calzar', 'ghghgh', 'gghgh', '2015-06-09', 'ghgh', 23, 'vbvbvb', 'vbvbbv', 'vbbvbv', 'ghghgh', 'ghghgh', 'ghghgh', 'ghghgh', 'ghghgh', 'bvbvb', 'vbvb', 'vbvbv', 'student', '2015-06-11 00:06:08', '2015-06-11 00:08:03'),
+(15, 'fgfg', 'fgfg', 'fgfg', 'fgfgf', 'fgfg', '2015-06-15', 'fgfg', 45, 'fgfg', 'fgfgfgfg', 'fgfgfgfgfg', 'fgfg', 'gcdfdf', 'fgfgfg', 'fgfgfg', 'fgfgfg', 'gffgfg', 'ffgfg', 'fgfgfg', 'student', '2015-06-11 00:33:55', '0000-00-00 00:00:00'),
+(16, 'gtytyu', 'ytuyuuy', 'tyutyuuty', 'tyutyu', 'yutyutyutyutyu', '2015-06-24', 'tyutyutyu', 23, 'ghjhj', 'hj', 'hjhj', 'utyutyu', 'tyutyuty', 'utyutyut', 'yutyu', 'tyutyutyu', 'tyutyu', 'hjghj', 'hjhj', 'student', '2015-06-11 00:36:57', '0000-00-00 00:00:00'),
+(18, 'gfdg', 'dfgfdfg', 'dfgdfg', 'gdfgdfg', 'dfgdfg', '2015-06-17', 'dfgdfgdfg', 26, 'gfhghfghf', 'fghgfhgfhgfh', 'gfhgfhgfhgfhgfhghf', 'dfgdfgdf', 'gdfgdfgdf', 'dfgdfgdfg', 'dfgdfgdfgdfg', 'fdgdfgdfg', 'dfgdfgdfg', 'ghgfhgfh', 'ghgfhgf', 'student', '2015-06-11 00:40:52', '0000-00-00 00:00:00'),
+(19, 'gffg', 'fgfg', 'fgfg', 'fddfdgf', 'gdfgdfgdfgdfg', '2015-06-24', 'dfgdfgdf', 34, 'dfgdfgdfg', 'hgfhgf', 'gfhgfhgfhgfhghf', 'fgfg', 'fgg', 'dfdfgdf', 'fgdfg', 'dfgdfgdf', 'fdgdfg', 'fgfg', 'dfggfhgf', 'student', '2015-06-11 00:47:14', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `students_subjects_grades`
+--
+
+CREATE TABLE IF NOT EXISTS `students_subjects_grades` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `first_quarter` decimal(10,0) DEFAULT NULL,
+  `second_quarter` decimal(10,0) DEFAULT NULL,
+  `third_quarter` decimal(10,0) DEFAULT NULL,
+  `fourth_quarter` decimal(10,0) DEFAULT NULL,
+  `final_grade` decimal(10,0) DEFAULT NULL,
+  `remarks` varchar(75) DEFAULT NULL,
+  `enrolled_student_subject_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `students_subjects_grades_ibfk_1` (`enrolled_student_subject_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=123 ;
+
+--
+-- Dumping data for table `students_subjects_grades`
+--
+
+INSERT INTO `students_subjects_grades` (`id`, `first_quarter`, `second_quarter`, `third_quarter`, `fourth_quarter`, `final_grade`, `remarks`, `enrolled_student_subject_id`) VALUES
+(114, NULL, NULL, NULL, NULL, NULL, NULL, 114),
+(115, NULL, NULL, NULL, NULL, NULL, NULL, 115),
+(116, NULL, NULL, NULL, NULL, NULL, NULL, 116),
+(117, NULL, NULL, NULL, NULL, NULL, NULL, 117),
+(118, NULL, NULL, NULL, NULL, NULL, NULL, 118),
+(119, NULL, NULL, NULL, NULL, NULL, NULL, 119),
+(120, NULL, NULL, NULL, NULL, NULL, NULL, 120),
+(121, NULL, NULL, NULL, NULL, NULL, NULL, 121),
+(122, NULL, NULL, NULL, NULL, NULL, NULL, 122);
 
 -- --------------------------------------------------------
 
@@ -215,17 +317,19 @@ CREATE TABLE IF NOT EXISTS `teachers_subjects` (
   PRIMARY KEY (`id`),
   KEY `teachers_subjects_ibfk_1` (`teacher_id`),
   KEY `teachers_subjects_ibfk_2` (`subject_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `teachers_subjects`
 --
 
 INSERT INTO `teachers_subjects` (`id`, `teacher_id`, `subject_id`, `created`, `updated`) VALUES
-(19, 10, 25, '2015-05-28 10:19:10', '0000-00-00 00:00:00'),
 (20, 11, 17, '2015-05-28 10:20:22', '0000-00-00 00:00:00'),
 (21, 11, 19, '2015-05-28 10:20:44', '0000-00-00 00:00:00'),
-(22, 10, 15, '2015-05-30 09:31:35', '0000-00-00 00:00:00');
+(22, 10, 15, '2015-05-30 09:31:35', '0000-00-00 00:00:00'),
+(23, 10, 29, '2015-06-08 10:28:35', '0000-00-00 00:00:00'),
+(24, 10, 17, '2015-06-08 10:28:35', '0000-00-00 00:00:00'),
+(25, 11, 15, '2015-06-08 10:29:49', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -242,7 +346,7 @@ CREATE TABLE IF NOT EXISTS `teachers_subjects_sections` (
   PRIMARY KEY (`id`),
   KEY `teachers_subjects_sections_ibfk_1` (`teacher_subject_id`),
   KEY `teachers_subjects_sections_ibfk_2` (`section_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
 
 --
 -- Dumping data for table `teachers_subjects_sections`
@@ -250,7 +354,9 @@ CREATE TABLE IF NOT EXISTS `teachers_subjects_sections` (
 
 INSERT INTO `teachers_subjects_sections` (`id`, `teacher_subject_id`, `section_id`, `created`, `updated`) VALUES
 (34, 21, 32, '2015-05-28 10:20:51', '0000-00-00 00:00:00'),
-(38, 19, 26, '2015-05-30 16:45:56', '0000-00-00 00:00:00');
+(39, 22, 24, '2015-06-08 10:29:12', '0000-00-00 00:00:00'),
+(40, 22, 25, '2015-06-08 10:29:12', '0000-00-00 00:00:00'),
+(41, 25, 26, '2015-06-08 10:30:02', '0000-00-00 00:00:00');
 
 --
 -- Constraints for dumped tables
@@ -269,18 +375,39 @@ ALTER TABLE `curriculum_subjects`
   ADD CONSTRAINT `curriculum_subjects_ibfk_1` FOREIGN KEY (`curriculum_id`) REFERENCES `curriculums` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `enrolled_students`
+--
+ALTER TABLE `enrolled_students`
+  ADD CONSTRAINT `enrolled_students_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `enrolled_students_ibfk_2` FOREIGN KEY (`curriculum_id`) REFERENCES `curriculums` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `enrolled_students_ibfk_3` FOREIGN KEY (`section_id`) REFERENCES `curriculum_sections` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `enrolled_student_subjects`
+--
+ALTER TABLE `enrolled_student_subjects`
+  ADD CONSTRAINT `enrolled_student_subjects_ibfk_1` FOREIGN KEY (`enrolled_student_id`) REFERENCES `enrolled_students` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `enrolled_student_subjects_ibfk_2` FOREIGN KEY (`subject_id`) REFERENCES `curriculum_subjects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `students_subjects_grades`
+--
+ALTER TABLE `students_subjects_grades`
+  ADD CONSTRAINT `students_subjects_grades_ibfk_1` FOREIGN KEY (`enrolled_student_subject_id`) REFERENCES `enrolled_student_subjects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `teachers_subjects`
 --
 ALTER TABLE `teachers_subjects`
-  ADD CONSTRAINT `teachers_subjects_ibfk_2` FOREIGN KEY (`subject_id`) REFERENCES `curriculum_subjects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `teachers_subjects_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `teachers_subjects_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `teachers_subjects_ibfk_2` FOREIGN KEY (`subject_id`) REFERENCES `curriculum_subjects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `teachers_subjects_sections`
 --
 ALTER TABLE `teachers_subjects_sections`
-  ADD CONSTRAINT `teachers_subjects_sections_ibfk_2` FOREIGN KEY (`section_id`) REFERENCES `curriculum_sections` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `teachers_subjects_sections_ibfk_1` FOREIGN KEY (`teacher_subject_id`) REFERENCES `teachers_subjects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `teachers_subjects_sections_ibfk_1` FOREIGN KEY (`teacher_subject_id`) REFERENCES `teachers_subjects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `teachers_subjects_sections_ibfk_2` FOREIGN KEY (`section_id`) REFERENCES `curriculum_sections` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
