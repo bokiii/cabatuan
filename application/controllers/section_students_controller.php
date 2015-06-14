@@ -28,8 +28,6 @@ class Section_students_controller extends CI_Controller {
 		$data["section_id"] = $section_id;
 		
 		$get_teacher_subject_data_by_teacher_subject_id = $this->teacher_subject_sections_model->get_teacher_subject_data_by_teacher_subject_id($teacher_subject_id);               
-		$this->debug($get_teacher_subject_data_by_teacher_subject_id);
-		
 		foreach($get_teacher_subject_data_by_teacher_subject_id as $row_a) {   
 			$data['subject_id'] = $row_a->subject_id;
 			$data['teacher_name'] = $row_a->last_name . ", " . $row_a->first_name . " " . $row_a->middle_name; 

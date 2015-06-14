@@ -652,7 +652,77 @@ var sectionStudentModule = (function() {
 	
 })()   
 
-sectionStudentModule.viewSectionStudentsClick();
+sectionStudentModule.viewSectionStudentsClick();      
+
+var teacherModule = (function() {   
+	
+	var teacherAccountClick = function() {  
+		$(document).on("click", ".teacher_account", function(e){   
+			e.preventDefault();
+			var teacherId = $(this).attr("id");  
+			var teacherName = $(this).parent('td').siblings(".teacher_name").text();   
+
+			angular.element($("#teacher_account_form")).scope().updateTeacherAccount(teacherId, teacherName);  
+	
+		});
+	};      
+
+	var teacherAccountModalHide = function() { 
+		
+		$('#teacherAccountModal').on('hide.bs.modal', function(e) {
+			$(document).find("#teacher_account_form").trigger("reset");
+		});   
+	
+	};
+	
+	var teacherAccountFormSubmit = function() {   
+		
+		$("#teacher_account_form").ajaxForm({
+			dataType: 'json',
+			forceSync: true,
+			beforeSubmit: loading,
+			success: success_status
+		});     
+		
+		function loading() {  
+			
+			var usernameVal = $("#teacher_account_form #username").val();  
+			var passwordVal = $("#teacher_account_form #password").val();   
+			
+			if(usernameVal == "" || passwordVal == "") {   
+				bootbox.alert("<p style='color: #D9534F;'>Failed. Username and password must not be empty.</p>");
+				return false;
+			} else {  
+				return true;
+			}
+			
+		}  
+		
+		function success_status(data) {  
+			if(data.status) {  
+				bootbox.alert("Account updated.");
+			} else {  
+				bootbox.alert("Failed.");
+			}
+		}
+		
+	};
+	
+	
+	return {   
+		teacherAccountClick:		teacherAccountClick, 
+		teacherAccountModalHide:	teacherAccountModalHide, 
+		teacherAccountFormSubmit:	teacherAccountFormSubmit
+	}
+
+})()   
+
+teacherModule.teacherAccountClick();  
+teacherModule.teacherAccountModalHide();  
+teacherModule.teacherAccountFormSubmit();
+
+
+
 
 
 

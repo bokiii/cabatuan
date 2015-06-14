@@ -86,8 +86,45 @@ controllers.controller('teacher', function($scope, $http){
 			$scope.teachers = data.teachers;
 		}); 
 	};
+
+});       
+
+
+controllers.controller('teacherAccount', function($scope, $http){    
 	
-});
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;     
+	
+	$scope.teacherId;  
+	$scope.teacherName;   
+	$scope.username; 
+	$scope.password; 
+	
+	$scope.updateTeacherAccount = function(teacherId, teacherName) {     
+	
+
+		var getTeacherAccountUrl = fullUrl + "/get_teacher_account_data?teacher_id=" + teacherId;   
+		
+		$http.get(getTeacherAccountUrl).success(function(data){
+			$scope.username = data.teacher_account[0].username;   
+			$scope.password = data.teacher_account[0].password;     
+		});  
+		
+		$scope.$apply(function(){   
+			
+			$scope.teacherId = teacherId;      	
+			$scope.teacherName = teacherName;			
+
+		});
+		
+		$('#teacherAccountModal').modal('show');
+	};        
+	
+});   
+
+
+
+
 
 controllers.controller('teacherSubject', function($scope, $http, $sce){
 	
@@ -317,8 +354,7 @@ controllers.controller('viewStudents', function($scope, $sce, $http){
 		var getSectionStudentsUrl = protocol + window.location.pathname + "/get_section_students_by_section_id_school_year_and_subject_id?section_id=" + sectionId + "&school_year=" + schoolYear + "&subject_id=" + subjectId;
 	
 		$http.get(getSectionStudentsUrl).success(function(data){
-			$scope.students = data.section_students;     
-			console.log($scope.students);			
+			$scope.students = data.section_students;     			
 			$('#sectionStudentsModal').modal('show');
 		});
 
