@@ -28,11 +28,26 @@ class Teachers_controller extends CI_Controller {
 	
 		$data = array();
 	
-		$teacher = new Teacher();
+		/*$teacher = new Teacher();
 		$teachers = $teacher->get();     
+		$data['teachers'] = $teacher->all_to_array();*/   
 		
-		$data['teachers'] = $teacher->all_to_array();  
+		$get_teachers = $this->teacher_model->get_teachers();    
 		
+		$data['teachers'] = $get_teachers;   
+		
+		for($i = 0; $i < count($data["teachers"]); $i++) {  
+			$teacher_id = $data['teachers'][$i]['id'];   
+			$check_teacher_id = $this->teacher_account_model->check_teacher_id($teacher_id);  
+			if($check_teacher_id != 0) {  
+				$data['teachers'][$i]['button_type'] = "info";   
+				$data['teachers'][$i]['button_value'] = "Update Account";   
+			} else {  
+				$data['teachers'][$i]['button_type'] = "default";   
+				$data['teachers'][$i]['button_value'] = "Create Account";   
+			}
+		}
+	
 		echo json_encode($data);
 	
 	}

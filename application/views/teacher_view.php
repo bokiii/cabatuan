@@ -223,7 +223,7 @@
 										<a href="<?php echo base_url(); ?>index.php/teacher_subjects_controller?teacher_id={{teacher.id}}"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
 									</td>     
 									<td>
-										<button id="{{teacher.id}}" type="button" class="btn btn-default teacher_account">Create Account</button>
+										<button id="{{teacher.id}}" type="button" class="btn btn-{{teacher.button_type}} teacher_account">{{teacher.button_value}}</button>
 									</td>
 								</tr>
 							</tbody>

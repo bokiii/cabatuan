@@ -122,10 +122,6 @@ controllers.controller('teacherAccount', function($scope, $http){
 	
 });   
 
-
-
-
-
 controllers.controller('teacherSubject', function($scope, $http, $sce){
 	
 	var protocol = window.location.protocol + "//" + window.location.host;
