@@ -89,7 +89,6 @@ controllers.controller('teacher', function($scope, $http){
 
 });       
 
-
 controllers.controller('teacherAccount', function($scope, $http){    
 	
 	var protocol = window.location.protocol + "//" + window.location.host;
@@ -102,7 +101,6 @@ controllers.controller('teacherAccount', function($scope, $http){
 	
 	$scope.updateTeacherAccount = function(teacherId, teacherName) {     
 	
-
 		var getTeacherAccountUrl = fullUrl + "/get_teacher_account_data?teacher_id=" + teacherId;   
 		
 		$http.get(getTeacherAccountUrl).success(function(data){
@@ -121,6 +119,7 @@ controllers.controller('teacherAccount', function($scope, $http){
 	};        
 	
 });   
+
 
 controllers.controller('teacherSubject', function($scope, $http, $sce){
 	
@@ -220,6 +219,9 @@ controllers.controller('student', function($scope, $http, $sce){
 	$scope.getStudents = function() {
 		$http.get(studentUrl).success(function(data){
 			
+			console.log("student is get..");
+			
+			
 			var i; 
 			for(i = 0; i < data.students.length; i++) {
 				if(data.students[i].enrolled_student_id != null) {
@@ -268,6 +270,36 @@ controllers.controller('student', function($scope, $http, $sce){
 	
 	
 });
+
+controllers.controller('studentAccount', function($scope, $http){    
+	
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;     
+	
+	$scope.studentId;  
+	$scope.studentName;   
+	$scope.username; 
+	$scope.password; 
+	
+	$scope.updateStudentAccount = function(studentId, studentName) {     
+	
+		var getStudentAccountUrl = fullUrl + "/get_student_account_data?student_id=" + studentId;   
+		
+		$http.get(getStudentAccountUrl).success(function(data){
+			$scope.username = data.student_account[0].username;   
+			$scope.password = data.student_account[0].password;     
+		});
+		
+		$scope.$apply(function(){   
+			$scope.studentId = studentId;      	
+			$scope.studentName = studentName;			
+		});
+		
+		$('#StudentAccountModal').modal('show');
+	};        
+	
+});  
+
 
 controllers.controller('enrolledStudentController', function($scope, $sce, $http){
 	

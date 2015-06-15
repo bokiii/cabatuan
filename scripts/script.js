@@ -699,10 +699,14 @@ var teacherModule = (function() {
 		}  
 		
 		function success_status(data) {  
+			
+			// below is the trigger for the students 
+			angular.element(document.getElementById('teacher_container')).scope().getTeachers();     
+			
 			if(data.status) {  
-				bootbox.alert("Account updated.");
+				bootbox.alert("Account updated."); 
 			} else {  
-				bootbox.alert("Failed.");
+				bootbox.alert("Failed.");   
 			}
 		}
 		
@@ -722,8 +726,66 @@ teacherModule.teacherAccountModalHide();
 teacherModule.teacherAccountFormSubmit();
 
 
+var studentModule = (function() {   
 
+	var studentAccountClick = function() {   
+		$(document).on('click', '.student_account', function(){   
+			
+			var studentId = $(this).attr("id");   
+			var studentName = $(this).parent('td').siblings(".student_name").text();   
+			
+			angular.element($("#student_account_form")).scope().updateStudentAccount(studentId, studentName);  
+			
+			
+		});
+	};   
+	
+	var student_account_form_submit = function() {   
+		
+		$("#student_account_form").ajaxForm({
+			dataType: 'json',
+			forceSync: true,
+			beforeSubmit: loading,
+			success: success_status
+		});     
+		
+		function loading() {  
+		
+			var usernameVal = $("#student_account_form #username").val();  
+			var passwordVal = $("#student_account_form #password").val();   
+			
+			if(usernameVal == "" || passwordVal == "") {   
+				bootbox.alert("<p style='color: #D9534F;'>Failed. Username and password must not be empty.</p>");
+				return false;
+			} else {  
+				return true;
+			}
+			
+		}  
+		
+		function success_status(data) {  
+			
+			// below is the trigger for the students 
+			angular.element(document.getElementById('student_angular_container')).scope().getStudents(); 
+			
+			if(data.status) {  
+				bootbox.alert("Account updated.");
+			} else {  
+				bootbox.alert("Failed.");
+			}
+		}
+		
+	};
+	
+	return {      
+		studentAccountClick:			studentAccountClick, 
+		student_account_form_submit:	student_account_form_submit
+	}
 
+})()   
+
+studentModule.studentAccountClick();
+studentModule.student_account_form_submit();
 
 
 
