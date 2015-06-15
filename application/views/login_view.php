@@ -66,6 +66,7 @@
 		</div>
 	</div>
 	
+	<!--
 	<div class="container">
 		<div class="row">   
 			<div class="col-md-12">   
@@ -202,7 +203,8 @@
 		
 		</form>    
 	</div>  
-
+	-->
+	
 	
 	<div class="container">  
 		<hr>
