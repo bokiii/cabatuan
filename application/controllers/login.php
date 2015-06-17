@@ -19,6 +19,10 @@ class Login extends CI_Controller {
 		
 		if($this->session->userdata('teacher_logged_in') == true) {
 			redirect("teacher_account_controller");
+		}      
+		
+		if($this->session->userdata('student_logged_in') == true) {
+			redirect("student_account_controller");
 		}   
 		
 		

@@ -221,7 +221,6 @@ controllers.controller('student', function($scope, $http, $sce){
 			
 			console.log("student is get..");
 			
-			
 			var i; 
 			for(i = 0; i < data.students.length; i++) {
 				if(data.students[i].enrolled_student_id != null) {
@@ -458,7 +457,90 @@ controllers.controller('viewTeacherStudents', function($scope, $sce, $http){
 	
 });
 
+// below are the controllers for the student account   
 
+controllers.controller('studentAccountController', function($scope, $sce, $http){
+	
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;       
+	
+	// below is for the students 
+	var studentUrl = fullUrl + "/get_student_via_standard_model"; 
+	$scope.students;      
+	
+	$http.get(studentUrl).success(function(data){
+		
+		var i; 
+		for(i = 0; i < data.students.length; i++) {
+			if(data.students[i].enrolled_student_id != null) {
+				data.students[i].status = '<button type="button" class="my_button btn btn-info enroll_button" data-toggle="modal" data-target="#enrollModal"><span class="glyphicon glyphicon-education" aria-hidden="true"></span> Enroll</button>';                  
+				data.students[i].viewAcademic = '<button type="button" id="'+ data.students[i].id +'" class="view_academic my_button btn btn-info enroll_button" data-toggle="modal" data-target="#academicStatusModal"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> View Academic Status</button>';                           
+			} else {
+				data.students[i].status = '<button type="button" class="my_button btn btn-info enroll_button" data-toggle="modal" data-target="#enrollModal"><span class="glyphicon glyphicon-education" aria-hidden="true"></span> Enroll</button>';                                                 
+				data.students[i].viewAcademic = "<p>(Not Enrolled)</p>";
+			} 
+		}
+	
+		$scope.students = data.students;     
+		var a; 
+		for(a = 0; a < $scope.students.length; a++) {  
+			$scope.students[a].status = $sce.trustAsHtml($scope.students[a].status);   
+			$scope.students[a].viewAcademic = $sce.trustAsHtml($scope.students[a].viewAcademic);
+		}   
+		
+	});   
+	
+});   
+
+controllers.controller('studentAccountAcademic', function($scope, $sce, $http){
+	
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;   
+	
+	$scope.getStudentEnrolledAcademicData = function(studentId) {  
+	
+		var studentEnrolledAcademicListUrl = fullUrl + "/list_student_enrolled_academic?student_id=" + studentId;
+		
+		$scope.listAcademics;
+		
+		$http.get(studentEnrolledAcademicListUrl).success(function(data){
+			
+			
+			var viewLinkUrl = fullUrl.replace("student_account_controller", "enrolled_student_account_controller");
+			
+			var i;
+			for(i = 0; i < data.list_academics.length; i++) {
+				data.list_academics[i].viewLink = '<a href="'+ viewLinkUrl +'?enrolled_student_id=' + data.list_academics[i].id +'"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>';
+			}
+			
+			$scope.listAcademics = data.list_academics; 	     
+		
+			var a; 
+			for(a = 0; a < $scope.listAcademics.length; a++) {  
+				$scope.listAcademics[a].viewLink = $sce.trustAsHtml($scope.listAcademics[a].viewLink);
+			}
+			
+		});
+		
+	};  
+	
+
+});
+
+controllers.controller('currentEnrolledStudentController', function($scope, $sce, $http){
+	
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;   
+	
+	var enrolledStudentUrl = fullUrl.replace("enrolled_student_account_controller", "enrolled_student_account_controller/get_student_academic_data");
+	
+	$scope.academicDatas;      
+	$http.get(enrolledStudentUrl).success(function(data){
+		$scope.academicDatas = data.academic_datas;   
+	});
+	
+	
+});
 
 // below is for the testing purposes
 controllers.controller('test', function($scope, $sce, $http){

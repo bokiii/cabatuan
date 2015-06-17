@@ -24,5 +24,14 @@ class Auth_model extends CI_Model {
 		return $query->result();
 	}   
 
-
+	function check_student_username_and_password($username, $password) {   
+	
+		$this->db->where("username", $username);   
+		$this->db->where("md5_password", $password);   
+		$query = $this->db->get("students_account");     
+		return $query->result();  
+		
+	}
+	
+	
 }
