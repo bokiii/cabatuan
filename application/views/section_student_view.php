@@ -37,8 +37,6 @@
 	</div>  
 </div>
 
-
-
 <div class="main_container" id="section_students_container" ng-controller='sectionStudents'>
 	<div class="container">   
 		

@@ -15,6 +15,11 @@
 	margin-bottom: 20px;
 }   
 
-table.academic th, table.academic td{   
+table.academic th, table.academic td {   
+	text-align: center;
+}   
+
+.update_student_grade {  
+	width: 100px;
 	text-align: center;
 }

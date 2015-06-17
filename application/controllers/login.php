@@ -15,7 +15,14 @@ class Login extends CI_Controller {
 		
 		if($this->session->userdata('logged_in') == true) {
 			redirect("home");
-		}
+		}                       
+		
+		if($this->session->userdata('teacher_logged_in') == true) {
+			redirect("teacher_account_controller");
+		}   
+		
+		
+		
 	}   
 	
 	public function index() {

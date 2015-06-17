@@ -2,6 +2,7 @@
 
 var controllers = angular.module('cabatuan.controllers', []);
 
+// below are the controllers for the admin account 
 controllers.controller('curriculumYear', function($scope, $http){
 	
 	var protocol = window.location.protocol + "//" + window.location.host;
@@ -119,7 +120,6 @@ controllers.controller('teacherAccount', function($scope, $http){
 	};        
 	
 });   
-
 
 controllers.controller('teacherSubject', function($scope, $http, $sce){
 	
@@ -300,7 +300,6 @@ controllers.controller('studentAccount', function($scope, $http){
 	
 });  
 
-
 controllers.controller('enrolledStudentController', function($scope, $sce, $http){
 	
 	var protocol = window.location.protocol + "//" + window.location.host;
@@ -380,7 +379,7 @@ controllers.controller('viewStudents', function($scope, $sce, $http){
 		$scope.schoolYear = schoolYear;  
 		//var getSectionStudentsUrl = protocol + window.location.pathname + "/get_section_students_by_section_id_and_school_year?section_id=" + sectionId + "&school_year=" + schoolYear;
 		var getSectionStudentsUrl = protocol + window.location.pathname + "/get_section_students_by_section_id_school_year_and_subject_id?section_id=" + sectionId + "&school_year=" + schoolYear + "&subject_id=" + subjectId;
-	
+		
 		$http.get(getSectionStudentsUrl).success(function(data){
 			$scope.students = data.section_students;     			
 			$('#sectionStudentsModal').modal('show');
@@ -390,7 +389,78 @@ controllers.controller('viewStudents', function($scope, $sce, $http){
 	
 });
  
+ 
+ // below are the controllers for the teacher account
+controllers.controller('teacherAccountController', function($scope, $sce, $http){
+	
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;       
+	
+	var teacherSubjectUrl = fullUrl + "/get_teacher_subjects";
+	
+	$scope.teacherSubjects;      
+	$http.get(teacherSubjectUrl).success(function(data){  
+		$scope.teacherSubjects = data.teacher_subjects;   
+	});   
+	
+});
 
+controllers.controller('teacherAccountSubjectSection', function($scope, $sce, $http){
+	
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;   
+	
+	var teacherSubjectSectionUrl = fullUrl.replace("teacher_account_subject_sections_controller", "teacher_account_subject_sections_controller/get_teacher_subject_section");               
+	$scope.teacherSubjectSections;      
+	$http.get(teacherSubjectSectionUrl).success(function(data){
+		$scope.teacherSubjectSections = data.teacher_subject_sections;       
+	});   
+	
+});
+
+controllers.controller('teacherAccountSectionStudents', function($scope, $sce, $http){
+	
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;   
+	
+	var sectionStudentsUrl = fullUrl.replace("teacher_account_section_students_controller", "teacher_account_section_students_controller/get_student_enrolled_school_year");
+
+	$scope.schoolYears;      
+	
+	$http.get(sectionStudentsUrl).success(function(data){
+		$scope.schoolYears = data.school_years;
+	});     
+	
+});  
+
+controllers.controller('viewTeacherStudents', function($scope, $sce, $http){
+	
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;   
+	
+	$scope.students;
+	$scope.schoolYear = "hi";    
+	
+	$scope.viewStudent = function(sectionId, schoolYear, subjectId) {  
+		$scope.schoolYear = schoolYear;  
+		
+		var getSectionStudentsUrl = protocol + window.location.pathname + "/get_section_students_by_section_id_school_year_and_subject_id?section_id=" + sectionId + "&school_year=" + schoolYear + "&subject_id=" + subjectId;
+		
+		$http.get(getSectionStudentsUrl).success(function(data){
+			$scope.students = data.section_students;     			
+			$('#sectionStudentsModal').modal('show');      
+			
+			console.log($scope.students);
+		});
+	};      
+	
+	
+	
+});
+
+
+
+// below is for the testing purposes
 controllers.controller('test', function($scope, $sce, $http){
 	
 	var protocol = window.location.protocol + "//" + window.location.host;
@@ -402,7 +472,6 @@ controllers.controller('test', function($scope, $sce, $http){
 	$http.get(testUrl).success(function(data){
 		$scope.sample_content = $sce.trustAsHtml(data.sample_content);        
 	});  
-	
 	
 });
 

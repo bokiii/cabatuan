@@ -34,6 +34,8 @@ class Teacher_subjects_controller extends CI_Controller {
 		
 		$data['curriculum_subjects'] = $this->get_curriculum_subjects($teacher_id);
 		$data['teacher_id'] = $teacher_id; 
+		
+		
 		$data['main_content'] = "teacher_subject_view";
 		$this->load->view('template/content', $data);        
 	

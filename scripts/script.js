@@ -532,7 +532,7 @@ var loginModule = (function() {
 			if(data.status) {
 				window.location = data.redirect;
 			} else {
-				bootbox.alert("Invalid username or password");
+				bootbox.alert("<p style='color: #D9534F;'>Invalid username or password</p>");
 			} 
 		}
 	};    
@@ -725,7 +725,6 @@ teacherModule.teacherAccountClick();
 teacherModule.teacherAccountModalHide();  
 teacherModule.teacherAccountFormSubmit();
 
-
 var studentModule = (function() {   
 
 	var studentAccountClick = function() {   
@@ -785,10 +784,46 @@ var studentModule = (function() {
 })()   
 
 studentModule.studentAccountClick();
-studentModule.student_account_form_submit();
+studentModule.student_account_form_submit();    
 
 
+// below are the modules for the teacher access   
 
+var teacherAccessModule = (function() {   
+
+	var updateSubjectGradeClick = function() {   
+		$(document).on("click", ".update_subject_grade", function(e){  
+			e.preventDefault();
+			var href =  $(this).attr("href");        
+			var firstQuarter = $(this).parent("td").siblings(".first_quarter").children(".update_student_grade").val();
+			var secondQuarter = $(this).parent("td").siblings(".second_quarter").children(".update_student_grade").val();  
+			var thirdQuarter = $(this).parent("td").siblings(".third_quarter").children(".update_student_grade").val();
+			var fourthQuarter = $(this).parent("td").siblings(".fourth_quarter").children(".update_student_grade").val();
+			var finalGrade = $(this).parent("td").siblings(".final_grade").children(".update_student_grade").val();   
+			var remarks = $(this).parent("td").siblings(".remarks").children(".update_student_grade").val();
+		
+			var updateLink = href + "&first_quarter=" + firstQuarter + "&second_quarter=" + secondQuarter + "&third_quarter=" + thirdQuarter + "&fourth_quarter=" + fourthQuarter + "&final_grade=" + finalGrade + "&remarks=" + remarks;
+			
+			$.get(updateLink, function(data){
+				var datas = eval('msg=' + data);        
+				if(datas.status) {   
+					bootbox.alert("success");
+				} else {  
+					bootbox.alert("failed");
+				}  
+				
+			});
+	
+		}); 
+	};  
+	
+	return {  
+		updateSubjectGradeClick:	updateSubjectGradeClick
+	}
+
+})()
+
+teacherAccessModule.updateSubjectGradeClick();
 
 
 
