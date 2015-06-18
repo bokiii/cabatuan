@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2015 at 07:32 AM
+-- Generation Time: Jun 18, 2015 at 03:13 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -151,16 +151,16 @@ CREATE TABLE IF NOT EXISTS `enrolled_students` (
   KEY `enrolled_students_ibfk_1` (`student_id`),
   KEY `enrolled_students_ibfk_2` (`curriculum_id`),
   KEY `enrolled_students_ibfk_3` (`section_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
 
 --
 -- Dumping data for table `enrolled_students`
 --
 
 INSERT INTO `enrolled_students` (`id`, `curriculum_id`, `section_id`, `student_id`, `school_year`, `current`, `accomplished`, `created`, `updated`) VALUES
-(43, 5, 24, 13, '2015-2016', 1, 0, '2015-06-11 16:19:24', '0000-00-00 00:00:00'),
 (44, 5, 24, 14, '2015-2016', 1, 0, '2015-06-11 16:20:23', '0000-00-00 00:00:00'),
-(45, 5, 24, 13, '2016-2017', 1, 0, '2015-06-12 23:39:48', '0000-00-00 00:00:00');
+(46, 5, 24, 15, '2015-2016', 1, 0, '2015-06-15 21:18:15', '0000-00-00 00:00:00'),
+(47, 5, 24, 13, '2015-2016', 1, 0, '2015-06-15 23:35:45', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -177,22 +177,22 @@ CREATE TABLE IF NOT EXISTS `enrolled_student_subjects` (
   PRIMARY KEY (`id`),
   KEY `enrolled_student_subjects_ibfk_2` (`subject_id`),
   KEY `enrolled_student_subjects_ibfk_1` (`enrolled_student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=123 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=129 ;
 
 --
 -- Dumping data for table `enrolled_student_subjects`
 --
 
 INSERT INTO `enrolled_student_subjects` (`id`, `subject_id`, `enrolled_student_id`, `created`, `updated`) VALUES
-(114, 15, 43, '2015-06-11 16:19:24', '0000-00-00 00:00:00'),
-(115, 29, 43, '2015-06-11 16:19:24', '0000-00-00 00:00:00'),
-(116, 31, 43, '2015-06-11 16:19:24', '0000-00-00 00:00:00'),
 (117, 15, 44, '2015-06-11 16:20:23', '0000-00-00 00:00:00'),
 (118, 29, 44, '2015-06-11 16:20:23', '0000-00-00 00:00:00'),
 (119, 31, 44, '2015-06-11 16:20:23', '0000-00-00 00:00:00'),
-(120, 15, 45, '2015-06-12 23:39:49', '0000-00-00 00:00:00'),
-(121, 29, 45, '2015-06-12 23:39:49', '0000-00-00 00:00:00'),
-(122, 31, 45, '2015-06-12 23:39:49', '0000-00-00 00:00:00');
+(123, 15, 46, '2015-06-15 21:18:16', '0000-00-00 00:00:00'),
+(124, 29, 46, '2015-06-15 21:18:16', '0000-00-00 00:00:00'),
+(125, 31, 46, '2015-06-15 21:18:16', '0000-00-00 00:00:00'),
+(126, 15, 47, '2015-06-15 23:35:45', '0000-00-00 00:00:00'),
+(127, 29, 47, '2015-06-15 23:35:45', '0000-00-00 00:00:00'),
+(128, 31, 47, '2015-06-15 23:35:45', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -242,36 +242,59 @@ INSERT INTO `students` (`id`, `sur_name`, `first_name`, `middle_name`, `lrn`, `s
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `students_account`
+--
+
+CREATE TABLE IF NOT EXISTS `students_account` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(75) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `md5_password` varchar(100) NOT NULL,
+  `student_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `students_account`
+--
+
+INSERT INTO `students_account` (`id`, `username`, `password`, `md5_password`, `student_id`) VALUES
+(6, 'markie', 'markie', '8ca29eb8ec2705cdb21a38e54a4c57a4', 13),
+(7, 'bokie', 'bokie', '7883b3e96372f8b932a03f14923b69ba', 14);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `students_subjects_grades`
 --
 
 CREATE TABLE IF NOT EXISTS `students_subjects_grades` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `first_quarter` decimal(10,0) DEFAULT NULL,
-  `second_quarter` decimal(10,0) DEFAULT NULL,
-  `third_quarter` decimal(10,0) DEFAULT NULL,
-  `fourth_quarter` decimal(10,0) DEFAULT NULL,
-  `final_grade` decimal(10,0) DEFAULT NULL,
-  `remarks` varchar(75) DEFAULT NULL,
+  `first_quarter` varchar(10) NOT NULL,
+  `second_quarter` varchar(10) NOT NULL,
+  `third_quarter` varchar(10) NOT NULL,
+  `fourth_quarter` varchar(10) NOT NULL,
+  `final_grade` varchar(10) NOT NULL,
+  `remarks` varchar(75) NOT NULL,
   `enrolled_student_subject_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `students_subjects_grades_ibfk_1` (`enrolled_student_subject_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=123 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=129 ;
 
 --
 -- Dumping data for table `students_subjects_grades`
 --
 
 INSERT INTO `students_subjects_grades` (`id`, `first_quarter`, `second_quarter`, `third_quarter`, `fourth_quarter`, `final_grade`, `remarks`, `enrolled_student_subject_id`) VALUES
-(114, NULL, NULL, NULL, NULL, NULL, NULL, 114),
-(115, NULL, NULL, NULL, NULL, NULL, NULL, 115),
-(116, NULL, NULL, NULL, NULL, NULL, NULL, 116),
-(117, NULL, NULL, NULL, NULL, NULL, NULL, 117),
-(118, NULL, NULL, NULL, NULL, NULL, NULL, 118),
-(119, NULL, NULL, NULL, NULL, NULL, NULL, 119),
-(120, NULL, NULL, NULL, NULL, NULL, NULL, 120),
-(121, NULL, NULL, NULL, NULL, NULL, NULL, 121),
-(122, NULL, NULL, NULL, NULL, NULL, NULL, 122);
+(117, '75', '75', '75', '75', '75', 'passed', 117),
+(118, '', '', '', '', '', '', 118),
+(119, '', '', '', '', '', '', 119),
+(123, '', '', '', '', '', '', 123),
+(124, '', '', '', '', '', '', 124),
+(125, '', '', '', '', '', '', 125),
+(126, '', '', '', '', '', '', 126),
+(127, '', '', '', '', '', '', 127),
+(128, '', '', '', '', '', '', 128);
 
 -- --------------------------------------------------------
 
@@ -292,7 +315,7 @@ CREATE TABLE IF NOT EXISTS `teachers` (
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `teachers`
@@ -300,7 +323,32 @@ CREATE TABLE IF NOT EXISTS `teachers` (
 
 INSERT INTO `teachers` (`id`, `first_name`, `last_name`, `middle_name`, `address`, `civilstatus`, `religion`, `birth_date`, `user_type`, `created`, `updated`) VALUES
 (10, 'Ariel', 'Judilla', 'Reyes', 'Janiuay, Iloilo', 'Single', 'Roman Catholic', '1980-03-20', 'teacher', '2015-05-26 15:33:16', '0000-00-00 00:00:00'),
-(11, 'Edwin', 'Herminado', 'Ranchodas', 'Janiuay, Iloilo', 'Single', 'Roman Catholic', '1995-11-01', 'teacher', '2015-05-28 10:18:51', '0000-00-00 00:00:00');
+(11, 'Edwin', 'Herminado', 'Ranchodas', 'Janiuay, Iloilo', 'Single', 'Roman Catholic', '1995-11-01', 'teacher', '2015-05-28 10:18:51', '0000-00-00 00:00:00'),
+(12, 'gfdddddddddddd', 'dddfgdgf', 'dfgdfgdf', 'dfgdfg', 'fgdfgdfg', 'dfgdfgdfgdfg', '2015-06-17', 'teacher', '2015-06-14 23:04:36', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teachers_account`
+--
+
+CREATE TABLE IF NOT EXISTS `teachers_account` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(75) NOT NULL,
+  `password` varchar(75) NOT NULL,
+  `md5_password` varchar(100) NOT NULL,
+  `teacher_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `teachers_account_ibfk_1` (`teacher_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `teachers_account`
+--
+
+INSERT INTO `teachers_account` (`id`, `username`, `password`, `md5_password`, `teacher_id`) VALUES
+(4, 'ariel', 'ariel', '4900d0a19b6894a4a514e9ff3afcc2c0', 10),
+(5, 'dsdfg', 'gfhfhgh', 'a1925a84080d02521c55b01d9882e788', 11);
 
 -- --------------------------------------------------------
 
@@ -317,19 +365,17 @@ CREATE TABLE IF NOT EXISTS `teachers_subjects` (
   PRIMARY KEY (`id`),
   KEY `teachers_subjects_ibfk_1` (`teacher_id`),
   KEY `teachers_subjects_ibfk_2` (`subject_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
 
 --
 -- Dumping data for table `teachers_subjects`
 --
 
 INSERT INTO `teachers_subjects` (`id`, `teacher_id`, `subject_id`, `created`, `updated`) VALUES
-(20, 11, 17, '2015-05-28 10:20:22', '0000-00-00 00:00:00'),
-(21, 11, 19, '2015-05-28 10:20:44', '0000-00-00 00:00:00'),
 (22, 10, 15, '2015-05-30 09:31:35', '0000-00-00 00:00:00'),
 (23, 10, 29, '2015-06-08 10:28:35', '0000-00-00 00:00:00'),
-(24, 10, 17, '2015-06-08 10:28:35', '0000-00-00 00:00:00'),
-(25, 11, 15, '2015-06-08 10:29:49', '0000-00-00 00:00:00');
+(26, 10, 31, '2015-06-13 16:23:20', '0000-00-00 00:00:00'),
+(28, 11, 31, '2015-06-15 23:49:33', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -346,17 +392,17 @@ CREATE TABLE IF NOT EXISTS `teachers_subjects_sections` (
   PRIMARY KEY (`id`),
   KEY `teachers_subjects_sections_ibfk_1` (`teacher_subject_id`),
   KEY `teachers_subjects_sections_ibfk_2` (`section_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
 
 --
 -- Dumping data for table `teachers_subjects_sections`
 --
 
 INSERT INTO `teachers_subjects_sections` (`id`, `teacher_subject_id`, `section_id`, `created`, `updated`) VALUES
-(34, 21, 32, '2015-05-28 10:20:51', '0000-00-00 00:00:00'),
 (39, 22, 24, '2015-06-08 10:29:12', '0000-00-00 00:00:00'),
 (40, 22, 25, '2015-06-08 10:29:12', '0000-00-00 00:00:00'),
-(41, 25, 26, '2015-06-08 10:30:02', '0000-00-00 00:00:00');
+(44, 23, 24, '2015-06-15 23:48:30', '0000-00-00 00:00:00'),
+(45, 28, 24, '2015-06-15 23:49:40', '0000-00-00 00:00:00');
 
 --
 -- Constraints for dumped tables
@@ -394,6 +440,12 @@ ALTER TABLE `enrolled_student_subjects`
 --
 ALTER TABLE `students_subjects_grades`
   ADD CONSTRAINT `students_subjects_grades_ibfk_1` FOREIGN KEY (`enrolled_student_subject_id`) REFERENCES `enrolled_student_subjects` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `teachers_account`
+--
+ALTER TABLE `teachers_account`
+  ADD CONSTRAINT `teachers_account_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `teachers_subjects`
