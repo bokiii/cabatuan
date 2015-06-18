@@ -2,7 +2,7 @@
 	<div class="container">   
 		<div class="row">   
 			<div class="col-md-12">  
-				<p>Hello World!</p>
+				<p>Welcome super admin...</p>
 			</div>
 		</div>
 	</div>  
