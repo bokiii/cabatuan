@@ -208,7 +208,7 @@
 	<div class="container">  
 		<hr>
 		<footer>
-			<p>&copy; Mastermind Technology Incorporated <?php echo date('Y'); ?></p>
+			<p>&copy; BitMasters Tech. <?php echo date('Y'); ?></p>
 		</footer>
 	
 	</div>
