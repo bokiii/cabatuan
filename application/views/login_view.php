@@ -225,7 +225,9 @@
     <script src="<?php echo base_url(); ?>scripts/ie10-viewport-bug-workaround.js"></script>
 	
 	<!--main script is below-->
-	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/script.js"></script>      
+	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/script.js"></script>  
+
+	
 
 	<!-- link scripts for angular js below -->  
 	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/lib/angular/angular.js"></script>
