@@ -11,7 +11,8 @@
     <link rel="icon" href="<?php echo base_url(); ?>images/hide.ico">
 	
 
-	<link rel="stylesheet" href="<?php echo base_url(); ?>bootstrap/css/bootstrap.css" />    
+	<link rel="stylesheet" href="<?php echo base_url(); ?>bootstrap/css/bootstrap.css" />     
+	<link rel="stylesheet" href="<?php echo base_url(); ?>bootstrap/css/bootstrap-datetimepicker.css" /> 
 	<link rel="stylesheet" href="<?php echo base_url(); ?>styles/jumbotron.css" />   
 	
 	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
@@ -28,8 +29,31 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>styles/style.css" />     
 	
 </head>
-<body>   
-	
+<body>     
+
+	<!-- Modal form for add -->
+	<div class="modal fade" id="myAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+			
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Registration Status</h4>
+				</div> 
+				
+				<div class="modal-body">  
+					<p>This is the status modal..</p>
+				</div>  <!-- end modal body-->
+				
+				<div class="modal-footer">  
+				
+				</div>  
+				
+			</div>
+		</div>  
+	</div> <!-- end div for error modal -->
+
+
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
@@ -119,8 +143,13 @@
 					
 					<div class="form-group">
 						<label for="date_of_birth">Date of Birth</label>
-						<input type="text" class="form-control" name="date_of_birth" id="date_of_birth" placeholder="Date of Birth">
-					</div>   
+						<div class='input-group date' id='add_birth_date_picker'>
+							<input type='text' name="date_of_birth" id="date_of_birth" class="form-control" placeholder="Date of Birth" />
+							<span class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar"></span>
+							</span>
+						</div>
+					</div>     
 					
 					<div class="form-group">
 						<label for="place_of_birth">Place of Birth</label>
@@ -192,7 +221,36 @@
 					
 				</div>
 				
+			</div>     
+			
+			<div class="row">  
+				<div class="col-md-12">  
+					<div id="captcha_image_container">  
+						
+						<div id="image_captcha" class="left">  
+							<?php echo $image; ?>  
+						</div>
+					
+						<div class="left">  
+							<a href="<?php echo base_url(); ?>index.php/login/refresh_captcha" class="refresh_captcha"><img src="<?php echo base_url() . "images/refresh.png" ?>" class="img-responsive" alt="Refresh" /></a>
+						</div>  
+						
+						<div class="clear"></div>
+					
+					</div>
+					
+				</div>    
 			</div>   
+			
+			<div class="row">  
+				<div class="col-md-3">   
+					<br />
+					<div class="form-group">
+						<label for="captcha_entered">Captcha</label>
+						<input type="text" class="form-control" name="captcha_entered" id="captcha_entered" placeholder="Captcha">
+					</div> 
+				</div>
+			</div>
 			
 			<div class="row">  
 				<div class="col-md-12">  

@@ -825,6 +825,39 @@ var teacherAccessModule = (function() {
 
 teacherAccessModule.updateSubjectGradeClick();
 
+// below is the module for the captcha 
+
+var captchaModule = (function() {  
+
+	var refreshClick = function() {  
+		$(".refresh_captcha").on('click', function(e){   
+			e.preventDefault();  
+			var refreshUrl = $(this).attr("href");  
+			
+			$.get(refreshUrl, function(data){
+				var datas = eval('msg=' + data);  
+				$(document).find('#image_captcha').html(datas.image);
+			});
+			
+		});
+	}; 
+	
+	return {  
+		refreshClick:	refreshClick
+	}    
+	
+})()       
+
+captchaModule.refreshClick();
+
+
+
+ 
+
+
+
+
+
 
 
 
