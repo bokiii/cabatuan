@@ -851,8 +851,41 @@ var captchaModule = (function() {
 captchaModule.refreshClick();
 
 
+var registrationModule = (function() {    
 
+	var submitRegister = function() {   
+		
+		$("#register_enrollee_form").ajaxForm({
+			dataType: 'json',
+			forceSync: true,
+			beforeSubmit: loading,
+			success: success_status
+		});     
+		
+		function loading() {    
+			return true;
+		}  
+		
+		function success_status(data) {  
+			
+			if(data.status === false) { 
+				bootbox.alert("<div style='color: #E0534F;'>" + data.errors + "</div>");
+			} else {   
+				bootbox.alert("<div style='color: #5CB85C;'><p>Please check your email for verification letter.</p></div>");
+				$("#register_enrollee_form").trigger("reset");
+			
+			}
+		}
+		
+	};  
+	
+	return {  
+		submitRegister: submitRegister
+	}
+
+})()
  
+registrationModule.submitRegister();
 
 
 

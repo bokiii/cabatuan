@@ -31,29 +31,6 @@
 </head>
 <body>     
 
-	<!-- Modal form for add -->
-	<div class="modal fade" id="myAddModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-			
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Registration Status</h4>
-				</div> 
-				
-				<div class="modal-body">  
-					<p>This is the status modal..</p>
-				</div>  <!-- end modal body-->
-				
-				<div class="modal-footer">  
-				
-				</div>  
-				
-			</div>
-		</div>  
-	</div> <!-- end div for error modal -->
-
-
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
@@ -249,7 +226,17 @@
 						<label for="captcha_entered">Captcha</label>
 						<input type="text" class="form-control" name="captcha_entered" id="captcha_entered" placeholder="Captcha">
 					</div> 
+				</div>   
+				
+				<div class="col-md-3">   
+					<br />
+					<div class="form-group">
+						<label for="email_address">Email Address</label>
+						<input type="text" class="form-control" name="email_address" id="email_address" placeholder="Email Address">
+					</div> 
 				</div>
+			
+			
 			</div>
 			
 			<div class="row">  

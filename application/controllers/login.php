@@ -25,7 +25,8 @@ class Login extends CI_Controller {
 			redirect("student_account_controller");
 		}      
 		
-		$this->load->helper('captcha');
+		$this->load->helper('captcha');  
+		$this->load->library('encrypt');
 		
 	}   
 	
@@ -79,42 +80,101 @@ class Login extends CI_Controller {
 	
 	public function register_enrollee() {  
 	
-		$data = array();
-	
-		$student = new Student();
-		$student->sur_name = $this->input->post('sur_name');     
-		$student->first_name = $this->input->post('first_name');   
-		$student->middle_name = $this->input->post('middle_name');   		  
-		$student->lrn = $this->input->post('lrn');   
-		$student->sex = $this->input->post('sex');  
-		$student->date_of_birth = $this->input->post('date_of_birth');  
-		$student->place_of_birth = $this->input->post('place_of_birth');   
-		$student->age = $this->input->post('age');      
-		$student->present_address = $this->input->post('present_address');   
-		$student->school_last_attended = $this->input->post('school_last_attended');   
-		$student->school_address = $this->input->post('school_address');   
-		$student->grade_or_year_level = $this->input->post('grade_or_year_level');   
-		$student->school_year = $this->input->post('school_year');   
-		$student->tve_specialization = $this->input->post('tve_specialization');  
-		$student->father = $this->input->post('father');  
-		$student->mother = $this->input->post('mother');   
-		$student->person_to_notify = $this->input->post('person_to_notify');   
-		$student->address = $this->input->post('address');   
-		$student->contact_number = $this->input->post('contact_number');   
-		$student->user_type = "student";  		
-	
-		if(!$student->save()) {  
+		$data = array();  
+		
+		$captcha_entered = $this->input->post("captcha_entered");     
+		
+		$verificationCode = $this->encrypt->encode($this->generateRandomString());     
+
+		$verification = new Verification();  
+		
+		$verification->sur_name = $this->input->post('sur_name');     
+		$verification->first_name = $this->input->post('first_name');   
+		$verification->middle_name = $this->input->post('middle_name');   		  
+		$verification->lrn = $this->input->post('lrn');   
+		$verification->sex = $this->input->post('sex');  
+		$verification->date_of_birth = $this->input->post('date_of_birth');  
+		$verification->place_of_birth = $this->input->post('place_of_birth');   
+		$verification->age = $this->input->post('age');      
+		$verification->present_address = $this->input->post('present_address');   
+		$verification->school_last_attended = $this->input->post('school_last_attended');   
+		$verification->school_address = $this->input->post('school_address');   
+		$verification->grade_or_year_level = $this->input->post('grade_or_year_level');   
+		$verification->school_year = $this->input->post('school_year');   
+		$verification->tve_specialization = $this->input->post('tve_specialization');  
+		$verification->father = $this->input->post('father');  
+		$verification->mother = $this->input->post('mother');   
+		$verification->person_to_notify = $this->input->post('person_to_notify');   
+		$verification->address = $this->input->post('address');   
+		$verification->contact_number = $this->input->post('contact_number');   
+		$verification->verification = $verificationCode;  
+		$verification->email_address = $this->input->post('email_address');
+		
+		if(!$verification->save()) {  
 			$data['status'] = false;   
-			$data['errors'] = $student->error->string;
+			$data['errors'] = $verification->error->string;
 		} else {
-			$data['status'] = true;
+			
+			if(strcasecmp($captcha_entered, $this->session->userdata('captcha_word')) == 0) {      
+				$data['status'] = true;
+			} else {   
+				$data['errors'] = "<p>Invalid Capctha</p>";  
+				$data['status'] = false;
+			}
+		
+		}   
+	
+		echo json_encode($data);
+	}   
+	
+	private function generateRandomString() {   
+		
+		$length = 10;
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
 		}  
 		
-		//echo json_encode($data);
 		
-		$this->debug($data);
+		return $randomString;
 	}
 	
 
 
-}
+}   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
