@@ -141,9 +141,56 @@ class Login extends CI_Controller {
 		return $randomString;
 	}
 	
+	public function test_send() {   
+	
+		$config['protocol'] = 'smtp';
+		$config['smtp_host'] = 'ssl://smtp.gmail.com'; //change this
+		$config['smtp_port'] = '465';
+		$config['smtp_user'] = 'mark.boribor73@gmail.com'; //change this
+		$config['smtp_pass'] = 'patanoy@*_*master0505'; //change this
+		$config['mailtype'] = 'html';
+		$config['charset'] = 'iso-8859-1';
+		$config['wordwrap'] = TRUE;
+		$config['newline'] = "\r\n"; //use double quotes to comply with RFC 822 standard
+			
+		
+		$this->load->library('email');  
+		$this->email->initialize($config);
+
+		$this->email->from('mark.boribor73@gmail.com', 'Mastermind');
+		$this->email->to('almer.gajo@gmail.com'); 
+		$this->email->cc('mark.boribor73@gmail.com'); 
+		$this->email->bcc('almer.gajo@gmail.com'); 
+
+		$this->email->subject('Email Test');
+		$this->email->message('Testing the email class.');	
+
+		$this->email->send();
+
+		echo $this->email->print_debugger();
+		
+	}
+	
+	
+}     
 
 
-}   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
