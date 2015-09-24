@@ -26,7 +26,9 @@ class Login extends CI_Controller {
 		}      
 		
 		$this->load->helper('captcha');  
-		$this->load->library('encrypt');
+		$this->load->library('encrypt');    
+		
+		$this->load->model("verification_model");
 		
 	}   
 	
@@ -183,9 +185,75 @@ class Login extends CI_Controller {
 	}
 	
 	public function verify_student_registration() {   
-		$this->debug($this->input->get());
+		
+		$verificationCode = $this->input->get('code');  
+		
+		$getUnverifiedStudentViaCode = $this->verification_model->getUnverifiedStudentViaCode($verificationCode);  
+
+		if($getUnverifiedStudentViaCode != NULL) {   
+		
+			foreach($getUnverifiedStudentViaCode as $row) {   
+				
+				$sur_name = $row->sur_name;
+				$first_name = $row->first_name;  
+				$middle_name = $row->middle_name; 
+				$lrn = $row->lrn; 
+				$sex = $row->sex; 
+				$date_of_birth = $row->date_of_birth; 
+				$place_of_birth = $row->place_of_birth; 
+				$age = $row->age; 
+				$present_address = $row->present_address; 
+				$school_last_attended = $row->school_last_attended;  
+				$school_address = $row->school_address; 
+				$grade_or_year_level = $row->grade_or_year_level; 
+				$school_year = $row->school_year; 
+				$tve_specialization = $row->tve_specialization;  
+				$father = $row->father;  
+				$mother = $row->mother; 
+				$person_to_notify = $row->person_to_notify; 
+				$address = $row->address;   
+				$contact_number = $row->contact_number; 
+			
+			}
+			
+			$data = array();
+		
+			$student = new Student();
+			$student->sur_name = $sur_name;     
+			$student->first_name = $first_name;   
+			$student->middle_name = $middle_name;   		  
+			$student->lrn = $lrn;   
+			$student->sex = $sex;  
+			$student->date_of_birth = $date_of_birth;  
+			$student->place_of_birth = $place_of_birth;   
+			$student->age = $age;      
+			$student->present_address = $present_address;   
+			$student->school_last_attended = $school_last_attended;   
+			$student->school_address = $school_address;   
+			$student->grade_or_year_level = $grade_or_year_level;   
+			$student->school_year = $school_year;   
+			$student->tve_specialization = $tve_specialization;  
+			$student->father = $father;  
+			$student->mother = $mother;   
+			$student->person_to_notify = $person_to_notify;   
+			$student->address = $address;   
+			$student->contact_number = $contact_number;   
+			$student->user_type = "student";  		
+		
+			if(!$student->save()) {  
+				$errors = $student->error->string;     
+				echo $errors;    
+			} else {  
+				$deleteIfVerified = $this->verification_model->deleteIfVerified($verificationCode);     
+				echo "<p>You have succesfully verified..</p>";
+			}  
+			
+		
+		} else {  
+			echo "<p>You are alreay verified..</p>";
+		}
+		
 	}    
-	
 	
 }     
 
