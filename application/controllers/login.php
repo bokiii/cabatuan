@@ -50,7 +50,6 @@ class Login extends CI_Controller {
 		$this->load->view('login_view', $data);
 	}        
 
-
 	public function refresh_captcha() {   
 		
 		$values = array(
@@ -77,7 +76,6 @@ class Login extends CI_Controller {
 		
 	}
 
-	
 	public function register_enrollee() {  
 	
 		$data = array();  
@@ -85,44 +83,49 @@ class Login extends CI_Controller {
 		$captcha_entered = $this->input->post("captcha_entered");     
 		
 		$verificationCode = $this->encrypt->encode($this->generateRandomString());     
-
-		$verification = new Verification();  
-		
-		$verification->sur_name = $this->input->post('sur_name');     
-		$verification->first_name = $this->input->post('first_name');   
-		$verification->middle_name = $this->input->post('middle_name');   		  
-		$verification->lrn = $this->input->post('lrn');   
-		$verification->sex = $this->input->post('sex');  
-		$verification->date_of_birth = $this->input->post('date_of_birth');  
-		$verification->place_of_birth = $this->input->post('place_of_birth');   
-		$verification->age = $this->input->post('age');      
-		$verification->present_address = $this->input->post('present_address');   
-		$verification->school_last_attended = $this->input->post('school_last_attended');   
-		$verification->school_address = $this->input->post('school_address');   
-		$verification->grade_or_year_level = $this->input->post('grade_or_year_level');   
-		$verification->school_year = $this->input->post('school_year');   
-		$verification->tve_specialization = $this->input->post('tve_specialization');  
-		$verification->father = $this->input->post('father');  
-		$verification->mother = $this->input->post('mother');   
-		$verification->person_to_notify = $this->input->post('person_to_notify');   
-		$verification->address = $this->input->post('address');   
-		$verification->contact_number = $this->input->post('contact_number');   
-		$verification->verification = $verificationCode;  
-		$verification->email_address = $this->input->post('email_address');
-		
-		if(!$verification->save()) {  
-			$data['status'] = false;   
-			$data['errors'] = $verification->error->string;
-		} else {
+	
+		if(strcasecmp($captcha_entered, $this->session->userdata('captcha_word')) == 0) {      
+		  
+		  	$verification = new Verification();  
+			$verification->sur_name = $this->input->post('sur_name');     
+			$verification->first_name = $this->input->post('first_name');   
+			$verification->middle_name = $this->input->post('middle_name');   		  
+			$verification->lrn = $this->input->post('lrn');   
+			$verification->sex = $this->input->post('sex');  
+			$verification->date_of_birth = $this->input->post('date_of_birth');  
+			$verification->place_of_birth = $this->input->post('place_of_birth');   
+			$verification->age = $this->input->post('age');      
+			$verification->present_address = $this->input->post('present_address');   
+			$verification->school_last_attended = $this->input->post('school_last_attended');   
+			$verification->school_address = $this->input->post('school_address');   
+			$verification->grade_or_year_level = $this->input->post('grade_or_year_level');   
+			$verification->school_year = $this->input->post('school_year');   
+			$verification->tve_specialization = $this->input->post('tve_specialization');  
+			$verification->father = $this->input->post('father');  
+			$verification->mother = $this->input->post('mother');   
+			$verification->person_to_notify = $this->input->post('person_to_notify');   
+			$verification->address = $this->input->post('address');   
+			$verification->contact_number = $this->input->post('contact_number');   
+			$verification->verification = $verificationCode;  
+			$verification->email_address = $this->input->post('email_address');
 			
-			if(strcasecmp($captcha_entered, $this->session->userdata('captcha_word')) == 0) {      
-				$data['status'] = true;
-			} else {   
-				$data['errors'] = "<p>Invalid Capctha</p>";  
-				$data['status'] = false;
-			}
-		
-		}   
+			if(!$verification->save()) {  
+				$data['status'] = false;   
+				$data['errors'] = $verification->error->string;
+			} else {  
+				
+				if($this->verification_send($this->input->post('email_address'), $verificationCode)) {  
+					$data['status'] = true;
+				} else {  
+					$data['status'] = false;
+				}
+				
+			}     
+
+		} else {   
+			$data['errors'] = "<p>Invalid Captcha</p>";  
+			$data['status'] = false;
+		}
 	
 		echo json_encode($data);
 	}   
@@ -141,35 +144,47 @@ class Login extends CI_Controller {
 		return $randomString;
 	}
 	
-	public function test_send() {   
+	private function verification_send($email, $verification_code) {   
 	
 		$config['protocol'] = 'smtp';
 		$config['smtp_host'] = 'ssl://smtp.gmail.com'; //change this
 		$config['smtp_port'] = '465';
-		$config['smtp_user'] = 'mark.boribor73@gmail.com'; //change this
-		$config['smtp_pass'] = 'patanoy@*_*master0505'; //change this
+		$config['smtp_user'] = 'bitmasters.tech@gmail.com'; //change this
+		$config['smtp_pass'] = 'bitmasters@*05'; //change this
 		$config['mailtype'] = 'html';
 		$config['charset'] = 'iso-8859-1';
 		$config['wordwrap'] = TRUE;
 		$config['newline'] = "\r\n"; //use double quotes to comply with RFC 822 standard
-			
+	
+		$verify_url =  base_url() . "index.php/login/verify_student_registration?code=" . $verification_code;
+		
+		$verify_message = "
+			<p>Click the below link to confirm the registration</p>  
+			<p><a href='{$verify_url}'>{$verify_url}</a></p>
+		";  
 		
 		$this->load->library('email');  
 		$this->email->initialize($config);
 
-		$this->email->from('mark.boribor73@gmail.com', 'Mastermind');
-		$this->email->to('almer.gajo@gmail.com'); 
-		$this->email->cc('mark.boribor73@gmail.com'); 
-		$this->email->bcc('almer.gajo@gmail.com'); 
+		$this->email->from('bitmasters.tech@gmail.com', 'CNCHS Registration');
+		$this->email->to($email); 
+		
+		$this->email->subject('Registration');
+		$this->email->message($verify_message);
 
-		$this->email->subject('Email Test');
-		$this->email->message('Testing the email class.');	
+		if($this->email->send()) {  
+			return true;
+		} else {  
+			return false;
+		}
 
-		$this->email->send();
-
-		echo $this->email->print_debugger();
+		//echo $this->email->print_debugger();  
 		
 	}
+	
+	public function verify_student_registration() {   
+		$this->debug($this->input->get());
+	}    
 	
 	
 }     
