@@ -245,15 +245,21 @@ class Login extends CI_Controller {
 				echo $errors;    
 			} else {  
 				$deleteIfVerified = $this->verification_model->deleteIfVerified($verificationCode);     
-				echo "<p>You have succesfully verified..</p>";
+				$data["message"] = "<p>You have succesfully verified..</p>";   
+				
 			}  
 			
-		
 		} else {  
-			echo "<p>You are alreay verified..</p>";
-		}
+			$data["message"] = "<p>You are already verified..</p>";
+		}   
 		
-	}    
+		
+		$data['main_content'] = "verified_view";
+		$this->load->view('template/content', $data);    
+		
+	}      
+	
+	
 	
 }     
 
