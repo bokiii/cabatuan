@@ -260,6 +260,11 @@ class Login extends CI_Controller {
 	}      
 	
 	
+	public function test() {  
+		$data['main_content'] = "test_view";
+		$this->load->view('template/content', $data);
+	}
+	
 	
 }     
 
