@@ -120,7 +120,7 @@ class Login extends CI_Controller {
 					$data['status'] = true;
 				} else {  
 					$data['status'] = false;
-				}
+				}  
 				
 			}     
 
@@ -135,7 +135,7 @@ class Login extends CI_Controller {
 	private function generateRandomString() {   
 		
 		$length = 10;
-		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$characters = 'abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 		$charactersLength = strlen($characters);
 		$randomString = '';
 		for ($i = 0; $i < $length; $i++) {
@@ -186,9 +186,9 @@ class Login extends CI_Controller {
 	
 	public function verify_student_registration() {   
 		
-		$verificationCode = $this->input->get('code');  
-		
-		$getUnverifiedStudentViaCode = $this->verification_model->getUnverifiedStudentViaCode($verificationCode);  
+		$verificationCode = $this->input->get('code');   
+
+		$getUnverifiedStudentViaCode = $this->verification_model->getUnverifiedStudentViaCode($verificationCode);     
 
 		if($getUnverifiedStudentViaCode != NULL) {   
 		
@@ -254,8 +254,10 @@ class Login extends CI_Controller {
 		}   
 		
 		
-		$data['main_content'] = "verified_view";
-		$this->load->view('template/content', $data);    
+		/*$data['main_content'] = "verified_view";
+		$this->load->view('template/content', $data);*/      
+		
+		$this->load->view("verified_view", $data);
 		
 	}      
 	

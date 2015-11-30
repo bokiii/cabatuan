@@ -11,7 +11,7 @@ class Verification_model extends CI_Model {
 		$this->db->where('verification', $verificationCode);  
 		$query = $this->db->get("unverified_students");   
 		
-		return $query->result();  
+		return $query->result();     
 	}   
 	
 	public function deleteIfVerified($verificationCode) {   

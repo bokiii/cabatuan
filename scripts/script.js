@@ -517,6 +517,7 @@ listModalModule.listAddModalHide();
 var loginModule = (function() {
 
 	var loginFormSubmit = function() {
+		
 		$("#login_form").ajaxForm({
 			dataType: 'json',
 			forceSync: true,
@@ -536,14 +537,37 @@ var loginModule = (function() {
 			} 
 		}
 	};    
-	
-	return {
-		loginFormSubmit:	loginFormSubmit
+
+
+	var bottomTabsClick = function() { 
+		
+		$(document).find(".active_tab").show("slow");  
+		
+		$(document).on("click", ".home_tab", function(e){   
+			e.preventDefault();    
+			
+			$(this).parent("li").siblings().removeClass("active");  
+			$(this).parent("li").addClass("active");
+			
+			// below is for the tabs below
+			var forActiveTab = $(this).attr("id");  
+			$(document).find(".active_tab").fadeOut("fast").removeClass("active_tab");  
+			$(document).find("." + forActiveTab).fadeIn("slow", function(){  
+				$(this).addClass("active_tab");
+			});  
+			
+		});
 	}
+
+	return {
+		loginFormSubmit:	loginFormSubmit, 
+		bottomTabsClick:	bottomTabsClick
+	}  
 	
 })()   
 
-loginModule.loginFormSubmit();
+loginModule.loginFormSubmit();  
+loginModule.bottomTabsClick();
 
 var studentModule = (function() {
 

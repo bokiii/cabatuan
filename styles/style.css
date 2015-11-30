@@ -48,6 +48,15 @@ table.academic th, table.academic td {
 }         
 
 
+/* below are the styles for the tabs */     
+
+.tabs { 
+	display: none;  
+}
+   
+
+
+
 
 
 
