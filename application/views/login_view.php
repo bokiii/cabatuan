@@ -133,7 +133,7 @@
 		<div class="row">   
 			<div class="col-md-12">   
 				<div class="page-header">
-				  <h1>Enrollment Form<small> for enrollees..</small></h1>
+				  <h1>Enrollment Form<small> for Grade 7..</small></h1>
 				</div>
 			</div>
 		</div>   
@@ -197,7 +197,7 @@
 				
 					<div class="form-group">
 						<label for="age">Age</label>
-						<input type="text" class="form-control" name="age" id="age">
+						<input readonly type="text" class="form-control" name="age" id="age">
 					</div>
 					
 					<div class="form-group">
@@ -320,7 +320,7 @@
 	</div>  
 	
 	<div class="container second_tab tabs">    
-		<p>Content for the second tab</p>
+			<p>Content for the second tab</p>
 	</div>   
 	
 	<div class="container third_tab tabs">    

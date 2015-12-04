@@ -15,7 +15,7 @@ class Student extends Datamapper {
 		), 
 		'middle_name' => array(
 			'label' => 'Middle Name', 
-			'rules' => array('required', 'trim')
+			'rules' => array('required', 'trim', 'unique')
 		), 
 		'lrn' => array(
 			'label' => 'LRN', 
