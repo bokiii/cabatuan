@@ -64,7 +64,7 @@
 						
 							<div class="form-group">
 								<label for="age">Age</label>
-								<input type="text" class="form-control" name="age" id="age" placeholder="Age">
+								<input readonly type="text" class="form-control" name="age" id="age" placeholder="Age">
 							</div>
 							
 							<div class="form-group">
@@ -193,7 +193,7 @@
 							
 							<div class="form-group">
 								<label for="date_of_birth_update">Date of Birth</label>
-								<div class='input-group date' id='add_birth_date_picker'>
+								<div class='input-group date' id='update_birth_date_picker'>
 									<input type='text' name="date_of_birth_update" id="date_of_birth_update" class="form-control" placeholder="Date of Birth" />
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>

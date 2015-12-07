@@ -263,10 +263,21 @@
 					
 					<div class="form-group">
 						<label for="contact_number">Tel. #/Cell #</label>
-						<input type="text" class="form-control" name="contact_number" id="contact_number">
-					</div> 
-					
-				</div>
+						<!--<input type="tel" class="form-control" name="contact_number" id="contact_number">-->  
+						
+						<div class="input-group">
+							<div class="input-group-btn phone_select">
+								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="button_value">Select Phone</span> <span class="caret"></span></button>
+								<ul class="dropdown-menu">   
+									<li><a class="select_telephone" id="telephone" href="#">Tel #</a></li>
+									<li><a class="select_telephone" id="cellphone" href="#">Cell #</a></li>
+								</ul>
+							</div><!-- /btn-group -->
+							<input type="text" readonly class="form-control" name="contact_number" id="contact_number">
+						</div><!-- /input-group -->    
+					</div>
+ 
+				</div> <!-- end col-md-6 -->
 				
 			</div>     
 			

@@ -447,7 +447,7 @@ var datePickerModule = (function() {
 			keepInvalid: true
 		});
 	
-	};  
+	};      
 	
 	return {
 		getBirthDate: 	getBirthDate
@@ -538,7 +538,6 @@ var loginModule = (function() {
 		}
 	};    
 
-
 	var bottomTabsClick = function() { 
 		
 		$(document).find(".active_tab").show("slow");  
@@ -559,7 +558,7 @@ var loginModule = (function() {
 		});
 	}
 
-	var firstYearRegistration = function() {   
+	var determineAge = function() {   
 		
 		var today = new Date();
 		var dd = today.getDate();
@@ -686,17 +685,49 @@ var loginModule = (function() {
 		
 	};
 	
+	var telephoneSelect = function() { 
+		$(document).on("click", ".select_telephone", function(e){  
+			e.preventDefault();
+			
+			var selected = $(this).attr("id");
+			var buttonValue;
+			if(selected == "cellphone") { 
+				buttonValue = "Cell #";  
+				$(this).parent().parent().parent().parent().children("#contact_number").removeAttr("readonly").attr({ 
+					placeholder: "09092700838", 
+					maxlength: "11", 
+					minlength: "11", 
+					required: "required"
+				});
+			} else if(selected == "telephone") { 
+				buttonValue = "Tel #";  
+				$(this).parent().parent().parent().parent().children("#contact_number").removeAttr("readonly").attr({  
+					placeholder: "033-531-83-43", 
+					maxlength: "13", 
+					minlength: "13", 
+					required: "required"
+				});
+			}
+			
+			$(this).parent().parent().parent().children("button").children(".button_value").text(buttonValue);  
+			
+		});
+	};
+	
+	
 	return {
 		loginFormSubmit:			loginFormSubmit, 
 		bottomTabsClick:			bottomTabsClick, 
-		firstYearRegistration:		firstYearRegistration
+		determineAge:				determineAge, 
+		telephoneSelect:			telephoneSelect
 	}  
 	
 })()   
 
 loginModule.loginFormSubmit();  
 loginModule.bottomTabsClick();  
-loginModule.firstYearRegistration();
+loginModule.determineAge();   
+loginModule.telephoneSelect();
 
 var studentModule = (function() {
 
@@ -768,13 +799,121 @@ var studentModule = (function() {
 		});
 	};    
 	
+	var determineAgeUpdate = function() {   
+		
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();   
+	
+		$("#update_birth_date_picker").on("dp.change", function (e) { 
+		
+			var birthday = $("#date_of_birth_update").val();   
+			
+			myAgeValidation(birthday);
+			
+		
+			function myAgeValidation(birthValue) {
+
+				var lre = /^\s*/;
+				var datemsg = "";
+
+				var inputDate = birthValue;
+				inputDate = inputDate.replace(lre, "");
+				
+				datemsg = isValidDate(inputDate);
+				
+				if (datemsg != "") {
+					bootbox.alert(" " + datemsg);
+					return;
+				}
+				else {
+					
+					getAge(new Date(inputDate));
+				}
+			}   
+			
+			function getAge(birth) {
+
+				var today = new Date();
+				var nowyear = today.getFullYear();
+				var nowmonth = today.getMonth();
+				var nowday = today.getDate();
+
+				var birthyear = birth.getFullYear();
+				var birthmonth = birth.getMonth();
+				var birthday = birth.getDate();
+
+				var age = nowyear - birthyear;
+				var age_month = nowmonth - birthmonth;
+				var age_day = nowday - birthday;
+
+				if(age_month < 0 || (age_month == 0 && age_day <0)) {
+					age = parseInt(age) -1;
+				}
+				
+				$("#age_update").val(age);
+				
+			} 
+			
+			function isValidDate(dateStr) {
+
+				var msg = "";
+	
+				var datePat = /^(\d{1,2})(\/|-)(\d{1,2})\2(\d{4})$/;
+
+				var matchArray = dateStr.match(datePat); 
+				if (matchArray == null) {
+					msg = "Date is not in a valid format.";
+					return msg;
+				}
+
+				month = matchArray[1]; 
+				day = matchArray[3];
+				year = matchArray[4];
+
+
+				if (month < 1 || month > 12) { 
+					msg = "Month must be between 1 and 12.";
+					return msg;
+				}
+
+				if (day < 1 || day > 31) {
+					msg = "Day must be between 1 and 31.";
+					return msg;
+				}
+
+				if ((month==4 || month==6 || month==9 || month==11) && day==31) {
+					msg = "Month "+month+" doesn't have 31 days!";
+					return msg;
+				}
+
+				if (month == 2) { // check for february 29th
+					var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+					if (day>29 || (day==29 && !isleap)) {
+						msg = "February " + year + " doesn't have " + day + " days!";
+						return msg;
+					}
+				}
+
+				if (day.charAt(0) == '0') day= day.charAt(1);
+
+				return msg;
+			}  
+			
+		
+		});      
+	};
+	
 	
 	return {
 		enrollProcess: 				enrollProcess,    
 		enrollModalHide:			enrollModalHide,   
 		enrollModalShow:			enrollModalShow, 
 		enrollmentFormSubmit:		enrollmentFormSubmit, 
-		viewAcademicStatusShow:		viewAcademicStatusShow
+		viewAcademicStatusShow:		viewAcademicStatusShow,  
+		determineAgeUpdate:			determineAgeUpdate
+		
 	}
 	
 })()      
@@ -783,7 +922,9 @@ studentModule.enrollProcess();
 studentModule.enrollModalHide();  
 studentModule.enrollModalShow();
 studentModule.enrollmentFormSubmit();  
-studentModule.viewAcademicStatusShow();  
+studentModule.viewAcademicStatusShow();    
+studentModule.determineAgeUpdate();   
+
 
 var sectionStudentModule = (function() { 
 
@@ -1039,7 +1180,10 @@ var registrationModule = (function() {
 })()
  
 registrationModule.submitRegister();
-
+ 
+ 
+ 
+ 
 
 
 
