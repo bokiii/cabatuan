@@ -212,7 +212,10 @@ controllers.controller('student', function($scope, $http, $sce){
 		for(a = 0; a < $scope.students.length; a++) {  
 			$scope.students[a].status = $sce.trustAsHtml($scope.students[a].status);   
 			$scope.students[a].viewAcademic = $sce.trustAsHtml($scope.students[a].viewAcademic);
-		}   
+		}       
+		
+		console.log($scope.students);
+		
 		
 	});   
 	

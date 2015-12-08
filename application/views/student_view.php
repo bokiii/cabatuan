@@ -16,14 +16,14 @@
 								<div class="col-md-4">   
 									<div class="form-group">
 										<label for="sur_name">Sur Name</label>
-										<input type="text" class="form-control" name="sur_name" id="sur_name" placeholder="Sur Name">
+										<input type="text" class="form-control" name="sur_name" id="sur_name">
 									</div>
 								</div>   
 								
 								<div class="col-md-4">   
 									<div class="form-group">
 										<label for="first_name">First Name</label>
-										<input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name">
+										<input type="text" class="form-control" name="first_name" id="first_name">
 									</div>
 								
 								</div>   
@@ -31,25 +31,30 @@
 								<div class="col-md-4">     
 									<div class="form-group">
 										<label for="middle_name">Middle Name</label>
-										<input type="text" class="form-control" name="middle_name" id="middle_name" placeholder="Middle Name">
+										<input type="text" class="form-control" name="middle_name" id="middle_name">
 									</div>
 								</div>   
 							</div>    
 							
 							<div class="form-group">
 								<label for="lrn">LRN</label>
-								<input type="text" class="form-control" name="lrn" id="lrn" placeholder="LRN">
+								<input type="text" class="form-control" name="lrn" id="lrn">
 							</div>  
 							
 							<div class="form-group">
 								<label for="sex">Sex</label>
-								<input type="text" class="form-control" name="sex" id="sex" placeholder="Sex">
+								<!--<input type="text" class="form-control" name="sex" id="sex">-->   
+								<select id="sex" name="sex" class="form-control">                                                           
+									<option value></option>
+									<option value="Male">Male</option>
+									<option value="Female">Female</option>
+								</select>
 							</div>  
 							
 							<div class="form-group">
 								<label for="date_of_birth">Date of Birth</label>
 								<div class='input-group date' id='add_birth_date_picker'>
-									<input type='text' name="date_of_birth" id="date_of_birth" class="form-control" placeholder="Date of Birth" />
+									<input type='text' name="date_of_birth" id="date_of_birth" class="form-control" />
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -59,27 +64,27 @@
 							
 							<div class="form-group">
 								<label for="place_of_birth">Place of Birth</label>
-								<input type="text" class="form-control" name="place_of_birth" id="place_of_birth" placeholder="Place of Birth">
+								<input type="text" class="form-control" name="place_of_birth" id="place_of_birth">
 							</div>
 						
 							<div class="form-group">
 								<label for="age">Age</label>
-								<input readonly type="text" class="form-control" name="age" id="age" placeholder="Age">
+								<input readonly type="text" class="form-control" name="age" id="age">
 							</div>
 							
 							<div class="form-group">
 								<label for="present_address">Present Address</label>
-								<input type="text" class="form-control" name="present_address" id="present_address" placeholder="Present Address">
+								<input type="text" class="form-control" name="present_address" id="present_address">
 							</div>   
 							
 							<div class="form-group">
 								<label for="school_last_attended">School Last Attended</label>
-								<input type="text" class="form-control" name="school_last_attended" id="school_last_attended" placeholder="School Last Attended">
+								<input type="text" class="form-control" name="school_last_attended" id="school_last_attended">
 							</div>    
 							
 							<div class="form-group">
 								<label for="school_address">School Address</label>
-								<input type="text" class="form-control" name="school_address" id="school_address" placeholder="School Address">
+								<input type="text" class="form-control" name="school_address" id="school_address">
 							</div>   
 						</div>    
 						
@@ -87,42 +92,62 @@
 							
 							<div class="form-group">
 								<label for="grade_or_year_level">Grade/Year Level</label>
-								<input type="text" class="form-control" name="grade_or_year_level" id="grade_or_year_level" placeholder="Grade/Year Level">
+								<!--<input type="text" class="form-control" name="grade_or_year_level" id="grade_or_year_level">-->
+								<select id="grade_or_year_level" name="grade_or_year_level" class="form-control">                                                           
+									<option value></option>
+									<option value="Grade 7">Grade 7</option>
+									<option value="Grade 8">Grade 8</option>
+									<option value="Grade 9">Grade 9</option>
+									<option value="Grade 10">Grade 10</option>
+									<option value="Grade 11">Grade 11</option>  
+									<option value="Grade 12">Grade 12</option>
+								</select>
+							
 							</div>      
 							
 							<div class="form-group">
 								<label for="school_year">School Year</label>
-								<input type="text" class="form-control" name="school_year" id="school_year" placeholder="School Year">
+								<input type="text" class="form-control" name="school_year" id="school_year">
 							</div>    	   
 
 							<div class="form-group">
 								<label for="tve_specialization">TVE Specialization (for Grade 9 and 4th Yr. Student Only)</label>
-								<input type="text" class="form-control" name="tve_specialization" id="tve_specialization" placeholder="TVE Specialization (for Grade 9 and 4th Yr. Student Only)">
+								<input type="text" class="form-control" name="tve_specialization" id="tve_specialization">
 							</div>    	
 							
 							<div class="form-group">
 								<label for="father">Father</label>
-								<input type="text" class="form-control" name="father" id="father" placeholder="Father">
+								<input type="text" class="form-control" name="father" id="father"">
 							</div>       
 							
 							<div class="form-group">
 								<label for="mother">Mother</label>
-								<input type="text" class="form-control" name="mother" id="mother" placeholder="Mother">
+								<input type="text" class="form-control" name="mother" id="mother">
 							</div>      
 							
 							<div class="form-group">
 								<label for="person_to_notify">Person to Notify in Case of Emergency/Guardian</label>
-								<input type="text" class="form-control" name="person_to_notify" id="person_to_notify" placeholder="Person to Notify">
+								<input type="text" class="form-control" name="person_to_notify" id="person_to_notify">
 							</div>    
 							
 							<div class="form-group">
 								<label for="address">Address</label>
-								<input type="text" class="form-control" name="address" id="address" placeholder="Address">
+								<input type="text" class="form-control" name="address" id="address">
 							</div>  
 							
 							<div class="form-group">
 								<label for="contact_number">Tel. #/Cell #</label>
-								<input type="text" class="form-control" name="contact_number" id="contact_number" placeholder="Tel. #/Cell #">
+								<!--<input type="text" class="form-control" name="contact_number" id="contact_number">-->   
+									<div class="input-group">
+										<div class="input-group-btn phone_select">
+											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="button_value">Select Phone</span> <span class="caret"></span></button>
+											<ul class="dropdown-menu">   
+												<li><a class="select_telephone" id="telephone" href="#">Tel #</a></li>
+												<li><a class="select_telephone" id="cellphone" href="#">Cell #</a></li>
+											</ul>
+										</div><!-- /btn-group -->
+										<input type="text" readonly class="form-control" name="contact_number" id="contact_number">
+									</div><!-- /input-group -->    
 							</div> 
 							
 						</div>
@@ -194,7 +219,7 @@
 							<div class="form-group">
 								<label for="date_of_birth_update">Date of Birth</label>
 								<div class='input-group date' id='update_birth_date_picker'>
-									<input type='text' name="date_of_birth_update" id="date_of_birth_update" class="form-control" placeholder="Date of Birth" />
+									<input type='text' name="date_of_birth_update" id="date_of_birth_update" class="form-control" />
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -204,7 +229,7 @@
 							
 							<div class="form-group">
 								<label for="place_of_birth_update">Place of Birth</label>
-								<input type="text" class="form-control" name="place_of_birth_update" id="place_of_birth_update" placeholder="Place of Birth">
+								<input type="text" class="form-control" name="place_of_birth_update" id="place_of_birth_update">
 							</div>
 						
 							<div class="form-group">
@@ -214,12 +239,12 @@
 							
 							<div class="form-group">
 								<label for="present_address_update">Present Address</label>
-								<input type="text" class="form-control" name="present_address_update" id="present_address_update" placeholder="Present Address">
+								<input type="text" class="form-control" name="present_address_update" id="present_address_update">
 							</div>   
 							
 							<div class="form-group">
 								<label for="school_last_attended_update">School Last Attended</label>
-								<input type="text" class="form-control" name="school_last_attended_update" id="school_last_attended_update" placeholder="School Last Attended">
+								<input type="text" class="form-control" name="school_last_attended_update" id="school_last_attended_update">
 							</div>    
 							
 							<div class="form-group">
@@ -457,9 +482,11 @@
 					<form class="form-inline">
 						<div class="form-group">
 							<label class="sr-only" for="query">Query</label>
-							<input ng-model="query" type="text" class="form-control" id="query" placeholder="Search Student">
-						</div>
-					</form>
+							<input ng-model="query" type="text" class="form-control" placeholder="Search Student">
+						</div>   
+						
+					</form>     
+					
 				</div>  
 			</div>  
 		</div>   

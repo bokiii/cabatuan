@@ -120,10 +120,10 @@
 	<div class="container">   
 		<ul class="nav nav-tabs">
 			<li role="presentation" class="active"><a class="home_tab" id="first_tab" href="#">Enrollment Form</a></li>
-			<li role="presentation"><a class="home_tab" id="second_tab" href="#">Second Tab</a></li>
+			<!--<li role="presentation"><a class="home_tab" id="second_tab" href="#">Second Tab</a></li>
 			<li role="presentation"><a class="home_tab" id="third_tab" href="#">Third Tab</a></li>   
 			<li role="presentation"><a class="home_tab" id="fourth_tab" href="#">Fourth Tab</a></li>  
-			<li role="presentation"><a class="home_tab" id="fifth_tab" href="#">Fifth Tab</a></li>
+			<li role="presentation"><a class="home_tab" id="fifth_tab" href="#">Fifth Tab</a></li>-->
 		</ul>
 	</div>
 	
@@ -330,8 +330,8 @@
 		</form>    
 	</div>  
 	
-	<div class="container second_tab tabs">    
-			<p>Content for the second tab</p>
+	<!--<div class="container second_tab tabs">    
+		<p>Content for the second tab</p>
 	</div>   
 	
 	<div class="container third_tab tabs">    
@@ -344,15 +344,13 @@
 
 	<div class="container fifth_tab tabs">    
 		<p>Content for the fifth tab</p>
-	</div>   
-	
+	</div>-->  
 	
 	<div class="container">  
 		<hr>
 		<footer>
 			<p>&copy; BitMasters Tech. <?php echo date('Y'); ?></p>
 		</footer>
-	
 	</div>
 	
 	<!-- scripts below -->

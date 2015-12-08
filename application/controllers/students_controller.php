@@ -59,9 +59,16 @@ class Students_controller extends CI_Controller {
 		
 		echo json_encode($data);        
 		
+		
 	}
 	
 	public function add_student() {
+		
+		$date_of_birth = $this->input->post("date_of_birth");     
+		$remove_dash = str_replace("/", " ", $date_of_birth); 
+		$pieces = explode(" ", $remove_dash);
+		
+		$valid_date_of_birth = $pieces[2] . "-" .  $pieces[0] . "-" . $pieces[1];     
 		
 		$data = array();
 	
@@ -71,7 +78,7 @@ class Students_controller extends CI_Controller {
 		$student->middle_name = $this->input->post('middle_name');   		  
 		$student->lrn = $this->input->post('lrn');   
 		$student->sex = $this->input->post('sex');  
-		$student->date_of_birth = $this->input->post('date_of_birth');  
+		$student->date_of_birth = $valid_date_of_birth;  
 		$student->place_of_birth = $this->input->post('place_of_birth');   
 		$student->age = $this->input->post('age');      
 		$student->present_address = $this->input->post('present_address');   
@@ -120,6 +127,20 @@ class Students_controller extends CI_Controller {
 	
 	public function update_student() {
 		
+		$date_of_birth = trim($this->input->post('date_of_birth_update'));   
+		
+		$pos = strpos($date_of_birth, "-");
+
+		if($pos === false) {
+			
+			$remove_dash = str_replace("/", " ", $date_of_birth); 
+			$pieces = explode(" ", $remove_dash);   
+			$valid_date_of_birth = $pieces[2] . "-" .  $pieces[0] . "-" . $pieces[1];  
+		
+		} else {     
+			$valid_date_of_birth = $this->input->post('date_of_birth_update');
+		}    
+		
 		$data = array();
 		
 		$id = $this->input->post('update_id');
@@ -130,7 +151,7 @@ class Students_controller extends CI_Controller {
 		$student->middle_name = $this->input->post('middle_name_update');		
 		$student->lrn = $this->input->post('lrn_update');  
 		$student->sex = $this->input->post('sex_update');  
-		$student->date_of_birth = $this->input->post('date_of_birth_update');   
+		$student->date_of_birth = $valid_date_of_birth;   
 		$student->place_of_birth = $this->input->post('place_of_birth_update');  
 		$student->age = $this->input->post('age_update');   
 		$student->present_address = $this->input->post('present_address_update');   

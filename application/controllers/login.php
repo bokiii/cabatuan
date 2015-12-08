@@ -80,6 +80,12 @@ class Login extends CI_Controller {
 
 	public function register_enrollee() {  
 	
+		$date_of_birth = $this->input->post("date_of_birth");     
+		$remove_dash = str_replace("/", " ", $date_of_birth); 
+		$pieces = explode(" ", $remove_dash);
+		
+		$valid_date_of_birth = $pieces[2] . "-" .  $pieces[0] . "-" . $pieces[1];  
+		
 		$data = array();  
 		
 		$captcha_entered = $this->input->post("captcha_entered");     
@@ -94,7 +100,7 @@ class Login extends CI_Controller {
 			$verification->middle_name = $this->input->post('middle_name');   		  
 			$verification->lrn = $this->input->post('lrn');   
 			$verification->sex = $this->input->post('sex');  
-			$verification->date_of_birth = $this->input->post('date_of_birth');  
+			$verification->date_of_birth = $valid_date_of_birth;  
 			$verification->place_of_birth = $this->input->post('place_of_birth');   
 			$verification->age = $this->input->post('age');      
 			$verification->present_address = $this->input->post('present_address');   
@@ -121,15 +127,14 @@ class Login extends CI_Controller {
 				} else {  
 					$data['status'] = false;
 				}  
-				
 			}     
-
 		} else {   
 			$data['errors'] = "<p>Invalid Captcha</p>";  
 			$data['status'] = false;
 		}
-	
-		echo json_encode($data);
+		echo json_encode($data);  
+		
+		
 	}   
 	
 	private function generateRandomString() {   
