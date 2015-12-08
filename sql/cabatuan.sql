@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2015 at 03:13 AM
+-- Generation Time: Dec 08, 2015 at 01:46 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -52,17 +52,18 @@ CREATE TABLE IF NOT EXISTS `curriculums` (
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `curriculums`
 --
 
 INSERT INTO `curriculums` (`id`, `curriculum`, `created`, `updated`) VALUES
-(5, 'First Year', '2015-05-26 15:25:47', '0000-00-00 00:00:00'),
-(6, 'Second Year', '2015-05-26 15:25:54', '0000-00-00 00:00:00'),
-(7, 'Third Year', '2015-05-26 15:26:04', '0000-00-00 00:00:00'),
-(8, 'Fourth Year', '2015-05-26 15:26:12', '0000-00-00 00:00:00');
+(5, 'Grade 7', '2015-05-26 15:25:47', '2015-12-08 07:40:59'),
+(6, 'Grade 8', '2015-05-26 15:25:54', '2015-12-08 07:41:07'),
+(7, 'Grade 9', '2015-05-26 15:26:04', '2015-12-08 07:41:17'),
+(8, 'Grade 10', '2015-05-26 15:26:12', '2015-12-08 07:41:28'),
+(9, 'Grade 11', '2015-12-08 07:41:44', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -159,7 +160,6 @@ CREATE TABLE IF NOT EXISTS `enrolled_students` (
 
 INSERT INTO `enrolled_students` (`id`, `curriculum_id`, `section_id`, `student_id`, `school_year`, `current`, `accomplished`, `created`, `updated`) VALUES
 (44, 5, 24, 14, '2015-2016', 1, 0, '2015-06-11 16:20:23', '0000-00-00 00:00:00'),
-(46, 5, 24, 15, '2015-2016', 1, 0, '2015-06-15 21:18:15', '0000-00-00 00:00:00'),
 (47, 5, 24, 13, '2015-2016', 1, 0, '2015-06-15 23:35:45', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
@@ -187,12 +187,21 @@ INSERT INTO `enrolled_student_subjects` (`id`, `subject_id`, `enrolled_student_i
 (117, 15, 44, '2015-06-11 16:20:23', '0000-00-00 00:00:00'),
 (118, 29, 44, '2015-06-11 16:20:23', '0000-00-00 00:00:00'),
 (119, 31, 44, '2015-06-11 16:20:23', '0000-00-00 00:00:00'),
-(123, 15, 46, '2015-06-15 21:18:16', '0000-00-00 00:00:00'),
-(124, 29, 46, '2015-06-15 21:18:16', '0000-00-00 00:00:00'),
-(125, 31, 46, '2015-06-15 21:18:16', '0000-00-00 00:00:00'),
 (126, 15, 47, '2015-06-15 23:35:45', '0000-00-00 00:00:00'),
 (127, 29, 47, '2015-06-15 23:35:45', '0000-00-00 00:00:00'),
 (128, 31, 47, '2015-06-15 23:35:45', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rules`
+--
+
+CREATE TABLE IF NOT EXISTS `rules` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rule` varchar(175) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -225,7 +234,7 @@ CREATE TABLE IF NOT EXISTS `students` (
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `students`
@@ -234,10 +243,8 @@ CREATE TABLE IF NOT EXISTS `students` (
 INSERT INTO `students` (`id`, `sur_name`, `first_name`, `middle_name`, `lrn`, `sex`, `date_of_birth`, `place_of_birth`, `age`, `present_address`, `school_last_attended`, `school_address`, `grade_or_year_level`, `school_year`, `tve_specialization`, `father`, `mother`, `person_to_notify`, `address`, `contact_number`, `user_type`, `created`, `updated`) VALUES
 (13, 'Boribor', 'Mark', 'Babon', 'dfdf', 'dfdf', '2015-06-24', 'dfdf', 34, 'dfdfdfdf', 'dfdf', 'dfdfdfdfdf', 'dfdf', 'dfdfdf', 'dfdfdf', 'dfdfdf', 'dfdf', 'dfdf', 'dfdfdf', 'dfdfdf', 'student', '2015-06-11 00:05:48', '2015-06-11 00:07:44'),
 (14, 'Trocho', 'John Neal', 'Calzar', 'ghghgh', 'gghgh', '2015-06-09', 'ghgh', 23, 'vbvbvb', 'vbvbbv', 'vbbvbv', 'ghghgh', 'ghghgh', 'ghghgh', 'ghghgh', 'ghghgh', 'bvbvb', 'vbvb', 'vbvbv', 'student', '2015-06-11 00:06:08', '2015-06-11 00:08:03'),
-(15, 'fgfg', 'fgfg', 'fgfg', 'fgfgf', 'fgfg', '2015-06-15', 'fgfg', 45, 'fgfg', 'fgfgfgfg', 'fgfgfgfgfg', 'fgfg', 'gcdfdf', 'fgfgfg', 'fgfgfg', 'fgfgfg', 'gffgfg', 'ffgfg', 'fgfgfg', 'student', '2015-06-11 00:33:55', '0000-00-00 00:00:00'),
-(16, 'gtytyu', 'ytuyuuy', 'tyutyuuty', 'tyutyu', 'yutyutyutyutyu', '2015-06-24', 'tyutyutyu', 23, 'ghjhj', 'hj', 'hjhj', 'utyutyu', 'tyutyuty', 'utyutyut', 'yutyu', 'tyutyutyu', 'tyutyu', 'hjghj', 'hjhj', 'student', '2015-06-11 00:36:57', '0000-00-00 00:00:00'),
-(18, 'gfdg', 'dfgfdfg', 'dfgdfg', 'gdfgdfg', 'dfgdfg', '2015-06-17', 'dfgdfgdfg', 26, 'gfhghfghf', 'fghgfhgfhgfh', 'gfhgfhgfhgfhgfhghf', 'dfgdfgdf', 'gdfgdfgdf', 'dfgdfgdfg', 'dfgdfgdfgdfg', 'fdgdfgdfg', 'dfgdfgdfg', 'ghgfhgfh', 'ghgfhgf', 'student', '2015-06-11 00:40:52', '0000-00-00 00:00:00'),
-(19, 'gffg', 'fgfg', 'fgfg', 'fddfdgf', 'gdfgdfgdfgdfg', '2015-06-24', 'dfgdfgdf', 34, 'dfgdfgdfg', 'hgfhgf', 'gfhgfhgfhgfhghf', 'fgfg', 'fgg', 'dfdfgdf', 'fgdfg', 'dfgdfgdf', 'fdgdfg', 'fgfg', 'dfggfhgf', 'student', '2015-06-11 00:47:14', '0000-00-00 00:00:00');
+(15, 'markie', 'sdjmsmndmsdmsdsd', 'sdsdmsdmsmdsd', 'dsnsndnsdnsdnsndsd', 'Female', '1981-06-09', 'dhsdhshdhsdhsdsd', 34, 'dsbsdbsbdbsdbsdsd', 'sdnsdnsndnsndsd', 'Janiuay, Iloilo', 'Grade 8', '2015-2016', 'ksdnsndsnnsdnsdnsndsd', 'sdb sdbsbdsbdsbdbsd', 'sdhhshdhsdhsdhsd', 'sndxsndnsdnsdnsdsd', 'sndnsdnsndnsdsd', '09092700838', 'student', '2015-12-08 06:40:15', '2015-12-08 07:02:36'),
+(16, 'jjjjjkdfdfkdfdf', 'jjjdshsdhsd', 'jjjdjsdshdjsd', 'ksndnsdnnsdnsdnsd', 'Male', '1982-02-09', 'msdmsdmsmdmsdmsdsd', 33, 'sndsdsdnsmdnsmdnsmdsd', 'sndxsndmsdnsmdnsdsd', 'Janiuay, Iloilo', 'Grade 7', '2015-2016', 'bhhhdhfhdfhdhfhdf', 'dshsdhshdhsdhshdsd', 'ndsnsdnsndnsdnnndssd', 'sdnnsndsdnsdnssd', 'sndsmdnmsdnsmdnmsndsd', '09092700838', 'student', '2015-12-08 07:21:59', '2015-12-08 07:22:22');
 
 -- --------------------------------------------------------
 
@@ -286,13 +293,10 @@ CREATE TABLE IF NOT EXISTS `students_subjects_grades` (
 --
 
 INSERT INTO `students_subjects_grades` (`id`, `first_quarter`, `second_quarter`, `third_quarter`, `fourth_quarter`, `final_grade`, `remarks`, `enrolled_student_subject_id`) VALUES
-(117, '75', '75', '75', '75', '75', 'passed', 117),
+(117, '75', '75', '75', '75', '85', 'passed', 117),
 (118, '', '', '', '', '', '', 118),
 (119, '', '', '', '', '', '', 119),
-(123, '', '', '', '', '', '', 123),
-(124, '', '', '', '', '', '', 124),
-(125, '', '', '', '', '', '', 125),
-(126, '', '', '', '', '', '', 126),
+(126, '45', '', '45', '45', '', '', 126),
 (127, '', '', '', '', '', '', 127),
 (128, '', '', '', '', '', '', 128);
 
@@ -365,7 +369,7 @@ CREATE TABLE IF NOT EXISTS `teachers_subjects` (
   PRIMARY KEY (`id`),
   KEY `teachers_subjects_ibfk_1` (`teacher_id`),
   KEY `teachers_subjects_ibfk_2` (`subject_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
 
 --
 -- Dumping data for table `teachers_subjects`
@@ -375,7 +379,9 @@ INSERT INTO `teachers_subjects` (`id`, `teacher_id`, `subject_id`, `created`, `u
 (22, 10, 15, '2015-05-30 09:31:35', '0000-00-00 00:00:00'),
 (23, 10, 29, '2015-06-08 10:28:35', '0000-00-00 00:00:00'),
 (26, 10, 31, '2015-06-13 16:23:20', '0000-00-00 00:00:00'),
-(28, 11, 31, '2015-06-15 23:49:33', '0000-00-00 00:00:00');
+(28, 11, 31, '2015-06-15 23:49:33', '0000-00-00 00:00:00'),
+(29, 10, 21, '2015-06-26 20:39:52', '0000-00-00 00:00:00'),
+(30, 10, 22, '2015-09-14 13:24:22', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -392,7 +398,7 @@ CREATE TABLE IF NOT EXISTS `teachers_subjects_sections` (
   PRIMARY KEY (`id`),
   KEY `teachers_subjects_sections_ibfk_1` (`teacher_subject_id`),
   KEY `teachers_subjects_sections_ibfk_2` (`section_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
 
 --
 -- Dumping data for table `teachers_subjects_sections`
@@ -402,7 +408,40 @@ INSERT INTO `teachers_subjects_sections` (`id`, `teacher_subject_id`, `section_i
 (39, 22, 24, '2015-06-08 10:29:12', '0000-00-00 00:00:00'),
 (40, 22, 25, '2015-06-08 10:29:12', '0000-00-00 00:00:00'),
 (44, 23, 24, '2015-06-15 23:48:30', '0000-00-00 00:00:00'),
-(45, 28, 24, '2015-06-15 23:49:40', '0000-00-00 00:00:00');
+(45, 28, 24, '2015-06-15 23:49:40', '0000-00-00 00:00:00'),
+(46, 30, 33, '2015-09-14 13:24:40', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `unverified_students`
+--
+
+CREATE TABLE IF NOT EXISTS `unverified_students` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `sur_name` varchar(175) NOT NULL,
+  `first_name` varchar(175) NOT NULL,
+  `middle_name` varchar(175) NOT NULL,
+  `lrn` varchar(50) NOT NULL,
+  `sex` varchar(75) NOT NULL,
+  `date_of_birth` date NOT NULL,
+  `place_of_birth` varchar(255) NOT NULL,
+  `age` int(10) unsigned NOT NULL,
+  `present_address` varchar(255) NOT NULL,
+  `school_last_attended` varchar(255) NOT NULL,
+  `school_address` varchar(255) NOT NULL,
+  `grade_or_year_level` varchar(75) NOT NULL,
+  `school_year` varchar(75) NOT NULL,
+  `tve_specialization` varchar(255) NOT NULL,
+  `father` varchar(175) NOT NULL,
+  `mother` varchar(175) NOT NULL,
+  `person_to_notify` varchar(175) NOT NULL,
+  `address` varchar(175) NOT NULL,
+  `contact_number` varchar(75) NOT NULL,
+  `verification` varchar(255) NOT NULL,
+  `email_address` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Constraints for dumped tables
