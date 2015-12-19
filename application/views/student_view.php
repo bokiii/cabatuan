@@ -481,9 +481,25 @@
 				<div class="col-md-12">  
 					<form class="form-inline">
 						<div class="form-group">
-							<label class="sr-only" for="query">Query</label>
+							<label class="sr-only" for="query">Query </label>
 							<input ng-model="query" type="text" class="form-control" placeholder="Search Student">
-						</div>   
+						</div>       
+
+						<div class="form-group">
+							<label for="grade_level">Select Year </label>
+							
+							<select ng-model="query" class="form-control">                                                           
+								<option value></option>
+								<option value="Grade 7">Grade 7</option>
+								<option value="Grade 8">Grade 8</option>
+								<option value="Grade 9">Grade 9</option>
+								<option value="Grade 10">Grade 10</option>
+								<option value="Grade 11">Grade 11</option>  
+								<option value="Grade 12">Grade 12</option>
+							</select>
+							
+							
+						</div>        
 						
 					</form>     
 					

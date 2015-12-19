@@ -21,7 +21,6 @@ controllers.controller('curriculumYear', function($scope, $http){
 		});  
 	};
 	
-	
 });
 
 controllers.controller('curriculumSubject', function($scope, $http){
@@ -390,7 +389,6 @@ controllers.controller('viewStudents', function($scope, $sce, $http){
 	};
 	
 });
- 
  
  // below are the controllers for the teacher account
 controllers.controller('teacherAccountController', function($scope, $sce, $http){
