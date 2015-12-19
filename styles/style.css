@@ -52,6 +52,16 @@ table.academic th, table.academic td {
 
 .tabs { 
 	display: none;  
+}  
+
+/* below is for the carousel */  
+
+.carousel-control { 
+	display: none;
+}  
+
+.carousel-indicators { 
+	display: none;
 }
    
 
