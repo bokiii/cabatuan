@@ -45,11 +45,12 @@ class Login extends CI_Controller {
 			'expiration' => 3600
 		); 
 		
-		$data = create_captcha($values);     
-		
+		/*$data = create_captcha($values);     
 		$this->session->set_userdata('captcha_word', $data['word']);
-		
-		$this->load->view('login_view', $data);
+		$this->load->view('login_view', $data);*/   
+
+		$this->load->view('login_view');
+	
 	}        
 
 	public function refresh_captcha() {   

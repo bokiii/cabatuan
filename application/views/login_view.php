@@ -129,7 +129,7 @@
 	</div>
 	
 	
-	<div class="container active_tab first_tab tabs">   
+	<div class="container first_tab tabs">   
 		
 		<div class="row">   
 			<div class="col-md-12">   
@@ -253,7 +253,7 @@
 		
 	</div>  
 
-	<div class="container fifth_tab tabs">    
+	<div class="container active_tab fifth_tab tabs">    
 		<div class="row">   
 			<div class="col-md-12">   
 				<div class="page-header">
@@ -270,14 +270,14 @@
 						<div class="col-md-4">   
 							<div class="form-group">
 								<label for="sur_name">Sur Name</label>
-								<input type="text" class="form-control" name="sur_name" id="sur_name">
+								<input type="text" class="form-control for_validation" name="sur_name" id="sur_name" data-placement="bottom" title="Title" data-content="Content">
 							</div>
 						</div>   
 						
 						<div class="col-md-4">   
 							<div class="form-group">
 								<label for="first_name">First Name</label>
-								<input type="text" class="form-control" name="first_name" id="first_name">
+								<input type="text" class="form-control for_validation" name="first_name" id="first_name">
 							</div>
 						
 						</div>   
@@ -285,19 +285,19 @@
 						<div class="col-md-4">     
 							<div class="form-group">
 								<label for="middle_name">Middle Name</label>
-								<input type="text" class="form-control" name="middle_name" id="middle_name">
+								<input type="text" class="form-control for_validation" name="middle_name" id="middle_name">
 							</div>
 						</div>   
 					</div>    
 					
 					<div class="form-group">
 						<label for="lrn">LRN</label>
-						<input type="text" class="form-control" name="lrn" id="lrn">
+						<input type="text" class="form-control for_validation" name="lrn" id="lrn">
 					</div>  
 					
 					<div class="form-group">
 						<label for="sex">Sex</label>
-						<select id="sex" name="sex" class="form-control">                                                           
+						<select id="sex" name="sex" class="form-control for_validation">                                                           
 							<option value></option>
 							<option value="Male">Male</option>
 							<option value="Female">Female</option>
@@ -307,7 +307,7 @@
 					<div class="form-group">
 						<label for="date_of_birth">Date of Birth</label>
 						<div class='input-group date' id='add_birth_date_picker'>
-							<input type='text' name="date_of_birth" id="date_of_birth" class="form-control" />
+							<input type='text' name="date_of_birth" id="date_of_birth" class="form-control for_validation" />
 							<span class="input-group-addon">
 								<span class="glyphicon glyphicon-calendar"></span>
 							</span>
@@ -316,27 +316,27 @@
 					
 					<div class="form-group">
 						<label for="place_of_birth">Place of Birth</label>
-						<input type="text" class="form-control" name="place_of_birth" id="place_of_birth">
+						<input type="text" class="form-control for_validation" name="place_of_birth" id="place_of_birth">
 					</div>
 				
 					<div class="form-group">
 						<label for="age">Age</label>
-						<input readonly type="text" class="form-control" name="age" id="age">
+						<input readonly type="text" class="form-control for_validation" name="age" id="age">
 					</div>
 					
 					<div class="form-group">
 						<label for="present_address">Present Address</label>
-						<input type="text" class="form-control" name="present_address" id="present_address">
+						<input type="text" class="form-control for_validation" name="present_address" id="present_address">
 					</div>   
 					
 					<div class="form-group">
 						<label for="school_last_attended">School Last Attended</label>
-						<input type="text" class="form-control" name="school_last_attended" id="school_last_attended">
+						<input type="text" class="form-control for_validation" name="school_last_attended" id="school_last_attended">
 					</div>    
 					
 					<div class="form-group">
 						<label for="school_address">School Address</label>
-						<input type="text" class="form-control" name="school_address" id="school_address">
+						<input type="text" class="form-control for_validation" name="school_address" id="school_address">
 					</div>   
 				</div>    
 				
@@ -344,7 +344,7 @@
 					
 					<div class="form-group">
 						<label for="grade_or_year_level">Grade/Year Level</label>
-						<select id="grade_or_year_level" name="grade_or_year_level" class="form-control">                                                           
+						<select id="grade_or_year_level" name="grade_or_year_level" class="form-control for_validation">                                                           
 							<option value></option>
 							<option value="Grade 7">Grade 7</option>
 							<option value="Grade 8">Grade 8</option>
@@ -357,38 +357,36 @@
 
 					<div class="form-group">
 						<label for="school_year">School Year</label>
-						<input type="text" class="form-control" name="school_year" id="school_year">
+						<input type="text" class="form-control for_validation" name="school_year" id="school_year">
 					</div>    	   
 
 					<div class="form-group">
 						<label for="tve_specialization">TVE Specialization (for Grade 9 and 4th Yr. Student Only)</label>
-						<input type="text" class="form-control" name="tve_specialization" id="tve_specialization">
+						<input type="text" class="form-control for_validation" name="tve_specialization" id="tve_specialization">
 					</div>    	
 					
 					<div class="form-group">
 						<label for="father">Father</label>
-						<input type="text" class="form-control" name="father" id="father">
+						<input type="text" class="form-control for_validation" name="father" id="father">
 					</div>       
 					
 					<div class="form-group">
 						<label for="mother">Mother</label>
-						<input type="text" class="form-control" name="mother" id="mother">
+						<input type="text" class="form-control for_validation" name="mother" id="mother">
 					</div>      
 					
 					<div class="form-group">
 						<label for="person_to_notify">Person to Notify in Case of Emergency/Guardian</label>
-						<input type="text" class="form-control" name="person_to_notify" id="person_to_notify">
+						<input type="text" class="form-control for_validation" name="person_to_notify" id="person_to_notify">
 					</div>    
 					
 					<div class="form-group">
 						<label for="address">Address</label>
-						<input type="text" class="form-control" name="address" id="address">
+						<input type="text" class="form-control for_validation" name="address" id="address">
 					</div>  
 					
 					<div class="form-group">
-						<label for="contact_number">Tel. #/Cell #</label>
-						<!--<input type="tel" class="form-control" name="contact_number" id="contact_number">-->  
-						
+						<label for="contact_number">Tel. #/Cell #</label>   
 						<div class="input-group">
 							<div class="input-group-btn phone_select">
 								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="button_value">Select Phone</span> <span class="caret"></span></button>
@@ -397,7 +395,7 @@
 									<li><a class="select_telephone" id="cellphone" href="#">Cell #</a></li>
 								</ul>
 							</div><!-- /btn-group -->
-							<input type="text" readonly class="form-control" name="contact_number" id="contact_number">
+							<input type="text" readonly class="form-control for_validation" name="contact_number" id="contact_number">
 						</div><!-- /input-group -->    
 					</div>
  
@@ -405,22 +403,17 @@
 				
 			</div>     
 			
-			<div class="row">  
+			<!--<div class="row">  
 				<div class="col-md-12">  
-					<div id="captcha_image_container">  
-						
+					<div id="captcha_image_container">  						
 						<div id="image_captcha" class="left">  
 							<?php echo $image; ?>  
 						</div>
-					
 						<div class="left">  
 							<a href="<?php echo base_url(); ?>index.php/login/refresh_captcha" class="refresh_captcha"><img src="<?php echo base_url() . "images/refresh.png" ?>" class="img-responsive" alt="Refresh" /></a>
 						</div>  
-						
 						<div class="clear"></div>
-					
 					</div>
-					
 				</div>    
 			</div>   
 			
@@ -440,9 +433,7 @@
 						<input type="text" class="form-control" name="email_address" id="email_address">
 					</div> 
 				</div>
-			
-			
-			</div>
+			</div>-->
 			
 			<div class="row">  
 				<div class="col-md-12">  

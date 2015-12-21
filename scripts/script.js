@@ -7,6 +7,14 @@ jQuery.fn.extend({
 	}
 });
 
+var delay = (function(){
+	var timer = 0;
+	return function(callback, ms){
+		clearTimeout (timer);
+		timer = setTimeout(callback, ms);
+	};
+})();
+
 var alertModule = (function() {
 
 	var modalAlertOpen = function(data, containerToAppend) {
@@ -1182,7 +1190,115 @@ var registrationModule = (function() {
 registrationModule.submitRegister();
  
  
- 
+var popOverModule = (function() { 
+
+	var hasNumberValue = function(arrayValue) { 
+	
+		var numCount = 0;   
+		for(val in arrayValue) { 
+			if($.isNumeric(arrayValue[val])){ 
+				numCount++;
+			}	
+		}     
+		
+		if(numCount > 0) { 
+			return true;
+		} else { 
+			return false;
+		} 
+	};
+	
+	var validationPopOver = function() {  
+		
+		$(".for_validation").on("keyup", function(){   
+			var id = $(this).attr("id"); 
+			validateInputValue(id);
+		});      
+		
+		$(".for_validation").on("focus", function(){   
+			var id = $(this).attr("id"); 
+			validateInputValue(id);
+		}); 
+		
+		function validateInputValue(id) { 
+			
+			delay(function(){  
+				
+				var inputValue = $('#' + id).val();    
+				var title; 
+				var content;
+				
+				if(inputValue.length > 0) { 
+					var splitValue = inputValue.split("");
+					if(hasNumberValue(splitValue)) { 
+						$('#' + id).addClass("error_color");	
+						title = "Error";   
+						content = "Number is not allowed";
+						popOverMessage(title, content, id);
+					} else { 
+						title = "Good";   
+						content = "Entered value is allowed";  
+						popOverMessage(title, content, id);
+						$('#' + id).removeClass("error_color");	  
+					}  
+					startPopOver(true, id);	
+				} else { 
+					startPopOver(false, id);	
+					$('#' + id).removeClass("error_color");	 
+				}
+				
+			}, 1000 );   
+		}   
+		
+		function popOverMessage(title, content, id) {  
+			
+			var titleLength = $('#' + id).attr("title").length;  
+			if(titleLength == 0) { 
+				$('#' + id).attr("data-original-title", title);   
+				$('#' + id).attr("data-content", content);
+			} else { 
+				$('#' + id).attr("title", title);   
+				$('#' + id).attr("data-content", content);
+			}
+			
+		}
+		
+		function startPopOver(pop, id) { 
+			if(pop) { 
+				$('#' + id).popover('show');  
+			} else { 
+				$('#' + id).popover('hide');  
+			}
+		}
+		
+	};
+	
+	return {  
+		validationPopOver:	validationPopOver
+	}  
+	
+})()   
+
+popOverModule.validationPopOver();
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
  
 
 
