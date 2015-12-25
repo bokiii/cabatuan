@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2015 at 01:46 AM
+-- Generation Time: Dec 25, 2015 at 11:12 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `enrolled_students` (
   KEY `enrolled_students_ibfk_1` (`student_id`),
   KEY `enrolled_students_ibfk_2` (`curriculum_id`),
   KEY `enrolled_students_ibfk_3` (`section_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=48 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
 
 --
 -- Dumping data for table `enrolled_students`
@@ -160,7 +160,8 @@ CREATE TABLE IF NOT EXISTS `enrolled_students` (
 
 INSERT INTO `enrolled_students` (`id`, `curriculum_id`, `section_id`, `student_id`, `school_year`, `current`, `accomplished`, `created`, `updated`) VALUES
 (44, 5, 24, 14, '2015-2016', 1, 0, '2015-06-11 16:20:23', '0000-00-00 00:00:00'),
-(47, 5, 24, 13, '2015-2016', 1, 0, '2015-06-15 23:35:45', '0000-00-00 00:00:00');
+(47, 5, 24, 13, '2015-2016', 1, 0, '2015-06-15 23:35:45', '0000-00-00 00:00:00'),
+(48, 6, 27, 15, '2015-2016', 1, 0, '2015-12-08 12:38:35', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -177,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `enrolled_student_subjects` (
   PRIMARY KEY (`id`),
   KEY `enrolled_student_subjects_ibfk_2` (`subject_id`),
   KEY `enrolled_student_subjects_ibfk_1` (`enrolled_student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=129 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=131 ;
 
 --
 -- Dumping data for table `enrolled_student_subjects`
@@ -189,7 +190,9 @@ INSERT INTO `enrolled_student_subjects` (`id`, `subject_id`, `enrolled_student_i
 (119, 31, 44, '2015-06-11 16:20:23', '0000-00-00 00:00:00'),
 (126, 15, 47, '2015-06-15 23:35:45', '0000-00-00 00:00:00'),
 (127, 29, 47, '2015-06-15 23:35:45', '0000-00-00 00:00:00'),
-(128, 31, 47, '2015-06-15 23:35:45', '0000-00-00 00:00:00');
+(128, 31, 47, '2015-06-15 23:35:45', '0000-00-00 00:00:00'),
+(129, 17, 48, '2015-12-08 12:38:35', '0000-00-00 00:00:00'),
+(130, 30, 48, '2015-12-08 12:38:35', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -286,7 +289,7 @@ CREATE TABLE IF NOT EXISTS `students_subjects_grades` (
   `enrolled_student_subject_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `students_subjects_grades_ibfk_1` (`enrolled_student_subject_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=129 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=131 ;
 
 --
 -- Dumping data for table `students_subjects_grades`
@@ -298,7 +301,9 @@ INSERT INTO `students_subjects_grades` (`id`, `first_quarter`, `second_quarter`,
 (119, '', '', '', '', '', '', 119),
 (126, '45', '', '45', '45', '', '', 126),
 (127, '', '', '', '', '', '', 127),
-(128, '', '', '', '', '', '', 128);
+(128, '', '', '', '', '', '', 128),
+(129, '', '', '', '', '', '', 129),
+(130, '', '', '', '', '', '', 130);
 
 -- --------------------------------------------------------
 
@@ -441,7 +446,7 @@ CREATE TABLE IF NOT EXISTS `unverified_students` (
   `verification` varchar(255) NOT NULL,
   `email_address` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
 -- Constraints for dumped tables
