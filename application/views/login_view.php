@@ -269,7 +269,7 @@
 					<div class="row">   
 						<div class="col-md-4">   
 							<div class="form-group">
-								<label for="sur_name">Sur Name</label>
+								<label for="sur_name">Last Name</label>
 								<input type="text" class="form-control for_validation" name="sur_name" id="sur_name" data-placement="bottom" title="Title" data-content="Content">
 							</div>
 						</div>   
@@ -277,7 +277,7 @@
 						<div class="col-md-4">   
 							<div class="form-group">
 								<label for="first_name">First Name</label>
-								<input type="text" class="form-control for_validation" name="first_name" id="first_name">
+								<input type="text" class="form-control for_validation" name="first_name" id="first_name" data-placement="bottom" title="Title" data-content="Content">
 							</div>
 						
 						</div>   
@@ -285,14 +285,14 @@
 						<div class="col-md-4">     
 							<div class="form-group">
 								<label for="middle_name">Middle Name</label>
-								<input type="text" class="form-control for_validation" name="middle_name" id="middle_name">
+								<input type="text" class="form-control for_validation" minlength="1" name="middle_name" id="middle_name" data-placement="bottom" title="Title" data-content="Content">
 							</div>
 						</div>   
 					</div>    
 					
 					<div class="form-group">
 						<label for="lrn">LRN</label>
-						<input type="text" class="form-control for_validation" name="lrn" id="lrn">
+						<input type="text" class="form-control for_validation" name="lrn" id="lrn" data-placement="bottom" title="Title" data-content="Content">
 					</div>  
 					
 					<div class="form-group">

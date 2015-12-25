@@ -1216,9 +1216,15 @@ var popOverModule = (function() {
 		});      
 		
 		$(".for_validation").on("focus", function(){   
-			var id = $(this).attr("id"); 
-			validateInputValue(id);
-		}); 
+			var id = $(this).attr("id");  
+			validateInputValue(id);     
+			$(document).find(".is_good").popover("hide");
+		});    
+		
+		$(".for_validation").on("blur", function(){    
+			$(document).find(".is_good").popover("hide");
+		});    
+		
 		
 		function validateInputValue(id) { 
 			
@@ -1227,18 +1233,21 @@ var popOverModule = (function() {
 				var inputValue = $('#' + id).val();    
 				var title; 
 				var content;
+				var inputValue;
 				
 				if(inputValue.length > 0) { 
 					var splitValue = inputValue.split("");
 					if(hasNumberValue(splitValue)) { 
 						$('#' + id).addClass("error_color");	
 						title = "Error";   
-						content = "Number is not allowed";
-						popOverMessage(title, content, id);
+						content = "Number is not allowed"; 
+						inputValue = "bad";
+						popOverMessage(title, content, id, inputValue);
 					} else { 
 						title = "Good";   
-						content = "Entered value is allowed";  
-						popOverMessage(title, content, id);
+						content = "Entered value is allowed"; 
+						inputValue = "good";
+						popOverMessage(title, content, id, inputValue);   
 						$('#' + id).removeClass("error_color");	  
 					}  
 					startPopOver(true, id);	
@@ -1250,7 +1259,7 @@ var popOverModule = (function() {
 			}, 1000 );   
 		}   
 		
-		function popOverMessage(title, content, id) {  
+		function popOverMessage(title, content, id, inputValue) {  
 			
 			var titleLength = $('#' + id).attr("title").length;  
 			if(titleLength == 0) { 
@@ -1259,6 +1268,12 @@ var popOverModule = (function() {
 			} else { 
 				$('#' + id).attr("title", title);   
 				$('#' + id).attr("data-content", content);
+			}   
+			
+			if(inputValue == "good") { 
+				$('#' + id).addClass("is_good");
+			} else if(inputValue == "bad") { 
+				$('#' + id).removeClass("is_good");
 			}
 			
 		}
