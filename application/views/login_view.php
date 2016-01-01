@@ -297,11 +297,20 @@
 					
 					<div class="form-group">
 						<label for="sex">Sex</label>
-						<select id="sex" name="sex" class="form-control validation_for_select" data-placement="top" title="title" data-content="content">                                                           
+						<!--<select id="sex" name="sex" class="form-control validation_for_select" data-placement="top" title="title" data-content="content">                                                           
 							<option value></option>
 							<option value="Male">Male</option>
 							<option value="Female">Female</option>
-						</select>
+						</select>-->      
+						<br />						
+						
+						<label class="radio-inline">
+							<input type="radio" class="validation_for_select" name="sex" id="sex_male" value="Male" data-placement="top" title="title" data-content="content"> Male
+						</label>
+						<label class="radio-inline">
+							<input type="radio" class="validation_for_select" name="sex" id="sex_female" value="Female" data-placement="top" title="title" data-content="content"> Female
+						</label>
+						
 					</div>  
 					
 					<div class="form-group">
