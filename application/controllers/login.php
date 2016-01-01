@@ -34,22 +34,27 @@ class Login extends CI_Controller {
 	
 	public function index() {  
 	
-		$values = array(
-			'word' => '',
-			'word_length' => 8,
-			'img_path' => './captcha_images/',
-			'img_url' =>  base_url() .'captcha_images/',
-			'font_path'  => base_url() . 'system/fonts/texb.ttf',
-			'img_width' => 180,
-			'img_height' => 60,
-			'expiration' => 3600
-		); 
+		$data = array();
+		$current_year = date("Y");
+		$data['dates'] = array($current_year);  
 		
-		/*$data = create_captcha($values);     
-		$this->session->set_userdata('captcha_word', $data['word']);
-		$this->load->view('login_view', $data);*/   
+		for($i = 1; $i < 111; $i++) {  
+			$down_year =  $current_year - $i;  
+			array_push($data['dates'], $down_year);  
+		}       
+		
+		$plus_one_current_year = $current_year + 1;    		
+		$current_school_year = $current_year . "-" . $plus_one_current_year;  
+		$data['school_years'] = array($current_school_year);       
 
-		$this->load->view('login_view');
+		for($i = 1; $i < 20; $i++) {  
+			$down_current_year =  $current_year - $i;    
+			$down_plus_one_current_year = $plus_one_current_year - $i;    
+			$down_current_school_year = $down_current_year . "-" . $down_plus_one_current_year;
+			array_push($data['school_years'], $down_current_school_year);  
+		}       
+	
+		$this->load->view('login_view', $data);
 	
 	}        
 

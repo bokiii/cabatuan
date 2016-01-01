@@ -463,7 +463,7 @@ var datePickerModule = (function() {
 	
 })()
 
-datePickerModule.getBirthDate();  
+//datePickerModule.getBirthDate();  
 
 var listModalModule = (function() {
 
@@ -571,7 +571,13 @@ var loginModule = (function() {
 		var today = new Date();
 		var dd = today.getDate();
 		var mm = today.getMonth()+1; //January is 0!
-		var yyyy = today.getFullYear();   
+		var yyyy = today.getFullYear();      
+		
+		var monthValue = ""; 
+		var dayValue = ""; 
+		var yearValue = ""; 
+		var birthday;
+		
 		
 		var i = 0;
 		$("#add_birth_date_picker").on("dp.change", function (e) {
@@ -590,7 +596,6 @@ var loginModule = (function() {
 
 					var inputDate = birthValue;
 					inputDate = inputDate.replace(lre, "");
-					//document.as400samplecode.myDate.value = inputDate;
 					datemsg = isValidDate(inputDate);
 					
 					if (datemsg != "") {
@@ -598,10 +603,9 @@ var loginModule = (function() {
 						return;
 					}
 					else {
-						//Now find the Age based on the Birth Date
 						getAge(new Date(inputDate));
 					}
-				} // end function     
+				}   
 				
 				function getAge(birth) {
 
@@ -622,13 +626,7 @@ var loginModule = (function() {
 						age = parseInt(age) -1;
 					}
 					
-					$("#age").val(age);
-
-					/*if ((age == 18 && age_month <= 0 && age_day <=0) || age < 18) {
-					}else {
-						alert("You have crossed your 18th birthday !");
-					}*/   
-					
+					$("#age").val(age);	
 					
 				} // end function
 				
@@ -636,27 +634,21 @@ var loginModule = (function() {
 
 
 					var msg = "";
-					// Checks for the following valid date formats:
-					// MM/DD/YY   MM/DD/YYYY   MM-DD-YY   MM-DD-YYYY
-					// Also separates date into month, day, and year variables
-
-					// To require a 2 & 4 digit year entry, use this line instead:
-					//var datePat = /^(\d{1,2})(\/|-)(\d{1,2})\2(\d{2}|\d{4})$/;
-					// To require a 4 digit year entry, use this line instead:
+			
 					var datePat = /^(\d{1,2})(\/|-)(\d{1,2})\2(\d{4})$/;
 
-					var matchArray = dateStr.match(datePat); // is the format ok?
+					var matchArray = dateStr.match(datePat); 
 					if (matchArray == null) {
 						msg = "Date is not in a valid format.";
 						return msg;
 					}
 
-					month = matchArray[1]; // parse date into variables
+					month = matchArray[1]; 
 					day = matchArray[3];
 					year = matchArray[4];
 
 
-					if (month < 1 || month > 12) { // check month range
+					if (month < 1 || month > 12) { 
 						msg = "Month must be between 1 and 12.";
 						return msg;
 					}
@@ -671,7 +663,7 @@ var loginModule = (function() {
 						return msg;
 					}
 
-					if (month == 2) { // check for february 29th
+					if (month == 2) { 
 						var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
 						if (day>29 || (day==29 && !isleap)) {
 							msg = "February " + year + " doesn't have " + day + " days!";
@@ -681,15 +673,134 @@ var loginModule = (function() {
 
 					if (day.charAt(0) == '0') day= day.charAt(1);
 
-					//Incase you need the value in CCYYMMDD format in your server program
-					//msg = (parseInt(year,10) * 10000) + (parseInt(month,10) * 100) + parseInt(day,10);
+					return msg;  
+				} 
+			} // end if	
+		}); 
+		
+		$("#month").on("change", function(){ 
+			monthValue = $(this).val();    
+			if(monthValue != "" && dayValue != "" && yearValue != "") { 
+				birthday = monthValue + "/" + dayValue + "/" + yearValue; 
+				automaticGetAge(birthday);
+			} else { 
+				$("#age").val("");
+			}
+		});  
+		
+		$("#day").on("change", function(){ 
+			dayValue = $(this).val();   
+			if(monthValue != "" && dayValue != "" && yearValue != "") { 
+				birthday = monthValue + "/" + dayValue + "/" + yearValue; 
+				automaticGetAge(birthday);
+			} else { 
+				$("#age").val("");
+			}
+		});  
+		
+		$("#year").on("change", function(){ 
+			yearValue = $(this).val();   
+			if(monthValue != "" && dayValue != "" && yearValue != "") { 
+				birthday = monthValue + "/" + dayValue + "/" + yearValue; 
+				automaticGetAge(birthday);
+			} else {  
+				$("#age").val("");
+			}
+		});   
+		
+		
+		function automaticGetAge(birthday) {  
+			myAgeValidation(birthday);
+			
+			function myAgeValidation(birthValue) {
 
-					return msg;  // date is valid
-				}  // end function
+				var lre = /^\s*/;
+				var datemsg = "";
+
+				var inputDate = birthValue;
+				inputDate = inputDate.replace(lre, "");
+				datemsg = isValidDate(inputDate);
 				
+				if (datemsg != "") {
+					bootbox.alert(" " + datemsg);
+					return;
+				}
+				else {
+					getAge(new Date(inputDate));
+				}
+			}   
+			
+			function getAge(birth) {
+
+				var today = new Date();
+				var nowyear = today.getFullYear();
+				var nowmonth = today.getMonth();
+				var nowday = today.getDate();
+
+				var birthyear = birth.getFullYear();
+				var birthmonth = birth.getMonth();
+				var birthday = birth.getDate();
+
+				var age = nowyear - birthyear;
+				var age_month = nowmonth - birthmonth;
+				var age_day = nowday - birthday;
+
+				if(age_month < 0 || (age_month == 0 && age_day <0)) {
+					age = parseInt(age) -1;
+				}
 				
-			}	
-		});      
+				$("#age").val(age);	
+				
+			} // end function
+			
+			function isValidDate(dateStr) {
+
+
+				var msg = "";
+		
+				var datePat = /^(\d{1,2})(\/|-)(\d{1,2})\2(\d{4})$/;
+
+				var matchArray = dateStr.match(datePat); 
+				if (matchArray == null) {
+					msg = "Date is not in a valid format.";
+					return msg;
+				}
+
+				month = matchArray[1]; 
+				day = matchArray[3];
+				year = matchArray[4];
+
+
+				if (month < 1 || month > 12) { 
+					msg = "Month must be between 1 and 12.";
+					return msg;
+				}
+
+				if (day < 1 || day > 31) {
+					msg = "Day must be between 1 and 31.";
+					return msg;
+				}
+
+				if ((month==4 || month==6 || month==9 || month==11) && day==31) {
+					msg = "Month "+month+" doesn't have 31 days!";
+					return msg;
+				}
+
+				if (month == 2) { 
+					var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+					if (day>29 || (day==29 && !isleap)) {
+						msg = "February " + year + " doesn't have " + day + " days!";
+						return msg;
+					}
+				}
+
+				if (day.charAt(0) == '0') day= day.charAt(1);
+
+				return msg;  
+			} 
+			
+		} // end function
+		
 		
 	};
 	
@@ -702,19 +813,23 @@ var loginModule = (function() {
 			if(selected == "cellphone") { 
 				buttonValue = "Cell #";  
 				$(this).parent().parent().parent().parent().children("#contact_number").removeAttr("readonly").attr({ 
-					placeholder: "09092700838", 
-					maxlength: "11", 
-					minlength: "11", 
-					required: "required"
-				});
+					placeholder: "09092700838",
+					maxlength: "11"
+					/*minlength: "11", 
+					required: "required"*/
+				}).removeClass("telephone").addClass("cellphone");     
+				$("#phone_selected").val("cellphone");  
+				$("#contact_number").val("").trigger("keyup");
 			} else if(selected == "telephone") { 
 				buttonValue = "Tel #";  
 				$(this).parent().parent().parent().parent().children("#contact_number").removeAttr("readonly").attr({  
-					placeholder: "033-531-83-43", 
-					maxlength: "13", 
-					minlength: "13", 
-					required: "required"
-				});
+					placeholder: "0335318343",
+					maxlength: "10"
+					/*minlength: "10", 
+					required: "required"*/
+				}).removeClass("cellphone").addClass("telephone");  
+				$("#phone_selected").val("telephone");  
+				$("#contact_number").val("").trigger("keyup");
 			}
 			
 			$(this).parent().parent().parent().children("button").children(".button_value").text(buttonValue);  
@@ -1192,6 +1307,22 @@ registrationModule.submitRegister();
  
 var popOverModule = (function() { 
 
+	
+	var hasStringValue = function(arrayValue) { 
+		var stringCount = 0; 
+		for(val in arrayValue) {  
+			if(!$.isNumeric(arrayValue[val])){ 
+				stringCount++;
+			}	
+		}   
+		
+		if(stringCount > 0) { 
+			return true;
+		} else { 
+			return false;
+		} 
+	}
+	
 	var hasNumberValue = function(arrayValue) { 
 	
 		var numCount = 0;   
@@ -1212,20 +1343,158 @@ var popOverModule = (function() {
 		
 		$(".for_validation").on("keyup", function(){   
 			var id = $(this).attr("id"); 
-			validateInputValue(id);
+			if(id == "place_of_birth" || id == "present_address" || id == "school_address" || id == "address") { 
+				anotherValidationOfInputValue(id);  
+			} else { 
+				validateInputValue(id);
+			}
 		});      
-		
-		$(".for_validation").on("focus", function(){   
-			var id = $(this).attr("id");  
-			validateInputValue(id);     
-			$(document).find(".is_good").popover("hide");
-		});    
 		
 		$(".for_validation").on("blur", function(){    
 			$(document).find(".is_good").popover("hide");
-		});    
+		});   
+
+		$(document).on("change", ".validation_for_select", function(){  
+			var id = $(this).attr("id");    
+			var selectValue = $("#" + id).val();    
+		
+			anotherValidationOfInputValue(id);     
+			
+		});
+		
+		// below is for the event in for validation
+		$('.for_validation').on('hidden.bs.popover', function () {
+			var isGood = $(this).hasClass("is_good");
+			if($(this).val().length > 0 && isGood === false) { 
+				$(this).popover("show");
+			}
+		});     
+		
+		// below are for the events of select option
+		$('.validation_for_select').on('hidden.bs.popover', function () {
+			$(this).popover("destroy");   
+		});     
+
+		$('.validation_for_select').on('blur', function () {
+			$(this).popover("destroy");   
+		});         
+		
+		$('.validation_for_select').on('click', function () {
+			$(this).popover("destroy");   
+		});         
+		
+		$(".validation_for_phone_select").on("keyup", function(){  
+			var id = $(this).attr("id");   
+			validatePhoneInput(id);
+		
+		});      
+		
+		// removes space in phone input
+		$(".validation_for_phone_select").on("keypress", function(e){  
+			if(e.which == 32) { 
+				return false;
+			}
+		});   
 		
 		
+		// below is to validate the phone 
+		function validatePhoneInput(id) {  
+			delay(function(){  
+			
+				var inputValue = $('#' + id).val();    
+				var title; 
+				var content;
+				var inputValue;  
+				var wrapValue;    
+				
+				var splitValue;
+				
+				var inputLength = $("#" + id).attr("maxlength"); 
+				
+				
+				if(inputValue.length > 0 && inputValue.length == inputLength) { 
+					splitValue = inputValue.split("");
+					if(hasStringValue(splitValue)) {   
+						$('#' + id).removeClass("success_color");	
+						$('#' + id).addClass("error_color");	
+						title = "Error";   
+						content = "String is not allowed"; 
+						inputValue = "bad";    
+						wrapValue = "error";
+						popOverMessage(title, content, id, inputValue);
+					} else {   
+						title = "Good";   
+						content = "Entered value is allowed"; 
+						inputValue = "good";  
+						wrapValue = "success";
+						popOverMessage(title, content, id, inputValue);   
+						$('#' + id).removeClass("error_color");	  
+						$('#' + id).addClass("success_color");		   
+						
+					}  
+					startPopOver(true, id, wrapValue);	  
+				} else if(inputValue.length > 0 && inputValue.length < inputLength) {  
+					splitValue = inputValue.split("");   
+					if(hasStringValue(splitValue)) {   
+						$('#' + id).removeClass("success_color");	
+						$('#' + id).addClass("error_color");	
+						title = "Error";   
+						content = "Value must be " +  inputLength + " long and String is not allowed"; 
+						inputValue = "bad";    
+						wrapValue = "error";
+						popOverMessage(title, content, id, inputValue); 
+					} else { 
+						$('#' + id).removeClass("success_color");	
+						$('#' + id).addClass("error_color");	
+						title = "Error";   
+						content = "Value must be " +  inputLength + " long"; 
+						inputValue = "bad";    
+						wrapValue = "error";
+						popOverMessage(title, content, id, inputValue); 
+					} 
+					
+					startPopOver(true, id, wrapValue);	  
+				} else { 
+					$('#' + id).popover('destroy');
+					$('#' + id).removeClass("error_color");	 
+					$('#' + id).removeClass("success_color");   
+					$('#' + id).removeClass("is_good");
+				}
+				
+			}, 1000);
+		}
+	   
+		// below is the validation that allows the number 
+		function anotherValidationOfInputValue(id) { 
+			delay(function(){   
+			
+				var inputValue = $('#' + id).val();    
+				var title; 
+				var content;
+				var inputValue;  
+				var wrapValue;   
+				
+				if(inputValue.length > 0) { 
+					title = "Good";   
+					content = "Entered value is allowed"; 
+					inputValue = "good";  
+					wrapValue = "success";
+					popOverMessage(title, content, id, inputValue);   
+					$('#' + id).removeClass("error_color");	  
+					$('#' + id).addClass("success_color");   
+
+					startPopOver(true, id, wrapValue);	  
+					
+				} else {  
+					$('#' + id).popover('destroy');
+					$('#' + id).removeClass("success_color");	 
+					$('#' + id).removeClass("is_good");
+				}
+				
+			}, 1000);  
+		}
+		
+		// below is the validation that does not allow the number
 		function validateInputValue(id) { 
 			
 			delay(function(){  
@@ -1233,34 +1502,42 @@ var popOverModule = (function() {
 				var inputValue = $('#' + id).val();    
 				var title; 
 				var content;
-				var inputValue;
+				var inputValue;  
+				var wrapValue;
 				
 				if(inputValue.length > 0) { 
 					var splitValue = inputValue.split("");
-					if(hasNumberValue(splitValue)) { 
+					if(hasNumberValue(splitValue)) {   
+						$('#' + id).removeClass("success_color");	
 						$('#' + id).addClass("error_color");	
 						title = "Error";   
 						content = "Number is not allowed"; 
-						inputValue = "bad";
+						inputValue = "bad";    
+						wrapValue = "error";
 						popOverMessage(title, content, id, inputValue);
 					} else { 
 						title = "Good";   
 						content = "Entered value is allowed"; 
-						inputValue = "good";
+						inputValue = "good";  
+						wrapValue = "success";
 						popOverMessage(title, content, id, inputValue);   
 						$('#' + id).removeClass("error_color");	  
+						$('#' + id).addClass("success_color");						
 					}  
-					startPopOver(true, id);	
+					startPopOver(true, id, wrapValue);	  
 				} else { 
-					startPopOver(false, id);	
+					//startPopOver(false, id);	    
+					$('#' + id).popover('destroy');
 					$('#' + id).removeClass("error_color");	 
+					$('#' + id).removeClass("success_color");   
+					$('#' + id).removeClass("is_good");
 				}
 				
 			}, 1000 );   
 		}   
 		
 		function popOverMessage(title, content, id, inputValue) {  
-			
+		
 			var titleLength = $('#' + id).attr("title").length;  
 			if(titleLength == 0) { 
 				$('#' + id).attr("data-original-title", title);   
@@ -1278,15 +1555,25 @@ var popOverModule = (function() {
 			
 		}
 		
-		function startPopOver(pop, id) { 
+		function startPopOver(pop, id, wrapValue) { 
 			if(pop) { 
-				$('#' + id).popover('show');  
+				$('#' + id).popover('show');   
+
+				if(wrapValue == "success") {  
+					$("#" + id).next(".popover").removeClass("error_wrap"); 
+					$("#" + id).next(".popover").addClass("success_wrap");
+				} else if(wrapValue == "error") { 
+					$("#" + id).next(".popover").removeClass("success_wrap"); 
+					$("#" + id).next(".popover").addClass("error_wrap");
+				} 
+				
 			} else { 
-				$('#' + id).popover('hide');  
+				$('#' + id).popover('hide');     
 			}
 		}
 		
 	};
+	
 	
 	return {  
 		validationPopOver:	validationPopOver

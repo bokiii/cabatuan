@@ -66,10 +66,70 @@ table.academic th, table.academic td {
 
 /* below are for the glow of the inputs */  
 
+.success_color { 
+	border-color: #5CB85C; 
+}  
+
+.error_color { 
+	border-color: red; 
+}
+
+.success_color:focus { 
+	border-color: #5CB85C;  
+	box-shadow: #5CB85C;
+}
+
 .error_color:focus {  
 	border-color: red;  
 	box-shadow: red;
-}
+} 
+
+/* below are the designs for the popover */          
+
+.popover .popover-title { 
+	text-align: center;
+}  
+
+.success_wrap { 
+	border-color: #5CB85C;
+}  
+
+.success_wrap.top .arrow { 
+	border-top-color: green;
+}  
+
+.success_wrap .popover-title { 
+	color: #5CB85C;  
+	font-weight: bold;
+}    
+
+.success_wrap .popover-content { 
+	color: #5CB85C;  
+}       
+
+
+.error_wrap { 
+	border-color: red;
+}  
+
+.error_wrap.top .arrow { 
+	border-top-color: red;
+}  
+
+.error_wrap .popover-title { 
+	color: red;  
+	font-weight: bold;
+}    
+
+.error_wrap .popover-content { 
+	color: red;  
+}  
+
+
+
+
+
+
    
 
 
