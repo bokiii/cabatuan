@@ -162,8 +162,13 @@ table.academic th, table.academic td {
 		text-align: center
 	}     
 	
-}
+}  
 
+/* below is the design for the students controller */
+
+#code_submit { 
+	margin-left: 18px;
+}
 
 
 

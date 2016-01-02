@@ -41,12 +41,12 @@ class Student_model extends CI_Model {
 	
 	function get_students() {
 		$this->db->select("students.id, students.sur_name, students.first_name, students.middle_name, students.lrn, students.sex, students.date_of_birth, students.place_of_birth, students.age, students.present_address, students.school_last_attended, students.school_address, students.grade_or_year_level, students.school_year, students.tve_specialization, students.father, students.mother, students.person_to_notify, students.address, students.contact_number, students.user_type, students.created, students.updated,    
-			enrolled_students.id as enrolled_student_id, curriculums.curriculum 
+			enrolled_students.id as enrolled_student_id
 		"); 
 
 		$this->db->from("students");     
 		$this->db->join("enrolled_students", "enrolled_students.student_id = students.id", "left");   
-		$this->db->join("curriculums", "curriculums.id = enrolled_students.curriculum_id");
+		//$this->db->join("curriculums", "curriculums.id = enrolled_students.curriculum_id");
 		//$this->db->group_by("enrolled_students.student_id");  
 		$this->db->group_by("students.id");
 		$query = $this->db->get();    

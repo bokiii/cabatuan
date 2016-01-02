@@ -80,6 +80,10 @@ class Student extends Datamapper {
 		'contact_number' => array(
 			'label' => 'Contact Number', 
 			'rules' => array('required', 'trim')
+		),   
+		'phone_selected' => array(
+			'label' => 'Phone Selected', 
+			'rules' => array('required', 'trim')
 		)
 	);
 

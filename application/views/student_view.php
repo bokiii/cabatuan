@@ -466,15 +466,28 @@
 
 
 <div class="main_container" id="student_angular_container" ng-controller='student'>
-	<div class="container">   
-		
+	
+	<div class="container">  
 		<div class="row">   
 			<div class="col-md-12">   
 				<div class="page-header">
 					<h1>Students <small></small></h1>
 				</div>
 			</div>  
-		</div>         
+		</div>        
+	</div>  
+	
+	<div class="container">   
+		<ul class="nav nav-tabs">
+			<li role="presentation" class="active"><a class="home_tab" id="first_tab" href="#">Enrolled Students</a></li>
+			<li role="presentation"><a class="home_tab" id="second_tab" href="#">Unenrolled Students</a></li>
+			<li role="presentation"><a class="home_tab" id="third_tab" href="#">Verify a Student</a></li>   
+		</ul>
+	</div>  
+	
+	<br />
+	
+	<div class="container active_tab first_tab tabs">   
 		
 		<div class="my_search_box">
 			<div class="row">   
@@ -551,6 +564,39 @@
 		</div>
 		
 	</div>  
+
+	<div class="container second_tab tabs">   
+		
+		<div class="row">   
+			<div class="col-md-12">   
+				<div class="page-header">
+				  <h1>This is for the unenrolled students</h1>
+				</div>
+			</div>      
+		</div>   
+	</div> <!-- end second tab -->  
+	
+	<div class="container third_tab tabs">   
+		<form method="post" id="verify_student_form" action="<?php echo base_url(); ?>index.php/students_controller/verify_student_registration">  
+			<div class="row">   
+				<div class="col-md-6">  
+					<div class="form-group">
+						<label for="code">Confirmation Code</label>
+						<input type="text" class="form-control" name="code" id="code">
+					</div>
+				</div>
+			</div>       
+			<div class="row">  
+				<div class="row">  
+					<div class="col-md-12">  
+						<button type="submit" class="btn btn-info" id="code_submit" disabled>Confirm</button>
+					</div>
+				</div>   
+			</div>
+		</form> 
+	</div> <!-- end second tab -->
+	
+	
 </div> <!-- end main container -->    
 
 

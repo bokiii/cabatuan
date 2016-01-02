@@ -463,6 +463,7 @@ var datePickerModule = (function() {
 	
 })()
 
+// datetime picker is removed
 //datePickerModule.getBirthDate();  
 
 var listModalModule = (function() {
@@ -1028,14 +1029,49 @@ var studentModule = (function() {
 		});      
 	};
 	
-	
+	var processConfirmationCode = function() { 
+		
+		var codeValue = "";
+		
+		$("#code").on("keyup", function(){ 
+			codeValue = $(this).val();
+			
+			delay(function(){  
+				if(codeValue != "") { 
+					$("#code_submit").removeAttr("disabled");
+				} else { 
+					$("#code_submit").attr("disabled", "disabled");
+				}
+			}, 1000);
+		});   
+		
+		
+		$("#verify_student_form").ajaxForm({
+			dataType: 'json',
+			forceSync: true,
+			beforeSubmit: loading,
+			success: success_status
+		});      
+		
+		function loading() {  
+			return true;
+		}   
+		
+		function success_status(data) {
+			bootbox.alert(data.message);  
+			$("#verify_student_form").trigger("reset");
+		}
+		
+	} 
+
 	return {
 		enrollProcess: 				enrollProcess,    
 		enrollModalHide:			enrollModalHide,   
 		enrollModalShow:			enrollModalShow, 
 		enrollmentFormSubmit:		enrollmentFormSubmit, 
 		viewAcademicStatusShow:		viewAcademicStatusShow,  
-		determineAgeUpdate:			determineAgeUpdate
+		determineAgeUpdate:			determineAgeUpdate, 
+		processConfirmationCode:	processConfirmationCode
 		
 	}
 	
@@ -1045,8 +1081,10 @@ studentModule.enrollProcess();
 studentModule.enrollModalHide();  
 studentModule.enrollModalShow();
 studentModule.enrollmentFormSubmit();  
-studentModule.viewAcademicStatusShow();    
-studentModule.determineAgeUpdate();   
+studentModule.viewAcademicStatusShow();     
+// determine age update is removed
+//studentModule.determineAgeUpdate();     
+studentModule.processConfirmationCode();
 
 
 var sectionStudentModule = (function() { 

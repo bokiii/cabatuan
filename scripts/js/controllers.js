@@ -213,15 +213,14 @@ controllers.controller('student', function($scope, $http, $sce){
 			$scope.students[a].viewAcademic = $sce.trustAsHtml($scope.students[a].viewAcademic);
 		}       
 		
-		console.log($scope.students);
-		
+		//console.log($scope.students);
 		
 	});   
 	
 	$scope.getStudents = function() {
 		$http.get(studentUrl).success(function(data){
 			
-			console.log("student is get..");
+			//console.log("student is get..");
 			
 			var i; 
 			for(i = 0; i < data.students.length; i++) {

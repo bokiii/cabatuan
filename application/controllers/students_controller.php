@@ -18,7 +18,8 @@ class Students_controller extends CI_Controller {
 		$this->load->model('student_model');     
 		$this->load->model('student_account_model');  
 		$this->load->model('curriculum_subjects_model');  
-		$this->load->model('enrolled_student_model');
+		$this->load->model('enrolled_student_model');  
+		$this->load->model('verification_model');
 	}     
 	
 	public function index() {
@@ -341,6 +342,92 @@ class Students_controller extends CI_Controller {
 		echo json_encode($data);   
 		
 	}
+	
+	// below is to verify a student in students module 
+	public function verify_student_registration() {   
+		
+		$verificationCode = $this->input->post('code');   
+
+		$getUnverifiedStudentViaCode = $this->verification_model->getUnverifiedStudentViaCode($verificationCode);      
+
+		//$this->debug($getUnverifiedStudentViaCode);		
+
+		if($getUnverifiedStudentViaCode != NULL) {   
+		
+			foreach($getUnverifiedStudentViaCode as $row) {   
+				
+				$sur_name = $row->sur_name;
+				$first_name = $row->first_name;  
+				$middle_name = $row->middle_name; 
+				$lrn = $row->lrn; 
+				$sex = $row->sex; 
+				$date_of_birth = $row->date_of_birth; 
+				$place_of_birth = $row->place_of_birth; 
+				$age = $row->age; 
+				$present_address = $row->present_address; 
+				$school_last_attended = $row->school_last_attended;  
+				$school_address = $row->school_address; 
+				$grade_or_year_level = $row->grade_or_year_level; 
+				$school_year = $row->school_year; 
+				$tve_specialization = $row->tve_specialization;  
+				$father = $row->father;  
+				$mother = $row->mother; 
+				$person_to_notify = $row->person_to_notify; 
+				$address = $row->address;   
+				$contact_number = $row->contact_number;   
+				$phone_selected = $row->phone_selected; 
+			
+			}
+			
+			$data = array();
+		
+			$student = new Student();
+			$student->sur_name = $sur_name;     
+			$student->first_name = $first_name;   
+			$student->middle_name = $middle_name;   		  
+			$student->lrn = $lrn;   
+			$student->sex = $sex;  
+			$student->date_of_birth = $date_of_birth;  
+			$student->place_of_birth = $place_of_birth;   
+			$student->age = $age;      
+			$student->present_address = $present_address;   
+			$student->school_last_attended = $school_last_attended;   
+			$student->school_address = $school_address;   
+			$student->grade_or_year_level = $grade_or_year_level;   
+			$student->school_year = $school_year;   
+			$student->tve_specialization = $tve_specialization;  
+			$student->father = $father;  
+			$student->mother = $mother;   
+			$student->person_to_notify = $person_to_notify;   
+			$student->address = $address;   
+			$student->contact_number = $contact_number;     
+			$student->phone_selected = $phone_selected; 
+			$student->user_type = "student";  		
+		
+			if(!$student->save()) {  
+				//$errors = $student->error->string;     
+				//echo $errors;    
+				$data["message"] = "<p>Confirmation failed</p>";   
+				$data['status'] = false;
+			} else {  
+				$deleteIfVerified = $this->verification_model->deleteIfVerified($verificationCode);     
+				$data["message"] = "<p>You have succesfully confirmed the student. Check the Unenrolled Students</p>";   
+				$data['status'] = true;
+			}  
+			
+		} else {  
+			$data["message"] = "<p>This student does not registered or already confirmed</p>";
+		}    
+		
+		
+		echo json_encode($data);
+		
+		
+		/*$data['main_content'] = "verified_view";
+		$this->load->view('template/content', $data);*/      
+		//$this->load->view("verified_view", $data);
+		
+	}      
 	
 	
 }  
