@@ -263,7 +263,7 @@
 		</div>   
 		
 		<form id='register_enrollee_form' method='post' action="<?php echo base_url(); ?>index.php/login/register_enrollee">
-			<div class="row">     
+			<div class="row wrap_inputs">     
 				<div class="col-md-6">  
 					
 					<div class="row">   
@@ -305,10 +305,10 @@
 						<br />						
 						
 						<label class="radio-inline">
-							<input type="radio" class="validation_for_select" name="sex" id="sex_male" value="Male" data-placement="top" title="title" data-content="content"> Male
+							<input type="radio" class="sex" name="sex" value="Male"> Male
 						</label>
 						<label class="radio-inline">
-							<input type="radio" class="validation_for_select" name="sex" id="sex_female" value="Female" data-placement="top" title="title" data-content="content"> Female
+							<input type="radio" class="sex" name="sex" value="Female"> Female
 						</label>
 						
 					</div>  
@@ -487,7 +487,7 @@
 			
 			<div class="row">  
 				<div class="col-md-12">  
-					<button type="submit" class="btn btn-info">Submit</button>
+					<button type="submit" class="btn btn-info" id="enrollment_submit" disabled>Submit</button>
 				</div>
 			</div>
 			

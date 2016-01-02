@@ -1341,51 +1341,63 @@ var popOverModule = (function() {
 	
 	var validationPopOver = function() {  
 		
+		var countGood;  
+		var sexValue = "";
+		
 		$(".for_validation").on("keyup", function(){   
 			var id = $(this).attr("id"); 
 			if(id == "place_of_birth" || id == "present_address" || id == "school_address" || id == "address") { 
 				anotherValidationOfInputValue(id);  
 			} else { 
 				validateInputValue(id);
-			}
+			}   
+			
+			enableDisableEnrollmentButton();
+			
 		});      
 		
 		$(".for_validation").on("blur", function(){    
-			$(document).find(".is_good").popover("hide");
+			$(document).find(".is_good").popover("hide");   
+			enableDisableEnrollmentButton();
 		});   
 
 		$(document).on("change", ".validation_for_select", function(){  
 			var id = $(this).attr("id");    
 			var selectValue = $("#" + id).val();    
-		
-			anotherValidationOfInputValue(id);     
+			anotherValidationOfInputValue(id);      
 			
+			enableDisableEnrollmentButton();
 		});
 		
 		// below is for the event in for validation
 		$('.for_validation').on('hidden.bs.popover', function () {
 			var isGood = $(this).hasClass("is_good");
 			if($(this).val().length > 0 && isGood === false) { 
-				$(this).popover("show");
-			}
+				$(this).popover("show");   
+			}    
+			enableDisableEnrollmentButton();
 		});     
 		
 		// below are for the events of select option
 		$('.validation_for_select').on('hidden.bs.popover', function () {
-			$(this).popover("destroy");   
+			$(this).popover("destroy");      
+			enableDisableEnrollmentButton();
 		});     
 
 		$('.validation_for_select').on('blur', function () {
-			$(this).popover("destroy");   
+			$(this).popover("destroy");     
+			enableDisableEnrollmentButton();
 		});         
 		
 		$('.validation_for_select').on('click', function () {
-			$(this).popover("destroy");   
+			$(this).popover("destroy");     
+			enableDisableEnrollmentButton();
 		});         
 		
 		$(".validation_for_phone_select").on("keyup", function(){  
 			var id = $(this).attr("id");   
-			validatePhoneInput(id);
+			validatePhoneInput(id);  
+			enableDisableEnrollmentButton();
 		
 		});      
 		
@@ -1394,8 +1406,45 @@ var popOverModule = (function() {
 			if(e.which == 32) { 
 				return false;
 			}
+		});         
+		
+		// below i will add an event for showing validation messages   
+		$('.for_validation').on('shown.bs.popover', function () {
+			enableDisableEnrollmentButton();
+		});        
+		
+		$('.validation_for_select').on('shown.bs.popover', function () {
+			enableDisableEnrollmentButton();
+		});         
+
+		$('.validation_for_phone_select').on('shown.bs.popover', function () {
+			enableDisableEnrollmentButton();
+		});          
+		
+		
+		// i will add an event below for the selection of sex  
+		$(".sex").on("change", function(){ 
+			sexValue = $(this).val(); 
+			enableDisableEnrollmentButton();
 		});   
 		
+		$(".wrap_inputs").mousemove(function(){ 
+			enableDisableEnrollmentButton();
+		});
+		
+		
+		// below is for the enrollment button behavior 
+		function enableDisableEnrollmentButton() { 
+			countGood = $(document).find(".is_good").length;
+			//console.log("goods: " + countGood);  
+			//console.log("sexValue is " + sexValue);  
+			
+			if(countGood == 19 && sexValue != "") {   
+				$(document).find("#enrollment_submit").removeAttr("disabled");
+			} else { 
+				$(document).find("#enrollment_submit").attr("disabled", "disabled");
+			}
+		}
 		
 		// below is to validate the phone 
 		function validatePhoneInput(id) {  
@@ -1548,9 +1597,11 @@ var popOverModule = (function() {
 			}   
 			
 			if(inputValue == "good") { 
-				$('#' + id).addClass("is_good");
+				$('#' + id).addClass("is_good");  
+				countGood++;
 			} else if(inputValue == "bad") { 
-				$('#' + id).removeClass("is_good");
+				$('#' + id).removeClass("is_good");  
+				countGood--;
 			}
 			
 		}
@@ -1576,12 +1627,13 @@ var popOverModule = (function() {
 	
 	
 	return {  
-		validationPopOver:	validationPopOver
+		validationPopOver:			validationPopOver
 	}  
 	
 })()   
 
-popOverModule.validationPopOver();
+popOverModule.validationPopOver();  
+
 
 
 
