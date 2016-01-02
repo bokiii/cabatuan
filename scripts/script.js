@@ -1,3 +1,7 @@
+// below is for the global variables 
+var phoneContentClone;  
+   
+
 jQuery.fn.extend({
 	check: function() {
 		return this.each(function() { this.checked = true; });
@@ -132,12 +136,12 @@ var modalModule = (function() {
 	
 		$(document).on('click', '.my_update_link', function(){
 		
-			$(document).find("#modal_update_form").trigger("reset");
+			$(document).find("#modal_update_form").trigger("reset");   
 			
 			var getUrl = $(this).attr("href");   
 			$.get(getUrl, function(data){
-				var datas = eval('msg=' + data);        
-				
+				var datas = eval('msg=' + data);   
+
 				// below is for the curriculum update 
 				if(datas.curriculum != undefined) {
 					console.log(datas.curriculum);
@@ -171,26 +175,96 @@ var modalModule = (function() {
 				
 				// below is for the student update   
 				if(datas.user_type != undefined && datas.user_type == "student" ) {   
+					
+					// add validation classes first 
+					$('#modal_update_form .for_validation').addClass("success_color");   
+					$('#modal_update_form .for_validation').addClass("is_good");  
+					
+					$('#modal_update_form .validation_for_select').addClass("success_color");   
+					$('#modal_update_form .validation_for_select').addClass("is_good");  
+					
+					$('#modal_update_form .validation_for_phone_select').addClass("success_color");   
+					$('#modal_update_form .validation_for_phone_select').addClass("is_good");
+					
+					
 					$(document).find("#sur_name_update").attr("value", datas.sur_name);     
 					$(document).find("#first_name_update").attr("value", datas.first_name);  
 					$(document).find("#middle_name_update").attr("value", datas.middle_name);
 					$(document).find("#lrn_update").attr("value", datas.lrn);
-					$(document).find("#sex_update").attr("value", datas.sex);  
-					$(document).find("#date_of_birth_update").attr("value", datas.date_of_birth);   
+					
+					
+					$('input[name=sex_update][value=' + datas.sex + ']').prop('checked',true)
+					
+					
+					//$(document).find("#date_of_birth_update").attr("value", datas.date_of_birth);     
+					var splitDateOfBirth = datas.date_of_birth.split("-");       
+					var monthValue = splitDateOfBirth[1]; 
+					var monthText;
+					
+					if(monthValue == 01) {  
+						monthText = "Jan";
+					} else if(monthValue == 02) { 
+						monthText = "Feb";  
+					} else if(monthValue == 03) { 
+						monthText = "Mar";
+					} else if(monthValue == 04) { 
+						monthText = "Apr";
+					} else if(monthValue == 05) { 
+						monthText = "May";
+					} else if(monthValue == 06) { 
+						monthText = "Jun";
+					} else if(monthValue == 07) { 
+						monthText = "Jul";
+					} else if(monthValue == 08) { 
+						monthText = "Aug";
+					} else if(monthValue == 09) { 
+						monthText = "Sep";
+					} else if(monthValue == 10) { 
+						monthText = "Oct";
+					} else if(monthValue == 11) { 
+						monthText = "Nov";
+					} else if(monthValue == 12) { 
+						monthText = "Dec";
+					}
+					
+					$(document).find("#month_update").children(".blank_value").text(monthText);  
+					$(document).find("#month_update").children(".blank_value").val(splitDateOfBirth[1]); 
+					$(document).find("#day_update").children(".blank_value").text(splitDateOfBirth[2]);
+					$(document).find("#day_update").children(".blank_value").val(splitDateOfBirth[2]);  
+					$(document).find("#year_update").children(".blank_value").text(splitDateOfBirth[0]);
+					$(document).find("#year_update").children(".blank_value").val(splitDateOfBirth[0]);
+					
+					
 					$(document).find("#place_of_birth_update").attr("value", datas.place_of_birth);
 					$(document).find("#age_update").attr("value", datas.age);   
 					$(document).find("#present_address_update").attr("value", datas.present_address);   
 					$(document).find("#school_last_attended_update").attr("value", datas.school_last_attended);
 					$(document).find("#school_address_update").attr("value", datas.school_address);
-					$(document).find("#grade_or_year_level_update").attr("value", datas.grade_or_year_level);     
-					$(document).find("#school_year_update").attr("value", datas.school_year);    					
+					
+					
+					//$(document).find("#grade_or_year_level_update").attr("value", datas.grade_or_year_level);   
+					$(document).find("#grade_or_year_level_update").children(".blank_value").text(datas.grade_or_year_level);	
+					$(document).find("#grade_or_year_level_update").children(".blank_value").val(datas.grade_or_year_level);					
+					
+					//$(document).find("#school_year_update").attr("value", datas.school_year);     
+					$(document).find("#school_year_update").children(".blank_value").text(datas.school_year);     
+					$(document).find("#school_year_update").children(".blank_value").val(datas.school_year);
+					
+					
+					
 					$(document).find("#tve_specialization_update").attr("value", datas.tve_specialization);    
 					$(document).find("#father_update").attr("value", datas.father);     
 					$(document).find("#mother_update").attr("value", datas.mother);      
 					$(document).find("#person_to_notify_update").attr("value", datas.person_to_notify); 
 					$(document).find("#address_update").attr("value", datas.address);    
 					$(document).find("#contact_number_update").attr("value", datas.contact_number); 
+					
+					
+					$(document).find("#phone_selected_update").attr("value", datas.phone_selected);   
+					$(document).find(".current_phone_type").text("(Current Phone Type) " + "(" + datas.phone_selected + ")"); 
+					phoneContentClone = $(document).find(".for_phone_update").html();   
 				
+	
 					$(document).find("#update_id").attr("value", datas.id);
 				}  
 				
@@ -203,7 +277,18 @@ var modalModule = (function() {
 	
 	var modalUpdateHide = function() {
 		$('#myUpdateModal').on('hide.bs.modal', function (e) {
-			$(document).find("#modal_update_form .modal-body button.close").trigger("click");   
+			
+			
+			$(document).find("#modal_update_form .modal-body button.close").trigger("click");     
+			
+		
+			$('#modal_update_form .for_validation').popover('hide');
+			
+			
+			$('#modal_update_form .validation_for_select').popover('hide');
+			
+			  
+			$('#modal_update_form .validation_for_phone_select').popover('hide');		
 		});   
 	};
 	
@@ -577,8 +662,14 @@ var loginModule = (function() {
 		var monthValue = ""; 
 		var dayValue = ""; 
 		var yearValue = ""; 
-		var birthday;
+		var birthday;          
 		
+		var monthValueUpdate = "";
+		var dayValueUpdate = "";
+		var yearValueUpdate = "";
+		var birthdayUpdate;   
+		
+
 		
 		var i = 0;
 		$("#add_birth_date_picker").on("dp.change", function (e) {
@@ -709,6 +800,43 @@ var loginModule = (function() {
 			}
 		});   
 		
+		// below is for the update   
+			$("#month_update").on("change", function(){ 
+			monthValueUpdate = $(this).val();  
+			dayValueUpdate = $(document).find("#day_update").val(); 
+			yearValueUpdate = $(document).find("#year_update").val();
+			if(monthValueUpdate != "" && dayValueUpdate != "" && yearValueUpdate != "") { 
+				birthdayUpdate = monthValueUpdate + "/" + dayValueUpdate + "/" + yearValueUpdate; 
+				automaticGetAge(birthdayUpdate);
+			} else { 
+				$("#age_update").val("");
+			}
+		});  
+		
+		$("#day_update").on("change", function(){ 
+			dayValueUpdate = $(this).val();   
+			monthValueUpdate = $(document).find("#month_update").val(); 
+			yearValueUpdate = $(document).find("#year_update").val();
+			if(monthValueUpdate != "" && dayValueUpdate != "" && yearValueUpdate != "") { 
+				birthdayUpdate = monthValueUpdate + "/" + dayValueUpdate + "/" + yearValueUpdate; 
+				automaticGetAge(birthdayUpdate);
+			} else { 
+				$("#age_update").val("");
+			}
+		});  
+		
+		$("#year_update").on("change", function(){ 
+			yearValueUpdate = $(this).val();    
+			monthValueUpdate = $(document).find("#month_update").val(); 
+			dayValueUpdate = $(document).find("#day_update").val();
+			if(monthValueUpdate != "" && dayValueUpdate != "" && yearValueUpdate != "") { 
+				birthdayUpdate = monthValueUpdate + "/" + dayValueUpdate + "/" + yearValueUpdate; 
+				automaticGetAge(birthdayUpdate);
+			} else { 
+				$("#age_update").val("");
+			}
+		});   
+		
 		
 		function automaticGetAge(birthday) {  
 			myAgeValidation(birthday);
@@ -750,7 +878,8 @@ var loginModule = (function() {
 					age = parseInt(age) -1;
 				}
 				
-				$("#age").val(age);	
+				$("#age").val(age);	 
+				$("#age_update").val(age);	
 				
 			} // end function
 			
@@ -820,7 +949,18 @@ var loginModule = (function() {
 					required: "required"*/
 				}).removeClass("telephone").addClass("cellphone");     
 				$("#phone_selected").val("cellphone");  
-				$("#contact_number").val("").trigger("keyup");
+				$("#contact_number").val("").trigger("keyup");      
+				
+				// below is for the update        
+				$(this).parent().parent().parent().parent().children("#contact_number_update").removeAttr("readonly").attr({ 
+					placeholder: "09092700838",
+					maxlength: "11"
+					/*minlength: "11", 
+					required: "required"*/
+				}).removeClass("telephone").addClass("cellphone");     
+				$("#phone_selected_update").val("cellphone");  
+				$("#contact_number_update").val("").trigger("keyup");      
+				
 			} else if(selected == "telephone") { 
 				buttonValue = "Tel #";  
 				$(this).parent().parent().parent().parent().children("#contact_number").removeAttr("readonly").attr({  
@@ -830,7 +970,19 @@ var loginModule = (function() {
 					required: "required"*/
 				}).removeClass("cellphone").addClass("telephone");  
 				$("#phone_selected").val("telephone");  
-				$("#contact_number").val("").trigger("keyup");
+				$("#contact_number").val("").trigger("keyup");   
+				
+				// below is for the update   
+				$(this).parent().parent().parent().parent().children("#contact_number_update").removeAttr("readonly").attr({  
+					placeholder: "0335318343",
+					maxlength: "10"
+					/*minlength: "10", 
+					required: "required"*/
+				}).removeClass("cellphone").addClass("telephone");  
+				$("#phone_selected_update").val("telephone");  
+				$("#contact_number_update").val("").trigger("keyup");   
+				
+				
 			}
 			
 			$(this).parent().parent().parent().children("button").children(".button_value").text(buttonValue);  
@@ -1389,7 +1541,11 @@ var popOverModule = (function() {
 	var validationPopOver = function() {  
 		
 		var countGood;  
-		var sexValue = "";
+		var sexValue = "";  
+		
+		var countGoodFromUpdate;  
+		var sexValueUpdate = "";  
+		
 		
 		$(".for_validation").on("keyup", function(){   
 			var id = $(this).attr("id"); 
@@ -1473,9 +1629,20 @@ var popOverModule = (function() {
 		$(".sex").on("change", function(){ 
 			sexValue = $(this).val(); 
 			enableDisableEnrollmentButton();
-		});   
+		});      
+
+		$(".sex_update").on("change", function(){ 
+			sexValueUpdate = $(this).val(); 
+			enableDisableEnrollmentButton();  
+		});      
+	
+		
 		
 		$(".wrap_inputs").mousemove(function(){ 
+			enableDisableEnrollmentButton();
+		});  
+		
+		$(".wrap_update_inputs").mousemove(function(){ 
 			enableDisableEnrollmentButton();
 		});
 		
@@ -1497,21 +1664,47 @@ var popOverModule = (function() {
 			$('.validation_for_phone_select').removeClass("success_color");   
 			$('.validation_for_phone_select').removeClass("is_good");  
 			
+		});  
+		
+		// i will add an event for the reset of the modal update form  
+		$("#modal_update_form").on("reset", function(){ 
+			$(".for_phone_update").html(phoneContentClone);	  
+			
 			
 		});
 		
 		// below is for the enrollment button behavior 
 		function enableDisableEnrollmentButton() { 
-			countGood = $(document).find(".is_good").length;
-			//console.log("goods: " + countGood);  
-			//console.log("sexValue is " + sexValue);  
 			
+			// below is for the update 
+			countGoodFromUpdate = $(document).find(".wrap_update_inputs .is_good").length;
+			sexValueUpdate = $(document).find(".sex_update").val(); 
+			console.log(sexValueUpdate);
+			
+			
+			if(countGoodFromUpdate == 19 && sexValueUpdate != "") {   
+				$(document).find("#update_form_submit").removeAttr("disabled");
+			} else { 
+				$(document).find("#update_form_submit").attr("disabled", "disabled");    
+			}  
+			
+			
+			// below is for the add
+			//countGood = $(document).find(".is_good").length;  
+			countGood = $(document).find(".wrap_inputs .is_good").length; 
+		
 			if(countGood == 19 && sexValue != "") {   
 				$(document).find("#enrollment_submit").removeAttr("disabled");
 			} else { 
-				$(document).find("#enrollment_submit").attr("disabled", "disabled");
-			}
-		}
+				$(document).find("#enrollment_submit").attr("disabled", "disabled");    
+			}  
+			
+			console.log("count good: " + countGood);  
+			console.log("count good from update: " + countGoodFromUpdate);
+		
+			
+		}   
+		
 		
 		// below is to validate the phone 
 		function validatePhoneInput(id) {  

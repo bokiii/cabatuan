@@ -155,17 +155,21 @@ class Students_controller extends CI_Controller {
 		
 		$date_of_birth = trim($this->input->post('date_of_birth_update'));   
 		
-		$pos = strpos($date_of_birth, "-");
-
+		/*$pos = strpos($date_of_birth, "-");
 		if($pos === false) {
-			
 			$remove_dash = str_replace("/", " ", $date_of_birth); 
 			$pieces = explode(" ", $remove_dash);   
 			$valid_date_of_birth = $pieces[2] . "-" .  $pieces[0] . "-" . $pieces[1];  
 		
 		} else {     
 			$valid_date_of_birth = $this->input->post('date_of_birth_update');
-		}    
+		}    */  
+		
+		$month = $this->input->post("month_update");  
+		$day = $this->input->post("day_update");
+		$year = $this->input->post("year_update");
+		
+		$valid_date_of_birth = $year . "-" . $month . "-" . $day;
 		
 		$data = array();
 		
@@ -190,7 +194,8 @@ class Students_controller extends CI_Controller {
 		$student->mother = $this->input->post('mother_update');      
 		$student->person_to_notify = $this->input->post('person_to_notify_update');   
 		$student->address = $this->input->post('address_update');   
-		$student->contact_number = $this->input->post('contact_number_update');
+		$student->contact_number = $this->input->post('contact_number_update');  
+		$student->phone_selected = $this->input->post('phone_selected_update');
 		
 		if(!$student->save()) {  
 			$data['status'] = false;   
@@ -231,7 +236,8 @@ class Students_controller extends CI_Controller {
 			$data['mother'] = $row->mother;  
 			$data['person_to_notify'] = $row->person_to_notify;   
 			$data['address'] = $row->address;   
-			$data['contact_number'] = $row->contact_number;   
+			$data['contact_number'] = $row->contact_number;    
+			$data['phone_selected'] = $row->phone_selected; 			
 			$data['user_type'] = $row->user_type;
 		}   
 		
