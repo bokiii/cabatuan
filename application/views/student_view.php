@@ -9,21 +9,22 @@
 				</div>
 				<div class="modal-body">  
 					
-					<div class="row" id="studentAddModal">     
+					<div class="row wrap_inputs" id="studentAddModal">     
+						
 						<div class="col-md-6">  
-							
+					
 							<div class="row">   
 								<div class="col-md-4">   
 									<div class="form-group">
-										<label for="sur_name">Sur Name</label>
-										<input type="text" class="form-control" name="sur_name" id="sur_name">
+										<label for="sur_name">Last Name</label>
+										<input type="text" class="form-control for_validation" name="sur_name" id="sur_name" data-placement="top" title="title" data-content="content">
 									</div>
 								</div>   
 								
 								<div class="col-md-4">   
 									<div class="form-group">
 										<label for="first_name">First Name</label>
-										<input type="text" class="form-control" name="first_name" id="first_name">
+										<input type="text" class="form-control for_validation" name="first_name" id="first_name" data-placement="top" title="title" data-content="content">
 									</div>
 								
 								</div>   
@@ -31,40 +32,113 @@
 								<div class="col-md-4">     
 									<div class="form-group">
 										<label for="middle_name">Middle Name</label>
-										<input type="text" class="form-control" name="middle_name" id="middle_name">
+										<input type="text" class="form-control for_validation" maxlength="2" name="middle_name" id="middle_name" data-placement="top" title="title" data-content="content">
 									</div>
 								</div>   
 							</div>    
 							
 							<div class="form-group">
 								<label for="lrn">LRN</label>
-								<input type="text" class="form-control" name="lrn" id="lrn">
+								<input type="text" class="form-control for_validation" name="lrn" id="lrn" data-placement="top" title="title" data-content="content">
 							</div>  
 							
 							<div class="form-group">
 								<label for="sex">Sex</label>
-								<!--<input type="text" class="form-control" name="sex" id="sex">-->   
-								<select id="sex" name="sex" class="form-control">                                                           
+								<!--<select id="sex" name="sex" class="form-control validation_for_select" data-placement="top" title="title" data-content="content">                                                           
 									<option value></option>
 									<option value="Male">Male</option>
 									<option value="Female">Female</option>
-								</select>
+								</select>-->      
+								<br />						
+								
+								<label class="radio-inline">
+									<input type="radio" class="sex" name="sex" value="Male"> Male
+								</label>
+								<label class="radio-inline">
+									<input type="radio" class="sex" name="sex" value="Female"> Female
+								</label>
+								
 							</div>  
 							
 							<div class="form-group">
 								<label for="date_of_birth">Date of Birth</label>
-								<div class='input-group date' id='add_birth_date_picker'>
+								<!--<div class='input-group date' id='add_birth_date_picker'>
 									<input type='text' name="date_of_birth" id="date_of_birth" class="form-control" />
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
+								</div>-->  
+								<div class="row">
+									<div class="col-md-4">
+										<select name="month" id="month" class="form-control validation_for_select" data-placement="top" title="title" data-content="content"> 
+											<option value="">Month</option>
+											<option value="01">Jan</option>
+											<option value="02">Feb</option>
+											<option value="03">Mar</option>
+											<option value="04">Apr</option>
+											<option value="05">May</option>
+											<option value="06">Jun</option>
+											<option value="07">Jul</option>
+											<option value="08">Aug</option>
+											<option value="09">Sep</option>
+											<option value="10">Oct</option>
+											<option value="11">Nov</option>
+											<option value="12">Dec</option>
+										</select>    
+									</div>   
+									<div class="col-md-4">
+										<select name="day" id="day" class="form-control validation_for_select" data-placement="top" title="title" data-content="content"> 
+											<option value="">Day</option>
+											<option value="01">1</option>
+											<option value="02">2</option>
+											<option value="03">3</option>
+											<option value="04">4</option>
+											<option value="05">5</option>
+											<option value="06">6</option>
+											<option value="07">7</option>
+											<option value="08">8</option>
+											<option value="09">9</option>
+											<option value="10">10</option>
+											<option value="11">11</option>
+											<option value="12">12</option>  
+											<option value="13">13</option>
+											<option value="14">14</option>
+											<option value="15">15</option>
+											<option value="16">16</option>
+											<option value="17">17</option>
+											<option value="18">18</option>
+											<option value="19">19</option>
+											<option value="20">20</option>
+											<option value="21">21</option>
+											<option value="22">22</option>
+											<option value="23">23</option>
+											<option value="24">24</option>
+											<option value="25">25</option>
+											<option value="26">26</option>
+											<option value="27">27</option>
+											<option value="28">28</option>
+											<option value="29">29</option>
+											<option value="30">30</option>
+											<option value="31">31</option>
+										</select>    
+									</div>
+									
+									<div class="col-md-4">
+										<select name="year" id="year" class="form-control validation_for_select" data-placement="top" title="title" data-content="content"> 
+											<option value="">Year</option>
+											<?php foreach($dates as $date) { ?>
+												<option value="<?php echo $date; ?>"><?php echo $date; ?></option>
+											<?php } ?>
+										</select>    
+									</div>   
+									
 								</div>
-							
-							</div>   
+								
+							</div>     
 							
 							<div class="form-group">
 								<label for="place_of_birth">Place of Birth</label>
-								<input type="text" class="form-control" name="place_of_birth" id="place_of_birth">
+								<input type="text" class="form-control for_validation" name="place_of_birth" id="place_of_birth" data-placement="top" title="title" data-content="content">
 							</div>
 						
 							<div class="form-group">
@@ -74,17 +148,17 @@
 							
 							<div class="form-group">
 								<label for="present_address">Present Address</label>
-								<input type="text" class="form-control" name="present_address" id="present_address">
+								<input type="text" class="form-control for_validation" name="present_address" id="present_address" data-placement="top" title="title" data-content="content">
 							</div>   
 							
 							<div class="form-group">
 								<label for="school_last_attended">School Last Attended</label>
-								<input type="text" class="form-control" name="school_last_attended" id="school_last_attended">
+								<input type="text" class="form-control for_validation" name="school_last_attended" id="school_last_attended" data-placement="top" title="title" data-content="content">
 							</div>    
 							
 							<div class="form-group">
 								<label for="school_address">School Address</label>
-								<input type="text" class="form-control" name="school_address" id="school_address">
+								<input type="text" class="form-control for_validation" name="school_address" id="school_address" data-placement="top" title="title" data-content="content">
 							</div>   
 						</div>    
 						
@@ -92,8 +166,7 @@
 							
 							<div class="form-group">
 								<label for="grade_or_year_level">Grade/Year Level</label>
-								<!--<input type="text" class="form-control" name="grade_or_year_level" id="grade_or_year_level">-->
-								<select id="grade_or_year_level" name="grade_or_year_level" class="form-control">                                                           
+								<select id="grade_or_year_level" name="grade_or_year_level" class="form-control validation_for_select" data-placement="top" title="title" data-content="content">                                                           
 									<option value></option>
 									<option value="Grade 7">Grade 7</option>
 									<option value="Grade 8">Grade 8</option>
@@ -102,55 +175,60 @@
 									<option value="Grade 11">Grade 11</option>  
 									<option value="Grade 12">Grade 12</option>
 								</select>
-							
-							</div>      
-							
+							</div>     
+
 							<div class="form-group">
 								<label for="school_year">School Year</label>
-								<input type="text" class="form-control" name="school_year" id="school_year">
+								<!--<input type="text" class="form-control" name="school_year" id="school_year">-->   
+								<select class="form-control validation_for_select" name="school_year" id="school_year" data-placement="top" title="title" data-content="content">  
+									<option value="">&nbsp;</option>  
+									<?php foreach($school_years as $school_year) { ?>
+										<option value="<?php echo $school_year; ?>"><?php echo $school_year; ?></option>
+									<?php } ?>
+								</select>
 							</div>    	   
 
 							<div class="form-group">
 								<label for="tve_specialization">TVE Specialization (for Grade 9 and 4th Yr. Student Only)</label>
-								<input type="text" class="form-control" name="tve_specialization" id="tve_specialization">
+								<input type="text" class="form-control for_validation" name="tve_specialization" id="tve_specialization" data-placement="top" title="title" data-content="content">
 							</div>    	
 							
 							<div class="form-group">
 								<label for="father">Father</label>
-								<input type="text" class="form-control" name="father" id="father"">
+								<input type="text" class="form-control for_validation" name="father" id="father" data-placement="top" title="title" data-content="content">
 							</div>       
 							
 							<div class="form-group">
 								<label for="mother">Mother</label>
-								<input type="text" class="form-control" name="mother" id="mother">
+								<input type="text" class="form-control for_validation" name="mother" id="mother" data-placement="top" title="title" data-content="content">
 							</div>      
 							
 							<div class="form-group">
 								<label for="person_to_notify">Person to Notify in Case of Emergency/Guardian</label>
-								<input type="text" class="form-control" name="person_to_notify" id="person_to_notify">
+								<input type="text" class="form-control for_validation" name="person_to_notify" id="person_to_notify" data-placement="top" title="title" data-content="content">
 							</div>    
 							
 							<div class="form-group">
 								<label for="address">Address</label>
-								<input type="text" class="form-control" name="address" id="address">
+								<input type="text" class="form-control for_validation" name="address" id="address" data-placement="top" title="title" data-content="content">
 							</div>  
 							
 							<div class="form-group">
-								<label for="contact_number">Tel. #/Cell #</label>
-								<!--<input type="text" class="form-control" name="contact_number" id="contact_number">-->   
-									<div class="input-group">
-										<div class="input-group-btn phone_select">
-											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="button_value">Select Phone</span> <span class="caret"></span></button>
-											<ul class="dropdown-menu">   
-												<li><a class="select_telephone" id="telephone" href="#">Tel #</a></li>
-												<li><a class="select_telephone" id="cellphone" href="#">Cell #</a></li>
-											</ul>
-										</div><!-- /btn-group -->
-										<input type="text" readonly class="form-control" name="contact_number" id="contact_number">
-									</div><!-- /input-group -->    
-							</div> 
-							
-						</div>
+								<label for="contact_number">Tel. #/Cell #</label>   
+								<div class="input-group">
+									<div class="input-group-btn phone_select">
+										<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="button_value">Select Phone</span> <span class="caret"></span></button>
+										<ul class="dropdown-menu">   
+											<li><a class="select_telephone" id="telephone" href="#">Tel #</a></li>
+											<li><a class="select_telephone" id="cellphone" href="#">Cell #</a></li>
+										</ul>
+									</div><!-- /btn-group -->
+									<input type="text" readonly class="form-control validation_for_phone_select" name="contact_number" id="contact_number" data-placement="top" title="title" data-content="content">  
+									<input type="hidden" id="phone_selected"  name="phone_selected" value="not selected" />
+								</div><!-- /input-group -->    
+							</div>
+		 
+						</div> <!-- end col-md-6 -->
 						
 					</div>   
 					
@@ -161,7 +239,7 @@
 				
 				<div class="modal-footer">  
 					<button type="reset" class="btn btn-primary">Reset</button>  
-					<button type="submit" class="btn btn-primary">Add</button>  
+					<button type="submit" class="btn btn-primary" id="enrollment_submit">Add</button>  
 				</div> 
 			</form>
 		</div>

@@ -1480,6 +1480,26 @@ var popOverModule = (function() {
 		});
 		
 		
+		// i will add an event for the reset in the modal add form in student view
+		$("#modal_add_form").on("reset", function(){ 
+			$('.for_validation').popover('destroy');
+			$('.for_validation').removeClass("error_color");	 
+			$('.for_validation').removeClass("success_color");   
+			$('.for_validation').removeClass("is_good");    
+			
+			$('.validation_for_select').popover('destroy');
+			$('.validation_for_select').removeClass("error_color");	 
+			$('.validation_for_select').removeClass("success_color");   
+			$('.validation_for_select').removeClass("is_good");    
+			
+			$('.validation_for_phone_select').popover('destroy');
+			$('.validation_for_phone_select').removeClass("error_color");	 
+			$('.validation_for_phone_select').removeClass("success_color");   
+			$('.validation_for_phone_select').removeClass("is_good");  
+			
+			
+		});
+		
 		// below is for the enrollment button behavior 
 		function enableDisableEnrollmentButton() { 
 			countGood = $(document).find(".is_good").length;

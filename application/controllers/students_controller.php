@@ -23,6 +23,26 @@ class Students_controller extends CI_Controller {
 	}     
 	
 	public function index() {
+		
+		$current_year = date("Y");
+		$data['dates'] = array($current_year);  
+		
+		for($i = 1; $i < 111; $i++) {  
+			$down_year =  $current_year - $i;  
+			array_push($data['dates'], $down_year);  
+		}       
+		
+		$plus_one_current_year = $current_year + 1;    		
+		$current_school_year = $current_year . "-" . $plus_one_current_year;  
+		$data['school_years'] = array($current_school_year);       
+
+		for($i = 1; $i < 20; $i++) {  
+			$down_current_year =  $current_year - $i;    
+			$down_plus_one_current_year = $plus_one_current_year - $i;    
+			$down_current_school_year = $down_current_year . "-" . $down_plus_one_current_year;
+			array_push($data['school_years'], $down_current_school_year);  
+		}       
+		
 		$data['main_content'] = "student_view";
 		$this->load->view('template/content', $data);    
 	}            
@@ -64,11 +84,16 @@ class Students_controller extends CI_Controller {
 	
 	public function add_student() {
 		
-		$date_of_birth = $this->input->post("date_of_birth");     
+		/*$date_of_birth = $this->input->post("date_of_birth");     
 		$remove_dash = str_replace("/", " ", $date_of_birth); 
 		$pieces = explode(" ", $remove_dash);
+		$valid_date_of_birth = $pieces[2] . "-" .  $pieces[0] . "-" . $pieces[1];*/  
+
+		$month = $this->input->post("month");  
+		$day = $this->input->post("day");
+		$year = $this->input->post("year");
 		
-		$valid_date_of_birth = $pieces[2] . "-" .  $pieces[0] . "-" . $pieces[1];     
+		$valid_date_of_birth = $year . "-" . $month . "-" . $day;
 		
 		$data = array();
 	
@@ -91,7 +116,8 @@ class Students_controller extends CI_Controller {
 		$student->mother = $this->input->post('mother');   
 		$student->person_to_notify = $this->input->post('person_to_notify');   
 		$student->address = $this->input->post('address');   
-		$student->contact_number = $this->input->post('contact_number');   
+		$student->contact_number = $this->input->post('contact_number');     
+		$student->phone_selected = $this->input->post('phone_selected');   
 		$student->user_type = "student";  		
 	
 		if(!$student->save()) {  
