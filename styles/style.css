@@ -123,7 +123,46 @@ table.academic th, table.academic td {
 
 .error_wrap .popover-content { 
 	color: red;  
-}    
+}      
+
+/* below is for the print design */      
+
+.for_print { 
+	display: none;
+	visibility: hidden;   
+	position: absolute; 
+	top: 0px;  
+	left: 0px;
+	height: 0px;
+}
+
+
+@media print {
+	
+	@page {
+		size: auto;   /* auto is the current printer page size */
+		margin: 0mm;  /* this affects the margin in the printer settings */
+    }
+	
+	body * {
+		visibility: hidden;
+	}
+	
+	.for_print, .for_print * {
+		visibility: visible;
+	}   
+
+	.for_print {    
+		display: block;
+		width: 100%; 
+		height: 100%;
+		position: absolute;
+		left: 10;
+		top: 10; 
+		text-align: center
+	}     
+	
+}
 
 
 

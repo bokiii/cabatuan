@@ -86,60 +86,56 @@ class Login extends CI_Controller {
 
 	public function register_enrollee() {  
 	
-		$date_of_birth = $this->input->post("date_of_birth");     
+		//$this->debug($this->input->post());   
+		
+		/*$date_of_birth = $this->input->post("date_of_birth");     
 		$remove_dash = str_replace("/", " ", $date_of_birth); 
 		$pieces = explode(" ", $remove_dash);
+		$valid_date_of_birth = $pieces[2] . "-" .  $pieces[0] . "-" . $pieces[1];  */   
 		
-		$valid_date_of_birth = $pieces[2] . "-" .  $pieces[0] . "-" . $pieces[1];  
+		
+		$month = $this->input->post("month");  
+		$day = $this->input->post("day");
+		$year = $this->input->post("year");
+		
+		$valid_date_of_birth = $year . "-" . $month . "-" . $day;
+	
 		
 		$data = array();  
+		$verificationCode = $this->generateRandomString();     
+
+		$verification = new Verification();  
+		$verification->sur_name = $this->input->post('sur_name');     
+		$verification->first_name = $this->input->post('first_name');   
+		$verification->middle_name = $this->input->post('middle_name');   		  
+		$verification->lrn = $this->input->post('lrn');   
+		$verification->sex = $this->input->post('sex');  
+		$verification->date_of_birth = $valid_date_of_birth;  
+		$verification->place_of_birth = $this->input->post('place_of_birth');   
+		$verification->age = $this->input->post('age');      
+		$verification->present_address = $this->input->post('present_address');   
+		$verification->school_last_attended = $this->input->post('school_last_attended');   
+		$verification->school_address = $this->input->post('school_address');   
+		$verification->grade_or_year_level = $this->input->post('grade_or_year_level');   
+		$verification->school_year = $this->input->post('school_year');   
+		$verification->tve_specialization = $this->input->post('tve_specialization');  
+		$verification->father = $this->input->post('father');  
+		$verification->mother = $this->input->post('mother');   
+		$verification->person_to_notify = $this->input->post('person_to_notify');   
+		$verification->address = $this->input->post('address');   
+		$verification->contact_number = $this->input->post('contact_number');   
+		$verification->verification = $verificationCode;  
+		$verification->phone_selected = $this->input->post('phone_selected');
 		
-		$captcha_entered = $this->input->post("captcha_entered");     
-		
-		$verificationCode = $this->encrypt->encode($this->generateRandomString());     
+		if(!$verification->save()) {  
+			$data['status'] = false;   
+			$data['errors'] = $verification->error->string;
+		} else {  
+			$data['status'] = true;  
+			$data["confirmation_code"] = $verificationCode;
+		}     
 	
-		if(strcasecmp($captcha_entered, $this->session->userdata('captcha_word')) == 0) {      
-		  
-		  	$verification = new Verification();  
-			$verification->sur_name = $this->input->post('sur_name');     
-			$verification->first_name = $this->input->post('first_name');   
-			$verification->middle_name = $this->input->post('middle_name');   		  
-			$verification->lrn = $this->input->post('lrn');   
-			$verification->sex = $this->input->post('sex');  
-			$verification->date_of_birth = $valid_date_of_birth;  
-			$verification->place_of_birth = $this->input->post('place_of_birth');   
-			$verification->age = $this->input->post('age');      
-			$verification->present_address = $this->input->post('present_address');   
-			$verification->school_last_attended = $this->input->post('school_last_attended');   
-			$verification->school_address = $this->input->post('school_address');   
-			$verification->grade_or_year_level = $this->input->post('grade_or_year_level');   
-			$verification->school_year = $this->input->post('school_year');   
-			$verification->tve_specialization = $this->input->post('tve_specialization');  
-			$verification->father = $this->input->post('father');  
-			$verification->mother = $this->input->post('mother');   
-			$verification->person_to_notify = $this->input->post('person_to_notify');   
-			$verification->address = $this->input->post('address');   
-			$verification->contact_number = $this->input->post('contact_number');   
-			$verification->verification = $verificationCode;  
-			$verification->email_address = $this->input->post('email_address');
-			
-			if(!$verification->save()) {  
-				$data['status'] = false;   
-				$data['errors'] = $verification->error->string;
-			} else {  
-				
-				if($this->verification_send($this->input->post('email_address'), $verificationCode)) {  
-					$data['status'] = true;
-				} else {  
-					$data['status'] = false;
-				}  
-			}     
-		} else {   
-			$data['errors'] = "<p>Invalid Captcha</p>";  
-			$data['status'] = false;
-		}
 		echo json_encode($data);  
-		
 		
 	}   
 	

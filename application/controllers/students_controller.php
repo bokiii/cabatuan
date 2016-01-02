@@ -56,10 +56,9 @@ class Students_controller extends CI_Controller {
 				$data['students'][$i]['button_value'] = "Create Account";   
 			}
 		}
-		
+	
 		echo json_encode($data);        
-		
-		
+	
 	}
 	
 	public function add_student() {

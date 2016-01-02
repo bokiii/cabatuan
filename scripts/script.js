@@ -1288,21 +1288,30 @@ var registrationModule = (function() {
 			if(data.status === false) { 
 				bootbox.alert("<div style='color: #E0534F;'>" + data.errors + "</div>");
 			} else {   
-				bootbox.alert("<div style='color: #5CB85C;'><p>Please check your email for verification letter.</p></div>");
-				$("#register_enrollee_form").trigger("reset");
-			
+				//bootbox.alert("<div style='color: #5CB85C;'><p>Please check your email for verification letter.</p></div>");
+				//$("#register_enrollee_form").trigger("reset");     
+				$(document).find(".for_print").children("h3").text(data.confirmation_code); 
+				location.reload();
+				window.print();
 			}
 		}
 		
 	};  
 	
+	var printContent = function() { 
+		//window.print();
+	}
+	
+	
 	return {  
-		submitRegister: submitRegister
+		submitRegister: submitRegister, 
+		printContent:	printContent
 	}
 
 })()
  
-registrationModule.submitRegister();
+registrationModule.submitRegister();  
+registrationModule.printContent();
  
  
 var popOverModule = (function() { 

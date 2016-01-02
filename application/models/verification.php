@@ -85,9 +85,9 @@ class Verification extends Datamapper {
 			'label' => 'Verification Code', 
 			'rules' => array('required', 'trim')
 		),  
-		'email_address' => array(
-			'label' => 'Email Address', 
-			'rules' => array('required', 'trim', 'valid_email', 'unique')
+		'phone_selected' => array(
+			'label' => 'Phone Selected', 
+			'rules' => array('required', 'trim')
 		)
 		
 	);

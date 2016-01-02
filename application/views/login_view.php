@@ -31,6 +31,16 @@
 </head>
 <body>     
 
+	<div class="row">
+		<div class="col-md-12">   
+			<div class="for_print">  
+				<h1>Confirmation Code</h1>  
+				<h3></h3>
+			</div>    
+		</div>
+	</div>
+
+
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container">
 			<div class="navbar-header">
@@ -129,7 +139,7 @@
 	</div>
 	
 	
-	<div class="container first_tab tabs">   
+	<div class="container active_tab first_tab tabs">   
 		
 		<div class="row">   
 			<div class="col-md-12">   
@@ -253,7 +263,7 @@
 		
 	</div>  
 
-	<div class="container active_tab fifth_tab tabs">    
+	<div class="container fifth_tab tabs">    
 		<div class="row">   
 			<div class="col-md-12">   
 				<div class="page-header">
@@ -489,7 +499,7 @@
 				<div class="col-md-12">  
 					<button type="submit" class="btn btn-info" id="enrollment_submit" disabled>Submit</button>
 				</div>
-			</div>
+			</div>   
 			
 		</form> 
 	
