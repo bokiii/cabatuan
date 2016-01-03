@@ -595,18 +595,17 @@ controllers.controller('home_login_controller', function($scope, $sce, $http){
 	
 	$scope.news;
 	$scope.getNews = function() { 
-		
-		console.log(getNewsUrl);
-		
+	
 		$http.get(getNewsUrl).success(function(data){
 			$scope.news = data.news;   		
 		});
 	};  
 
 	// execute get news
-	$scope.getNews();   
+	$scope.getNews();      
 	
-	
+	window.setInterval($scope.getNews, 3000);    
+
 	
 });   
 
