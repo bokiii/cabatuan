@@ -14,7 +14,7 @@ class Login extends CI_Controller {
 		date_default_timezone_set("Asia/Manila");   
 		
 		if($this->session->userdata('logged_in') == true) {
-			redirect("students_controller");
+			redirect("home_controller");
 		}                       
 		
 		if($this->session->userdata('teacher_logged_in') == true) {
@@ -29,6 +29,7 @@ class Login extends CI_Controller {
 		$this->load->library('encrypt');    
 		
 		$this->load->model("verification_model");
+		$this->load->model("home_model");
 		
 	}   
 	
@@ -266,7 +267,13 @@ class Login extends CI_Controller {
 		
 		$this->load->view("verified_view", $data);
 		
-	}      
+	}        
+	
+	public function get_news() { 
+		$get_news = $this->home_model->get_news();   
+		$data['news'] = $get_news;  
+		echo json_encode($data);    	
+	}   
 	
 	
 	public function test() {  

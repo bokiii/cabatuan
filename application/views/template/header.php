@@ -46,6 +46,9 @@
 				
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
+						<a href="<?php echo base_url(); ?>index.php/home_controller">Home</a>                                  
+					</li>  
+					<li class="dropdown">
 						<a href="<?php echo base_url(); ?>index.php/students_controller">Students</a>                                  
 					</li>  
 					<li class="dropdown">

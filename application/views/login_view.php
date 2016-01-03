@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en-US">
+<html lang="en-US" ng-app="cabatuan">
 <head>
 	<meta charset="UTF-8">
 	<title>Student Information System</title>  
@@ -138,7 +138,7 @@
 	</div>
 	
 	
-	<div class="container active_tab first_tab tabs">   
+	<div class="container active_tab first_tab tabs" id="home_login_angular_container" ng-controller='home_login_controller'>   
 		
 		<div class="row">   
 			<div class="col-md-12">   
@@ -146,8 +146,20 @@
 				  <h1>News<small> feeds..</small></h1>
 				</div>
 			</div>   
-			
-		</div>   
+		</div>        
+		
+		<div class="row news_lists" ng-repeat="new in news">  
+			<div class="col-md-12">  
+				<div class="panel panel-default">
+					<div class="panel-body">
+						{{new.news}}
+					</div>
+					<div class="panel-footer">{{new.created}}</div>
+				
+				</div>
+			</div>  
+		</div>     
+	
 		
 	</div> <!-- end first tab -->
 	
@@ -533,11 +545,12 @@
 	
 
 	<!-- link scripts for angular js below -->  
-	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/lib/angular/angular.js"></script>
+	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/lib/angular/angular.min.js"></script>   
+	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/lib/angular/angular-sanitize.min.js"></script> 
 	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/js/app.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/js/services.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/js/controllers.js"></script>
-	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/js/filters.js"></script>    
+	<script type="text/javascript" src="<?php echo base_url(); ?>scripts/js/filters.js"></script>  
 	
 	
 </body>

@@ -41,7 +41,7 @@ class Auth_controller extends CI_Controller {
 			);   
 		
 			$this->session->set_userdata($account_data);  
-			$data['redirect'] = base_url() . "index.php/students_controller";
+			$data['redirect'] = base_url() . "index.php/home_controller";
 			$data['status'] = true;
 			
 		} elseif ($check_teacher_username_and_password != NULL) {   

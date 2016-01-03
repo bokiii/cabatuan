@@ -542,6 +542,77 @@ controllers.controller('currentEnrolledStudentController', function($scope, $sce
 	
 });
 
+// below are the controllers for the home
+controllers.controller('home_controller', function($scope, $sce, $http){
+	
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;   
+	
+	var getNewsUrl = fullUrl + "/get_news"
+	
+	/*var enrolledStudentUrl = fullUrl.replace("enrolled_student_account_controller", "enrolled_student_account_controller/get_student_academic_data");
+	$scope.academicDatas;      
+	$http.get(enrolledStudentUrl).success(function(data){
+		$scope.academicDatas = data.academic_datas;   
+	});*/  
+	
+	$scope.news;
+	$scope.getNews = function() { 
+		$http.get(getNewsUrl).success(function(data){
+			$scope.news = data.news;   		
+		});   
+	};  
+
+	// execute get news
+	$scope.getNews();   
+	
+	
+	$scope.getNewsContent;   
+	$scope.getNewsUpdateContent = function(updateLink) { 
+		
+		var getUpdateNewsContentUrl = updateLink;
+		$http.get(getUpdateNewsContentUrl).success(function(data){
+			$scope.getNewsContent = data.news[0];       			
+			console.log($scope.getNewsContent);
+		});   
+	};    
+	
+});      
+
+
+controllers.controller('home_login_controller', function($scope, $sce, $http){
+	
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;   
+	
+	var getNewsUrl = fullUrl + "/get_news"
+	
+	/*var enrolledStudentUrl = fullUrl.replace("enrolled_student_account_controller", "enrolled_student_account_controller/get_student_academic_data");
+	$scope.academicDatas;      
+	$http.get(enrolledStudentUrl).success(function(data){
+		$scope.academicDatas = data.academic_datas;   
+	});*/  
+	
+	$scope.news;
+	$scope.getNews = function() { 
+		
+		console.log(getNewsUrl);
+		
+		$http.get(getNewsUrl).success(function(data){
+			$scope.news = data.news;   		
+		});
+	};  
+
+	// execute get news
+	$scope.getNews();   
+	
+	
+	
+});   
+
+
+
+
 // below is for the testing purposes
 controllers.controller('test', function($scope, $sce, $http){
 	

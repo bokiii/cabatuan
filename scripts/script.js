@@ -1895,6 +1895,136 @@ var popOverModule = (function() {
 popOverModule.validationPopOver();  
 
 
+// below is for the home module
+var homeModule = (function() { 
+
+	var newsValue = "";
+
+	var inputNews = function() { 
+		
+		$("#news").keyup(function(){ 
+			var newsValue = $(this).val();
+			delay(function(){ 
+				if(newsValue != "") { 
+					$("#news_submit").removeAttr("disabled");
+				} else { 
+					$("#news_submit").attr("disabled", "disabled");
+				}
+			}, 1000);
+		});    
+		
+		
+		$("#add_news_form").ajaxForm({
+			dataType: 'json',
+			forceSync: true,
+			beforeSubmit: loading,
+			success: success_status
+		});      
+		
+		function loading() {  
+			return true;
+		}   
+		
+		function success_status(data) {
+			if(data.status) { 
+				bootbox.alert("News added successfully");
+			} else { 
+				bootbox.alert("Failed");
+			}
+			
+			$("#add_news_form").trigger("reset");  
+			
+			$("#news_submit").attr("disabled", "disabled");  
+			
+			// get all the news via angular  
+			angular.element($("#home_angular_container")).scope().getNews(); 
+			
+		}  
+	
+	};  
+	
+	var deleteNews = function() { 
+		
+		$(document).on("click", ".delete_news_link", function(e){ 
+			e.preventDefault();
+			var deleteNewsLink = $(this).attr("href");     
+			
+			$.get(deleteNewsLink, function(data){
+				var datas = eval('msg=' + data);        
+				if(datas.status) {   
+					bootbox.alert("Deleted");
+				} else {  
+					bootbox.alert("Deletion failed");
+				}    
+			});  
+			
+			// get all the news via angular  
+			angular.element($("#home_angular_container")).scope().getNews(); 
+			
+		});  
+		
+		
+		
+	};
+	
+	var showUpdateNews = function() {   
+		$(document).on("click", ".show_update", function(e){ 
+			e.preventDefault();  
+			
+			var updateLink = $(this).attr("id");    
+		
+			//get all the news via angular  
+			angular.element($("#getUpdateNewsModal")).scope().getNewsUpdateContent(updateLink); 
+			
+			
+		});
+	};	
+	
+	
+	var updateNews = function() { 
+		
+		$("#news_update_form").ajaxForm({
+			dataType: 'json',
+			forceSync: true,
+			beforeSubmit: loading,
+			success: success_status
+		});      
+		
+		function loading() {  
+			return true;
+		}   
+		
+		function success_status(data) {
+			if(data.status) { 
+				bootbox.alert("News updated successfully");
+			} else { 
+				bootbox.alert("Failed");
+			}
+			
+			// get all the news via angular  
+			angular.element($("#home_angular_container")).scope().getNews();   
+			
+		}  
+	};
+	
+	return { 
+		inputNews:			inputNews, 
+		deleteNews:			deleteNews, 
+		showUpdateNews:		showUpdateNews, 
+		updateNews:			updateNews
+	}  
+	
+})()       
+
+homeModule.inputNews();   
+homeModule.deleteNews();  
+homeModule.showUpdateNews();  
+homeModule.updateNews();
+
+
+
+
+
 
 
 
