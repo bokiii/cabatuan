@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 25, 2015 at 11:12 AM
+-- Generation Time: Jan 03, 2016 at 08:49 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -154,15 +154,6 @@ CREATE TABLE IF NOT EXISTS `enrolled_students` (
   KEY `enrolled_students_ibfk_3` (`section_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
 
---
--- Dumping data for table `enrolled_students`
---
-
-INSERT INTO `enrolled_students` (`id`, `curriculum_id`, `section_id`, `student_id`, `school_year`, `current`, `accomplished`, `created`, `updated`) VALUES
-(44, 5, 24, 14, '2015-2016', 1, 0, '2015-06-11 16:20:23', '0000-00-00 00:00:00'),
-(47, 5, 24, 13, '2015-2016', 1, 0, '2015-06-15 23:35:45', '0000-00-00 00:00:00'),
-(48, 6, 27, 15, '2015-2016', 1, 0, '2015-12-08 12:38:35', '0000-00-00 00:00:00');
-
 -- --------------------------------------------------------
 
 --
@@ -178,21 +169,30 @@ CREATE TABLE IF NOT EXISTS `enrolled_student_subjects` (
   PRIMARY KEY (`id`),
   KEY `enrolled_student_subjects_ibfk_2` (`subject_id`),
   KEY `enrolled_student_subjects_ibfk_1` (`enrolled_student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=131 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `enrolled_student_subjects`
+-- Table structure for table `news`
 --
 
-INSERT INTO `enrolled_student_subjects` (`id`, `subject_id`, `enrolled_student_id`, `created`, `updated`) VALUES
-(117, 15, 44, '2015-06-11 16:20:23', '0000-00-00 00:00:00'),
-(118, 29, 44, '2015-06-11 16:20:23', '0000-00-00 00:00:00'),
-(119, 31, 44, '2015-06-11 16:20:23', '0000-00-00 00:00:00'),
-(126, 15, 47, '2015-06-15 23:35:45', '0000-00-00 00:00:00'),
-(127, 29, 47, '2015-06-15 23:35:45', '0000-00-00 00:00:00'),
-(128, 31, 47, '2015-06-15 23:35:45', '0000-00-00 00:00:00'),
-(129, 17, 48, '2015-12-08 12:38:35', '0000-00-00 00:00:00'),
-(130, 30, 48, '2015-12-08 12:38:35', '0000-00-00 00:00:00');
+CREATE TABLE IF NOT EXISTS `news` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `news` text NOT NULL,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`id`, `news`, `created`, `updated`) VALUES
+(1, 'dmsdmsmdmsdsd', '2016-01-03 10:31:06', '0000-00-00 00:00:00'),
+(2, 'hiiiiiiiiiiiiiiiiiiiiiiiiii', '2016-01-03 10:31:16', '2016-01-03 13:48:41'),
+(7, 'hiiiiiiiibsdbsdbsd', '2016-01-03 13:08:54', '2016-01-03 15:43:59');
 
 -- --------------------------------------------------------
 
@@ -233,21 +233,22 @@ CREATE TABLE IF NOT EXISTS `students` (
   `person_to_notify` varchar(175) NOT NULL,
   `address` varchar(175) NOT NULL,
   `contact_number` varchar(75) NOT NULL,
+  `phone_selected` varchar(200) NOT NULL,
   `user_type` varchar(50) NOT NULL,
   `created` datetime NOT NULL,
   `updated` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `sur_name`, `first_name`, `middle_name`, `lrn`, `sex`, `date_of_birth`, `place_of_birth`, `age`, `present_address`, `school_last_attended`, `school_address`, `grade_or_year_level`, `school_year`, `tve_specialization`, `father`, `mother`, `person_to_notify`, `address`, `contact_number`, `user_type`, `created`, `updated`) VALUES
-(13, 'Boribor', 'Mark', 'Babon', 'dfdf', 'dfdf', '2015-06-24', 'dfdf', 34, 'dfdfdfdf', 'dfdf', 'dfdfdfdfdf', 'dfdf', 'dfdfdf', 'dfdfdf', 'dfdfdf', 'dfdf', 'dfdf', 'dfdfdf', 'dfdfdf', 'student', '2015-06-11 00:05:48', '2015-06-11 00:07:44'),
-(14, 'Trocho', 'John Neal', 'Calzar', 'ghghgh', 'gghgh', '2015-06-09', 'ghgh', 23, 'vbvbvb', 'vbvbbv', 'vbbvbv', 'ghghgh', 'ghghgh', 'ghghgh', 'ghghgh', 'ghghgh', 'bvbvb', 'vbvb', 'vbvbv', 'student', '2015-06-11 00:06:08', '2015-06-11 00:08:03'),
-(15, 'markie', 'sdjmsmndmsdmsdsd', 'sdsdmsdmsmdsd', 'dsnsndnsdnsdnsndsd', 'Female', '1981-06-09', 'dhsdhshdhsdhsdsd', 34, 'dsbsdbsbdbsdbsdsd', 'sdnsdnsndnsndsd', 'Janiuay, Iloilo', 'Grade 8', '2015-2016', 'ksdnsndsnnsdnsdnsndsd', 'sdb sdbsbdsbdsbdbsd', 'sdhhshdhsdhsdhsd', 'sndxsndnsdnsdnsdsd', 'sndnsdnsndnsdsd', '09092700838', 'student', '2015-12-08 06:40:15', '2015-12-08 07:02:36'),
-(16, 'jjjjjkdfdfkdfdf', 'jjjdshsdhsd', 'jjjdjsdshdjsd', 'ksndnsdnnsdnsdnsd', 'Male', '1982-02-09', 'msdmsdmsmdmsdmsdsd', 33, 'sndsdsdnsmdnsmdnsmdsd', 'sndxsndmsdnsmdnsdsd', 'Janiuay, Iloilo', 'Grade 7', '2015-2016', 'bhhhdhfhdfhdhfhdf', 'dshsdhshdhsdhshdsd', 'ndsnsdnsndnsdnnndssd', 'sdnnsndsdnsdnssd', 'sndsmdnmsdnsmdnmsndsd', '09092700838', 'student', '2015-12-08 07:21:59', '2015-12-08 07:22:22');
+INSERT INTO `students` (`id`, `sur_name`, `first_name`, `middle_name`, `lrn`, `sex`, `date_of_birth`, `place_of_birth`, `age`, `present_address`, `school_last_attended`, `school_address`, `grade_or_year_level`, `school_year`, `tve_specialization`, `father`, `mother`, `person_to_notify`, `address`, `contact_number`, `phone_selected`, `user_type`, `created`, `updated`) VALUES
+(18, 'mark', 'sndnsdnsndsd', 'bs', 'bsndsbdbsdsd', 'Male', '1990-05-16', 'nsdnsdnnsdnsdnsd', 25, 'ndsnsdnsdnsndnsdsd', 'hey', 'nxcnxcnxcnxcxc', 'Grade 8', '2015-2016', 'nsdnsndsd', 'sdnsndnsdnsndsd', 'nsdnsdnsndnsdsd', 'bsdbsbdbsdbsdbsdsd', 'bsdbsdbsbdbsdbsd', '09092700838', 'cellphone', 'student', '2016-01-02 23:01:31', '2016-01-03 04:20:16'),
+(19, 'vvvvvvbvbvb', 'bbbdbsdsd', 'dn', 'bdfbdfbdfbdf', 'Female', '2015-01-02', 'ndnsdnsdsd', 1, 'msdmsdmsdsd', 'ndnsdnsdsdsd', 'jbbsdbsbdbsdsd', 'Grade 8', '2015-2016', 'nsdnsdsdsd', 'bsdbsdbsdsd', 'ndsnsdnsndsd', 'sdnnsdnsdsd', 'sdndsndnsdsd', '0000000000', 'telephone', 'student', '2016-01-02 23:41:26', '0000-00-00 00:00:00'),
+(20, 'msdmsmdmsdsd', 'sdnsndnsdsd', 'B', 'sdhshdhsdhsd', 'Male', '2000-02-16', 'sdnsdnsndnsdsd', 15, 'msdmsdmsmdsd', 'dmsmdmsdmsdsd', 'dsnnsdn7', 'Grade 7', '2014-2015', 'sdsdhhsdhsdhsd', 'msdsmdmsdmsd', 'dmsdmsmdmsdsd', 'mdsmsdmsdmsd', 'dsmsmdmsdmsd', '0954405989', 'telephone', 'student', '2016-01-03 15:38:49', '0000-00-00 00:00:00'),
+(21, 'nsdnsndnsdsd', 'dssdsd', 'sd', 'sdsdmsmd', 'Male', '2000-02-19', 'sd msdmsmdmsdsd', 15, 'sdmsmdmsdsd', 'sd sdnsndsd', 'sdmsmdmsdmsd', 'Grade 7', '2015-2016', 'sdmsdmsmdsd', 'mdsmsdmmsdsd', 'msdmsdmsmdsdsd', 'smdmsdmsmdsd', 'msdmsdmsmdsd', '9094054059', 'telephone', 'student', '2016-01-03 15:41:19', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -263,14 +264,6 @@ CREATE TABLE IF NOT EXISTS `students_account` (
   `student_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
-
---
--- Dumping data for table `students_account`
---
-
-INSERT INTO `students_account` (`id`, `username`, `password`, `md5_password`, `student_id`) VALUES
-(6, 'markie', 'markie', '8ca29eb8ec2705cdb21a38e54a4c57a4', 13),
-(7, 'bokie', 'bokie', '7883b3e96372f8b932a03f14923b69ba', 14);
 
 -- --------------------------------------------------------
 
@@ -289,21 +282,7 @@ CREATE TABLE IF NOT EXISTS `students_subjects_grades` (
   `enrolled_student_subject_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `students_subjects_grades_ibfk_1` (`enrolled_student_subject_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=131 ;
-
---
--- Dumping data for table `students_subjects_grades`
---
-
-INSERT INTO `students_subjects_grades` (`id`, `first_quarter`, `second_quarter`, `third_quarter`, `fourth_quarter`, `final_grade`, `remarks`, `enrolled_student_subject_id`) VALUES
-(117, '75', '75', '75', '75', '85', 'passed', 117),
-(118, '', '', '', '', '', '', 118),
-(119, '', '', '', '', '', '', 119),
-(126, '45', '', '45', '45', '', '', 126),
-(127, '', '', '', '', '', '', 127),
-(128, '', '', '', '', '', '', 128),
-(129, '', '', '', '', '', '', 129),
-(130, '', '', '', '', '', '', 130);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -444,9 +423,9 @@ CREATE TABLE IF NOT EXISTS `unverified_students` (
   `address` varchar(175) NOT NULL,
   `contact_number` varchar(75) NOT NULL,
   `verification` varchar(255) NOT NULL,
-  `email_address` varchar(200) NOT NULL,
+  `phone_selected` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Constraints for dumped tables
