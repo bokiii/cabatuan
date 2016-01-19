@@ -60,9 +60,10 @@ class Students_controller extends CI_Controller {
 
 	}   
 	
+	// below is the enrolled students
 	public function get_student_via_standard_model() {
 	
-		$get_students = $this->student_model->get_students();  
+		$get_students = $this->student_model->get_enrolled_students();  
 		
 		$data['students'] = $get_students;        
 		
@@ -77,10 +78,32 @@ class Students_controller extends CI_Controller {
 				$data['students'][$i]['button_value'] = "Create Account";   
 			}
 		}
-	
+		
 		echo json_encode($data);        
+	}    
 	
-	}
+	// below is to get unenrolled students 
+	public function get_unenrolled_student_via_standard_model() {
+	
+		$get_students = $this->student_model->get_unenrolled_students();  
+		
+		$data['students'] = $get_students;        
+		
+		for($i = 0; $i < count($data["students"]); $i++) {  
+			$student_id = $data['students'][$i]['id'];   
+			$check_student_id = $this->student_account_model->check_student_id($student_id);  
+			if($check_student_id != 0) {  
+				$data['students'][$i]['button_type'] = "info";   
+				$data['students'][$i]['button_value'] = "Update Account";   
+			} else {  
+				$data['students'][$i]['button_type'] = "default";   
+				$data['students'][$i]['button_value'] = "Create Account";   
+			}
+		}
+		
+		echo json_encode($data);        
+	}  
+
 	
 	public function add_student() {
 		

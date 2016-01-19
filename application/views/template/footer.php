@@ -1,5 +1,5 @@
 	<div class="container">  
-		<hr>
+		
 		<footer>
 			<p>&copy; BitMasters Tech. <?php echo date('Y'); ?></p>
 		</footer>

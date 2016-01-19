@@ -122,7 +122,9 @@ var modalModule = (function() {
 				$(document).find(".teacher_angular_trigger").trigger("click");     
 				
 				// below is the trigger for the students 
-				$(document).find(".student_angular_trigger").trigger("click"); 
+				//$(document).find(".student_angular_trigger").trigger("click");  
+				angular.element($("#student_angular_container")).scope().getUnenrolledStudents(); 
+				
 				
 				alertModule.modalAlertOpen(data, containerToAppend);
 			} else {
@@ -1212,6 +1214,7 @@ var studentModule = (function() {
 		function success_status(data) {
 			bootbox.alert(data.message);  
 			$("#verify_student_form").trigger("reset");
+			angular.element($("#student_angular_container")).scope().getUnenrolledStudents(); 
 		}
 		
 	} 

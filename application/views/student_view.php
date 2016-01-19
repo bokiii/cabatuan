@@ -32,7 +32,7 @@
 								<div class="col-md-4">     
 									<div class="form-group">
 										<label for="middle_name">Middle Name</label>
-										<input type="text" class="form-control for_validation" maxlength="2" name="middle_name" id="middle_name" data-placement="top" title="title" data-content="content">
+										<input type="text" class="form-control for_validation" name="middle_name" id="middle_name" data-placement="top" title="title" data-content="content">
 									</div>
 								</div>   
 							</div>    
@@ -721,38 +721,104 @@
 				</div>
 			</div>   
 			
-			<div class="row">    
+			<!--<div class="row">    
 				<div class="col-md-12">   
 					
-					<button type="button" class="my_button btn btn-primary" data-toggle="modal" data-target="#myAddModal">
+					<button type="button" class="my_button btn btn-primary pull-right" data-toggle="modal" data-target="#myAddModal">
 						<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add
 					</button>      
 					
-					<button id="my_form_delete_button" type="submit" class="my_button btn btn-danger">
+					<button id="my_form_delete_button" type="submit" class="my_button btn btn-danger pull-right">
 						<span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span> Delete
 					</button>
 					
 				</div>  
-			</div>    
+			</div>-->  
 		
 		</form> <!-- end delete form -->
 		
 		<!-- below is the hidden div for the angular trigger -->
-		<div class="row my_hidden_div">   
+		<!--<div class="row my_hidden_div">   
 			<div class="col-md-12">   
 				<button type="button" ng-click="getStudents()" class="btn btn-primary student_angular_trigger">Get Students</button>   
 			</div>
-		</div>
+		</div>-->
 		
 	</div>  
 
 	<div class="container second_tab tabs">   
 		
+		<div class="my_search_box">
+			<div class="row">   
+				<div class="col-md-12">  
+					<form class="form-inline">
+						<div class="form-group">
+							<label class="sr-only" for="query">Query </label>
+							<input ng-model="unenrolledQuery" type="text" class="form-control" placeholder="Search Student">
+						</div>      	
+					</form>     
+					
+				</div>  
+			</div>  
+		</div>   
+		
 		<div class="row">   
 			<div class="col-md-12">   
-				<div class="page-header">
-				  <h1>This is for the unenrolled students</h1>
-				</div>
+				
+				
+				<form id="delete_form" action="<?php echo base_url(); ?>index.php/students_controller/delete_student" method='post'>
+					<div class="row">  
+						<div class="col-md-12">
+						
+							<div class="table-responsive">
+								<table class="table table-hover">
+									<thead>  
+										<tr>
+											<th><input type="checkbox" class="main_check" /></th>
+											<th>Student</th>  
+											<th>Edit Data</th>  
+											<th>Enrollment</th>  
+											<th>Academic Status</th>   
+											<th>Account</th>
+										</tr>
+									</thead>   
+									<tbody>   
+										<tr ng-repeat=" unenrolled in unenrolledStudents | filter: unenrolledQuery">
+											<td class="has_student_id"><input type="checkbox" name="student_id[]" value="{{unenrolled.id}}" class="sub_check" /></td>
+											<td class="student_name">{{unenrolled.sur_name}}, {{unenrolled.first_name}} {{unenrolled.middle_name}}</td>   
+											<td>
+												<a class="my_update_link" href="<?php echo base_url(); ?>index.php/students_controller/get_student_update_content_by_id?id={{unenrolled.id}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="modal" data-target="#myUpdateModal"></span></a>
+											</td>   
+											<td ng-bind-html="unenrolled.status"></td>  
+											<td ng-bind-html="unenrolled.viewAcademic"></td>     
+											<td>
+												<button id="{{unenrolled.id}}" type="button" class="btn btn-{{unenrolled.button_type}} student_account">{{unenrolled.button_value}}</button>
+											</td>
+										</tr>  
+									</tbody>
+								</table>
+							</div>
+						
+						</div>
+					</div>   
+					
+					<div class="row">    
+						<div class="col-md-12">   
+							
+							<button type="button" class="my_button btn btn-primary pull-right" data-toggle="modal" data-target="#myAddModal">
+								Add
+							</button>      
+							
+							<button id="my_form_delete_button" type="submit" class="my_button btn btn-danger pull-right">
+								Delete
+							</button>
+							
+						</div>  
+					</div>    
+				
+				</form> <!-- end delete form -->
+				
+				
 			</div>      
 		</div>   
 	</div> <!-- end second tab -->  

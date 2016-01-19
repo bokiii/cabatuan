@@ -93,12 +93,12 @@
 			<div class="row">    
 				<div class="col-md-12">   
 					
-					<button type="button" class="my_button btn btn-primary" data-toggle="modal" data-target="#listAddModal">
-						<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add
+					<button type="button" class="my_button btn btn-primary pull-right" data-toggle="modal" data-target="#listAddModal">
+						Add
 					</button>      
 					
-					<button id="my_form_delete_button" type="submit" class="my_button btn btn-danger">
-						<span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span> Delete
+					<button id="my_form_delete_button" type="submit" class="my_button btn btn-danger pull-right">
+						Delete
 					</button>
 					
 				</div>  

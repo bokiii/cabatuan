@@ -14,7 +14,7 @@ class Login extends CI_Controller {
 		date_default_timezone_set("Asia/Manila");   
 		
 		if($this->session->userdata('logged_in') == true) {
-			redirect("home_controller");
+			redirect("home_controller", 'refresh');
 		}                       
 		
 		if($this->session->userdata('teacher_logged_in') == true) {

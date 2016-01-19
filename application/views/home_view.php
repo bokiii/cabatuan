@@ -52,7 +52,7 @@
 			
 			<div class="row">  
 				<div class="col-md-12">  
-					<button type="submit" class="btn btn-info" id="news_submit" disabled>Add</button>
+					<button type="submit" class="btn btn-success pull-right" id="news_submit" disabled>Add</button>
 				</div>
 			</div>
 	
@@ -63,18 +63,21 @@
 	<hr />
 	
 	<div class="container" id="home_angular_container" ng-controller='home_controller'>    
-		
 		<div class="row news_lists" ng-repeat="new in news">  
 			<div class="col-md-12">  
 				<div class="panel panel-default">
 					<div class="panel-body">
-						{{new.news}}
+						
+						<div style="word-wrap: break-word">
+							{{new.news}}
+						</div>
+					
+					
 					</div>
 					<div class="panel-footer"> <button id="<?php echo base_url(); ?>index.php/home_controller/get_news_update_content_by_id?id={{new.id}}" type="button" class="btn btn-primary show_update" data-toggle="modal" data-target=".updateNewsModal">Update</button>  <a class="btn btn-default delete_news_link" href="<?php echo base_url(); ?>index.php/home_controller/delete_latest_news?id={{new.id}}" role="button">Delete</a> &nbsp; <span>(Created) {{new.created}}</span></div>
 				</div>
 			</div>  
-		</div>     
-		
+		</div>    
 	</div>  
 
 	

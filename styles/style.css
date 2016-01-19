@@ -123,7 +123,7 @@ table.academic th, table.academic td {
 
 .error_wrap .popover-content { 
 	color: red;  
-}      
+}       
 
 /* below is for the print design */      
 
@@ -168,6 +168,77 @@ table.academic th, table.academic td {
 
 #code_submit { 
 	margin-left: 18px;
+}    
+
+
+/* below lets redesign the template */  
+
+
+@font-face {
+    font-family: roboto;
+    src: url(RobotoSlab-Bold.ttf);
+}  
+
+* {
+	
+	font-family: roboto;
+}
+ 
+  
+body {   
+	background-color: #FAF6CF; 
+}    
+
+
+.nav-tabs {  
+	border-bottom: 1px solid #000000;
+}  
+
+.page-header {  
+	border-bottom: 1px solid #000000;
+}
+  
+.form-control {  
+	border-radius: 0;    
+	/*border: 1px solid #000000;*/
+}      
+
+
+.navbar { 
+	
+	/*background-color: #5CB85C;*/  
+	background-color: #fd9902;
+	border-bottom: none;
+}  
+
+.navbar-inverse .navbar-nav > li > a { 
+	color: #000000;
+}
+
+.navbar .navbar-brand { 
+	color: #000000;
+}        
+
+
+/*.input-group .form-control:first-child, .input-group-addon:first-child, .input-group-btn:first-child > .btn, .input-group-btn:first-child > .btn-group > .btn, .input-group-btn:first-child > .dropdown-toggle, .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle), .input-group-btn:last-child > .btn-group:not(:last-child) > .btn { 
+	border-radius: 0; 
+	border: 1px solid #000000;
+}*/
+
+
+.modal .modal-content { 
+	background-color: #FAF6CF;
+}  
+
+.modal .modal-content .modal-header {   
+	background-color: #fd9902;
+}
+
+/* below is the footer */
+footer {  
+	padding-top: 20px;
+	margin-top: 20px;
+	border-top: 1px solid #000000;
 }
 
 
