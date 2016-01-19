@@ -49,7 +49,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">CNCHS Information System</a>
+				<a class="navbar-brand" href="#"><img class="pull-left" style="max-width: 40px; margin-top: -8px;" src="<?php echo base_url() ?>images/CNCHSLOGO.png" alt="CNCHS logo" /> CNCHS Information System</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<form id="login_form" method="post" action="<?php echo base_url(); ?>index.php/auth_controller/process_auth" class="navbar-form navbar-right">

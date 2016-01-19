@@ -280,7 +280,7 @@
 								<div class="col-md-4">     
 									<div class="form-group">
 										<label for="middle_name_update">Middle Name</label>
-										<input type="text" class="form-control for_validation" maxlength="2" name="middle_name_update" id="middle_name_update" data-placement="top" title="title" data-content="content">
+										<input type="text" class="form-control for_validation" name="middle_name_update" id="middle_name_update" data-placement="top" title="title" data-content="content">
 									</div>
 								</div>   
 							</div>    

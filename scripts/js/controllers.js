@@ -592,9 +592,7 @@ controllers.controller('home_controller', function($scope, $sce, $http){
 	} else { 
 		getNewsFinalUrl = fullUrl + "index.php/home_controller/get_news"
 	}  
-	
-	console.log(getNewsFinalUrl);
-	
+
 	/*var enrolledStudentUrl = fullUrl.replace("enrolled_student_account_controller", "enrolled_student_account_controller/get_student_academic_data");
 	$scope.academicDatas;      
 	$http.get(enrolledStudentUrl).success(function(data){
