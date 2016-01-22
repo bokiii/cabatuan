@@ -554,7 +554,7 @@
 	</div>
 </div>
 
-<!-- Model for view Academic Status -->
+<!-- Modal for view Academic Status -->
 
 <div class="modal fade" id="academicStatusModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
@@ -721,29 +721,8 @@
 				</div>
 			</div>   
 			
-			<!--<div class="row">    
-				<div class="col-md-12">   
-					
-					<button type="button" class="my_button btn btn-primary pull-right" data-toggle="modal" data-target="#myAddModal">
-						<span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Add
-					</button>      
-					
-					<button id="my_form_delete_button" type="submit" class="my_button btn btn-danger pull-right">
-						<span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span> Delete
-					</button>
-					
-				</div>  
-			</div>-->  
-		
 		</form> <!-- end delete form -->
-		
-		<!-- below is the hidden div for the angular trigger -->
-		<!--<div class="row my_hidden_div">   
-			<div class="col-md-12">   
-				<button type="button" ng-click="getStudents()" class="btn btn-primary student_angular_trigger">Get Students</button>   
-			</div>
-		</div>-->
-		
+	
 	</div>  
 
 	<div class="container second_tab tabs">   

@@ -101,7 +101,7 @@ controllers.controller('teacherAccount', function($scope, $http){
 	
 	$scope.updateTeacherAccount = function(teacherId, teacherName) {     
 	
-		var getTeacherAccountUrl = fullUrl + "/get_teacher_account_data?teacher_id=" + teacherId;   
+		var getTeacherAccountUrl = fullUrl + "/get_teacher_account_data?teacher_id=" + teacherId;      
 		
 		$http.get(getTeacherAccountUrl).success(function(data){
 			$scope.username = data.teacher_account[0].username;   
@@ -193,28 +193,6 @@ controllers.controller('student', function($scope, $http, $sce){
 	var studentUrl = fullUrl + "/get_student_via_standard_model"; 
 	$scope.students;      
 	
-	/*$http.get(studentUrl).success(function(data){
-		
-		var i; 
-		for(i = 0; i < data.students.length; i++) {
-			if(data.students[i].enrolled_student_id != null) {
-				data.students[i].status = '<button type="button" class="my_button btn btn-info enroll_button" data-toggle="modal" data-target="#enrollModal"><span class="glyphicon glyphicon-education" aria-hidden="true"></span> Enroll</button>';                  
-				data.students[i].viewAcademic = '<button type="button" id="'+ data.students[i].id +'" class="view_academic my_button btn btn-info enroll_button" data-toggle="modal" data-target="#academicStatusModal"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> View Academic Status</button>';                           
-			} else {
-				data.students[i].status = '<button type="button" class="my_button btn btn-info enroll_button" data-toggle="modal" data-target="#enrollModal"><span class="glyphicon glyphicon-education" aria-hidden="true"></span> Enroll</button>';                                                 
-				data.students[i].viewAcademic = "<p>(Not Enrolled)</p>";
-			} 
-		}
-	
-		$scope.students = data.students;     
-		var a; 
-		for(a = 0; a < $scope.students.length; a++) {  
-			$scope.students[a].status = $sce.trustAsHtml($scope.students[a].status);   
-			$scope.students[a].viewAcademic = $sce.trustAsHtml($scope.students[a].viewAcademic);
-		}       
-		
-	});*/   
-	
 	$scope.getStudents = function() {
 		$http.get(studentUrl).success(function(data){
 			
@@ -237,7 +215,7 @@ controllers.controller('student', function($scope, $http, $sce){
 				$scope.students[a].status = $sce.trustAsHtml($scope.students[a].status);   
 				$scope.students[a].viewAcademic = $sce.trustAsHtml($scope.students[a].viewAcademic);
 			}   
-		
+			
 		}); 
 	};        
 	
@@ -503,7 +481,7 @@ controllers.controller('studentAccountController', function($scope, $sce, $http)
 	var studentUrl = fullUrl + "/get_student_via_standard_model"; 
 	$scope.students;      
 	
-	$http.get(studentUrl).success(function(data){
+	/*$http.get(studentUrl).success(function(data){
 		
 		var i; 
 		for(i = 0; i < data.students.length; i++) {
@@ -521,9 +499,39 @@ controllers.controller('studentAccountController', function($scope, $sce, $http)
 		for(a = 0; a < $scope.students.length; a++) {  
 			$scope.students[a].status = $sce.trustAsHtml($scope.students[a].status);   
 			$scope.students[a].viewAcademic = $sce.trustAsHtml($scope.students[a].viewAcademic);
-		}   
+		}       
 		
-	});   
+	});*/      
+	
+	$scope.getStudents = function() {
+		$http.get(studentUrl).success(function(data){
+			
+			//console.log("student is get..");
+			
+			var i; 
+			for(i = 0; i < data.students.length; i++) {
+				if(data.students[i].enrolled_student_id != null) {
+					data.students[i].status = '<button type="button" class="my_button btn btn-info enroll_button" data-toggle="modal" data-target="#enrollModal"><span class="glyphicon glyphicon-education" aria-hidden="true"></span> Enroll</button>';                  
+					data.students[i].viewAcademic = '<button type="button" id="'+ data.students[i].id +'" class="view_academic my_button btn btn-info enroll_button" data-toggle="modal" data-target="#academicStatusModal"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> View Academic Status</button>';                           
+				} else {
+					data.students[i].status = '<button type="button" class="my_button btn btn-info enroll_button" data-toggle="modal" data-target="#enrollModal"><span class="glyphicon glyphicon-education" aria-hidden="true"></span> Enroll</button>';                                                 
+					data.students[i].viewAcademic = "<p>(Not Enrolled)</p>";
+				} 
+			}
+		
+			$scope.students = data.students;     
+			var a; 
+			for(a = 0; a < $scope.students.length; a++) {  
+				$scope.students[a].status = $sce.trustAsHtml($scope.students[a].status);   
+				$scope.students[a].viewAcademic = $sce.trustAsHtml($scope.students[a].viewAcademic);
+			}   
+			
+			console.log($scope.students);
+			
+		}); 
+	};          
+	
+	$scope.getStudents();
 	
 });   
 
@@ -590,7 +598,7 @@ controllers.controller('home_controller', function($scope, $sce, $http){
 	if(inHome != -1) {    
 		getNewsFinalUrl = getNewsUrl;	
 	} else { 
-		getNewsFinalUrl = fullUrl + "index.php/home_controller/get_news"
+		getNewsFinalUrl = fullUrl + "index.php/home_controller/get_news";
 	}  
 
 	/*var enrolledStudentUrl = fullUrl.replace("enrolled_student_account_controller", "enrolled_student_account_controller/get_student_academic_data");

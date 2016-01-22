@@ -17,7 +17,7 @@ class Student_account_controller extends CI_Controller {
 		}      
 		
 		$this->load->model("student_model");   
-		$this->load->model("student_account_model");
+		$this->load->model("student_account_model");   
 		
 	}          
 	
@@ -61,7 +61,53 @@ class Student_account_controller extends CI_Controller {
 	
 	}
 	
+	function set_student_account() {  
+		$data = array();
+		
+		$username = trim($this->input->post("username"));
+		$password = trim($this->input->post("password"));     
+		$md5_password = md5($password);
+		$student_id = $this->input->post("student_id");   
+		
+		$student_account_data = array(  
+			'username' => $username, 
+			'password' => $password, 
+			'md5_password' => $md5_password, 
+			'student_id' => $student_id
+		);   
+		
+		$set_student_account = $this->student_account_model->set_student_account($student_account_data, $student_id);                              
+		
+		if($set_student_account) {  
+			$data['status'] = true; 
+		} else { 
+			$data['status'] = false; 
+		}  
+		
+		echo json_encode($data); 
+		
+	}       
 	
+	function get_student_account_data() {  
+		
+		$student_id = $this->input->get("student_id");   
+		
+		$get_student_account_by_student_id = $this->student_account_model->get_student_account_by_student_id($student_id);   
+		
+		if($get_student_account_by_student_id != null) {  
+			$data['student_account'] = $get_student_account_by_student_id;  
+		} else {  
+			$data['student_account'] = array( 
+				0 => array( 
+					"username" => "", 
+					"password" => ""
+				)
+			);  
+		}
+	
+		echo json_encode($data);   
+		
+	}
 	
 }      
 

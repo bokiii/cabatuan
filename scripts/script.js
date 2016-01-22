@@ -1060,7 +1060,8 @@ var studentModule = (function() {
 			} 
 		
 			// below is the trigger for the students 
-			angular.element(document.getElementById('student_angular_container')).scope().getStudents();     
+			angular.element(document.getElementById('student_angular_container')).scope().getStudents();    
+			angular.element(document.getElementById('student_angular_container')).scope().getUnenrolledStudents();  			
 		
 			var studentId = data.student_id;
 			// below is the trigger for the view list academic  
@@ -1268,6 +1269,7 @@ var teacherModule = (function() {
 	
 	var teacherAccountClick = function() {  
 		$(document).on("click", ".teacher_account", function(e){   
+			console.log("clicked");
 			e.preventDefault();
 			var teacherId = $(this).attr("id");  
 			var teacherName = $(this).parent('td').siblings(".teacher_name").text();   
@@ -1275,7 +1277,22 @@ var teacherModule = (function() {
 			angular.element($("#teacher_account_form")).scope().updateTeacherAccount(teacherId, teacherName);  
 	
 		});
+	};     
+
+	var teacherActiveAccountClick = function() {  
+		$(document).on("click", ".teacher_active_account", function(e){    
+		
+			e.preventDefault();
+			$("#teacherAccountModal").modal('show');  
+			
+			var teacherId = $(this).attr("id");  
+			var teacherName = $(document).find(".teacher_name").text();    
+			
+			angular.element($("#teacher_account_form")).scope().updateTeacherAccount(teacherId, teacherName);  	
+		
+		});
 	};      
+	
 
 	var teacherAccountModalHide = function() { 
 		
@@ -1311,7 +1328,7 @@ var teacherModule = (function() {
 		function success_status(data) {  
 			
 			// below is the trigger for the students 
-			angular.element(document.getElementById('teacher_container')).scope().getTeachers();     
+			//angular.element(document.getElementById('teacher_container')).scope().getTeachers();     
 			
 			if(data.status) {  
 				bootbox.alert("Account updated."); 
@@ -1325,13 +1342,15 @@ var teacherModule = (function() {
 	
 	return {   
 		teacherAccountClick:		teacherAccountClick, 
+		teacherActiveAccountClick:	teacherActiveAccountClick,
 		teacherAccountModalHide:	teacherAccountModalHide, 
 		teacherAccountFormSubmit:	teacherAccountFormSubmit
 	}
 
 })()   
 
-teacherModule.teacherAccountClick();  
+teacherModule.teacherAccountClick();     
+teacherModule.teacherActiveAccountClick();    
 teacherModule.teacherAccountModalHide();  
 teacherModule.teacherAccountFormSubmit();
 
@@ -1360,14 +1379,16 @@ var studentModule = (function() {
 		
 		function loading() {  
 		
+		
 			var usernameVal = $("#student_account_form #username").val();  
 			var passwordVal = $("#student_account_form #password").val();   
-			
+
 			if(usernameVal == "" || passwordVal == "") {   
-				bootbox.alert("<p style='color: #D9534F;'>Failed. Username and password must not be empty.</p>");
-				return false;
+				bootbox.alert("<p style='color: #D9534F;'>Failed. Username and password must not be empty.</p>");   
+				
+				return false;  
 			} else {  
-				return true;
+				return true;  
 			}
 			
 		}  
@@ -1682,8 +1703,7 @@ var popOverModule = (function() {
 			// below is for the update 
 			countGoodFromUpdate = $(document).find(".wrap_update_inputs .is_good").length;
 			sexValueUpdate = $(document).find(".sex_update").val(); 
-			console.log(sexValueUpdate);
-			
+		
 			
 			if(countGoodFromUpdate == 19 && sexValueUpdate != "") {   
 				$(document).find("#update_form_submit").removeAttr("disabled");
@@ -1701,11 +1721,7 @@ var popOverModule = (function() {
 			} else { 
 				$(document).find("#enrollment_submit").attr("disabled", "disabled");    
 			}  
-			
-			console.log("count good: " + countGood);  
-			console.log("count good from update: " + countGoodFromUpdate);
 		
-			
 		}   
 		
 		
