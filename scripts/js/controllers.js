@@ -282,8 +282,6 @@ controllers.controller('student', function($scope, $http, $sce){
 	
 });
 
-
-
 controllers.controller('studentAccount', function($scope, $http){    
 	
 	var protocol = window.location.protocol + "//" + window.location.host;
@@ -480,28 +478,6 @@ controllers.controller('studentAccountController', function($scope, $sce, $http)
 	// below is for the students 
 	var studentUrl = fullUrl + "/get_student_via_standard_model"; 
 	$scope.students;      
-	
-	/*$http.get(studentUrl).success(function(data){
-		
-		var i; 
-		for(i = 0; i < data.students.length; i++) {
-			if(data.students[i].enrolled_student_id != null) {
-				data.students[i].status = '<button type="button" class="my_button btn btn-info enroll_button" data-toggle="modal" data-target="#enrollModal"><span class="glyphicon glyphicon-education" aria-hidden="true"></span> Enroll</button>';                  
-				data.students[i].viewAcademic = '<button type="button" id="'+ data.students[i].id +'" class="view_academic my_button btn btn-info enroll_button" data-toggle="modal" data-target="#academicStatusModal"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> View Academic Status</button>';                           
-			} else {
-				data.students[i].status = '<button type="button" class="my_button btn btn-info enroll_button" data-toggle="modal" data-target="#enrollModal"><span class="glyphicon glyphicon-education" aria-hidden="true"></span> Enroll</button>';                                                 
-				data.students[i].viewAcademic = "<p>(Not Enrolled)</p>";
-			} 
-		}
-	
-		$scope.students = data.students;     
-		var a; 
-		for(a = 0; a < $scope.students.length; a++) {  
-			$scope.students[a].status = $sce.trustAsHtml($scope.students[a].status);   
-			$scope.students[a].viewAcademic = $sce.trustAsHtml($scope.students[a].viewAcademic);
-		}       
-		
-	});*/      
 	
 	$scope.getStudents = function() {
 		$http.get(studentUrl).success(function(data){

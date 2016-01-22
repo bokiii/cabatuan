@@ -124,7 +124,8 @@ class Students_controller extends CI_Controller {
 		$student->sur_name = $this->input->post('sur_name');     
 		$student->first_name = $this->input->post('first_name');   
 		$student->middle_name = $this->input->post('middle_name');   		  
-		$student->lrn = $this->input->post('lrn');   
+		//$student->lrn = $this->input->post('lrn');     
+		$student->lrn = "removed";
 		$student->sex = $this->input->post('sex');  
 		$student->date_of_birth = $valid_date_of_birth;  
 		$student->place_of_birth = $this->input->post('place_of_birth');   
@@ -202,7 +203,8 @@ class Students_controller extends CI_Controller {
 		$student->sur_name = $this->input->post('sur_name_update');      
 		$student->first_name = $this->input->post('first_name_update');   
 		$student->middle_name = $this->input->post('middle_name_update');		
-		$student->lrn = $this->input->post('lrn_update');  
+		//$student->lrn = $this->input->post('lrn_update');   
+		$student->lrn = "removed"; 
 		$student->sex = $this->input->post('sex_update');  
 		$student->date_of_birth = $valid_date_of_birth;   
 		$student->place_of_birth = $this->input->post('place_of_birth_update');  

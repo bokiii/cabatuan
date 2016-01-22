@@ -320,10 +320,10 @@
 							</div>   
 						</div>    
 						
-						<div class="form-group"> 
+						<!--<div class="form-group"> 
 							<label for="lrn">LRN</label>
 							<input type="text" class="form-control for_validation" name="lrn" id="lrn" data-placement="top" title="title" data-content="content">
-						</div>  
+						</div>--> 
 						
 						<div class="form-group">
 							<label for="sex">Sex</label>

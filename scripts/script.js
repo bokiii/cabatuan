@@ -1705,7 +1705,7 @@ var popOverModule = (function() {
 			sexValueUpdate = $(document).find(".sex_update").val(); 
 		
 			
-			if(countGoodFromUpdate == 19 && sexValueUpdate != "") {   
+			if(countGoodFromUpdate == 18 && sexValueUpdate != "") {   
 				$(document).find("#update_form_submit").removeAttr("disabled");
 			} else { 
 				$(document).find("#update_form_submit").attr("disabled", "disabled");    
@@ -1716,7 +1716,7 @@ var popOverModule = (function() {
 			//countGood = $(document).find(".is_good").length;  
 			countGood = $(document).find(".wrap_inputs .is_good").length; 
 		
-			if(countGood == 19 && sexValue != "") {   
+			if(countGood == 18 && sexValue != "") {   
 				$(document).find("#enrollment_submit").removeAttr("disabled");
 			} else { 
 				$(document).find("#enrollment_submit").attr("disabled", "disabled");    

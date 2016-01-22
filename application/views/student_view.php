@@ -11,7 +11,7 @@
 					
 					<div class="row wrap_inputs" id="studentAddModal">     
 						
-						<div class="col-md-6">  
+						<div class="col-md-12">  
 					
 							<div class="row">   
 								<div class="col-md-4">   
@@ -37,10 +37,10 @@
 								</div>   
 							</div>    
 							
-							<div class="form-group">
+							<!--<div class="form-group">
 								<label for="lrn">LRN</label>
 								<input type="text" class="form-control for_validation" name="lrn" id="lrn" data-placement="top" title="title" data-content="content">
-							</div>  
+							</div>-->  
 							
 							<div class="form-group">
 								<label for="sex">Sex</label>
@@ -160,9 +160,7 @@
 								<label for="school_address">School Address</label>
 								<input type="text" class="form-control for_validation" name="school_address" id="school_address" data-placement="top" title="title" data-content="content">
 							</div>   
-						</div>    
-						
-						<div class="col-md-6">   
+					
 							
 							<div class="form-group">
 								<label for="grade_or_year_level">Grade/Year Level</label>
@@ -228,7 +226,7 @@
 								</div><!-- /input-group -->    
 							</div>
 		 
-						</div> <!-- end col-md-6 -->
+						</div> <!-- end col-md-12 -->
 						
 					</div>   
 					
@@ -259,7 +257,7 @@
 				  
 					<div class="row wrap_update_inputs" id="studentUpdateModal">     
 						
-						<div class="col-md-6">  
+						<div class="col-md-12">  
 					
 							<div class="row">   
 								<div class="col-md-4">   
@@ -285,10 +283,10 @@
 								</div>   
 							</div>    
 							
-							<div class="form-group">
+							<!--<div class="form-group">
 								<label for="lrn_update">LRN</label>
 								<input type="text" class="form-control for_validation" name="lrn_update" id="lrn_update" data-placement="top" title="title" data-content="content">
-							</div>  
+							</div>-->  
 							
 							<div class="form-group">
 								<label for="sex">Sex</label>
@@ -408,9 +406,7 @@
 								<label for="school_address_update">School Address</label>
 								<input type="text" class="form-control for_validation" name="school_address_update" id="school_address_update" data-placement="top" title="title" data-content="content">
 							</div>   
-						</div>    
-						
-						<div class="col-md-6">   
+					 
 							
 							<div class="form-group">
 								<label for="grade_or_year_level">Grade/Year Level</label>
@@ -476,7 +472,7 @@
 								</div><!-- /input-group -->    
 							</div>
 		 
-						</div> <!-- end col-md-6 -->
+						</div> <!-- end col-md-12 -->
 						
 					</div>   
 					

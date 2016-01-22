@@ -109,7 +109,8 @@ class Login extends CI_Controller {
 		$verification->sur_name = $this->input->post('sur_name');     
 		$verification->first_name = $this->input->post('first_name');   
 		$verification->middle_name = $this->input->post('middle_name');   		  
-		$verification->lrn = $this->input->post('lrn');   
+		//$verification->lrn = $this->input->post('lrn');   
+		$verification->lrn = "removed";  
 		$verification->sex = $this->input->post('sex');  
 		$verification->date_of_birth = $valid_date_of_birth;  
 		$verification->place_of_birth = $this->input->post('place_of_birth');   
