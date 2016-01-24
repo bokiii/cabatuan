@@ -765,7 +765,6 @@
 											<th>Edit Data</th>  
 											<th>Enrollment</th>  
 											<th>Academic Status</th>   
-											<th>Account</th>
 										</tr>
 									</thead>   
 									<tbody>   
@@ -777,9 +776,6 @@
 											</td>   
 											<td ng-bind-html="unenrolled.status"></td>  
 											<td ng-bind-html="unenrolled.viewAcademic"></td>     
-											<td>
-												<button id="{{unenrolled.id}}" type="button" class="btn btn-{{unenrolled.button_type}} student_account">{{unenrolled.button_value}}</button>
-											</td>
 										</tr>  
 									</tbody>
 								</table>

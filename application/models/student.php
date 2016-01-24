@@ -7,11 +7,11 @@ class Student extends Datamapper {
 	public $validation = array(
 		'sur_name' => array(
 			'label' => 'Sur Name', 
-			'rules' => array('required', 'trim', 'unique')
+			'rules' => array('required', 'trim')
 		), 
 		'first_name' => array(
 			'label' => 'First Name', 
-			'rules' => array('required', 'trim', 'unique')
+			'rules' => array('required', 'trim')
 		), 
 		'middle_name' => array(
 			'label' => 'Middle Name', 
