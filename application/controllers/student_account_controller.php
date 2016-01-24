@@ -81,13 +81,9 @@ class Student_account_controller extends CI_Controller {
 			
 			array_push($data['list_academics'][$i]['subjects_and_grades'], $get_student_academic_data_by_enrolled_student_id);
 			
-			//$this->debug($data['list_academics'][$i]);  
-		
 		}   
 		
-		//$this->debug($data);
-
-		echo json_encode($data);
+		echo json_encode($data);  
 		
 	}
 	

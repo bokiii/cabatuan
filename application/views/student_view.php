@@ -681,7 +681,7 @@
 		</div>   
 		
 		
-		<form id="delete_form" action="<?php echo base_url(); ?>index.php/students_controller/delete_student" method='post'>
+		<form class="delete_form" action="<?php echo base_url(); ?>index.php/students_controller/delete_student" method='post'>
 			<div class="row">  
 				<div class="col-md-12">
 				
@@ -715,7 +715,18 @@
 					</div>
 				
 				</div>
-			</div>   
+			</div>      
+			
+			<div class="row">    
+				<div class="col-md-12">   
+					
+					<button type="submit" class="my_form_delete_button my_button btn btn-danger pull-right">
+						Delete
+					</button>  
+					
+				</div>  
+			</div>  
+			
 			
 		</form> <!-- end delete form -->
 	
@@ -741,7 +752,7 @@
 			<div class="col-md-12">   
 				
 				
-				<form id="delete_form" action="<?php echo base_url(); ?>index.php/students_controller/delete_student" method='post'>
+				<form class="delete_form" action="<?php echo base_url(); ?>index.php/students_controller/delete_student" method='post'>
 					<div class="row">  
 						<div class="col-md-12">
 						
@@ -784,7 +795,7 @@
 								Add
 							</button>      
 							
-							<button id="my_form_delete_button" type="submit" class="my_button btn btn-danger pull-right">
+							<button type="submit" class="my_form_delete_button my_button btn btn-danger pull-right">
 								Delete
 							</button>
 							

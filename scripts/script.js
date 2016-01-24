@@ -122,8 +122,8 @@ var modalModule = (function() {
 				$(document).find(".teacher_angular_trigger").trigger("click");     
 				
 				// below is the trigger for the students 
-				angular.element($("#student_angular_container")).scope().getUnenrolledStudents(); 
-				
+				angular.element($("#student_angular_container")).scope().getUnenrolledStudents();   
+				angular.element($("#student_angular_container")).scope().getStudents(); 
 				
 				alertModule.modalAlertOpen(data, containerToAppend);
 			} else {
@@ -357,6 +357,7 @@ var deleteFormModule = (function() {
 
 	var executeCheckBox = function() {
 		
+		// below is for the #delete_form
 		$(document).on('click', "#delete_form .main_check", function(){
 			if($(this).is(":checked")) {
 				$("#delete_form .sub_check").check();
@@ -371,8 +372,24 @@ var deleteFormModule = (function() {
 			} else {
 				$("#delete_form .main_check").uncheck();
 			}
-		});          
+		});             
 		
+		// below is for the .delete_form 
+		$(document).on('click', ".delete_form .main_check", function(){
+			if($(this).is(":checked")) {
+				$(".delete_form .sub_check").check();
+			} else {
+				$(".delete_form .sub_check").uncheck();
+			}
+		});
+		
+		$(document).on('click', ".delete_form .sub_check", function(){
+			if($(".delete_form .sub_check:checked").length === $(".delete_form .sub_check").length) {
+				$(".delete_form .main_check").check();
+			} else {
+				$(".delete_form .main_check").uncheck();
+			}
+		});          
 		
 		
 		// below is the checkbox for the view academic
@@ -406,6 +423,19 @@ var deleteFormModule = (function() {
 			bootbox.confirm("Are you sure?", function(result) {
 				if(result) {
 					$(document).find("#delete_form").submit();
+				}
+			});        
+			
+		
+		});   
+		
+		$(document).on('click', ".my_form_delete_button", function(e){
+		
+			e.preventDefault();
+			
+			bootbox.confirm("Are you sures?", function(result) {
+				if(result) {
+					$(document).find(".delete_form").submit();
 				}
 			});        
 			
@@ -462,11 +492,75 @@ var deleteFormModule = (function() {
 				$(document).find(".teacher_subject_curriculum_section_angular_trigger").trigger("click"); 
 
 				// below is the trigger for the students 
-				$(document).find(".student_angular_trigger").trigger("click"); 				
+			
+				angular.element($("#student_angular_container")).scope().getUnenrolledStudents();   
+				angular.element($("#student_angular_container")).scope().getStudents(); 
+	
 			}
+		}        
+		
+		
+		$(".delete_form").ajaxForm({
+			dataType: 'json',
+			forceSync: true,
+			beforeSubmit: isLoading,
+			success: is_success_status
+		});     
+		
+		
+		function isLoading() {
+			
+			console.log("trying to submit");
+			
+			return true;
 		}
 		
-	};
+
+		function is_success_status(data) {
+			if(data.status) {
+				
+				$(document).find(".main_check").uncheck();  
+				$(document).find(".sub_check").uncheck();
+				
+				// below is the angular trigger for curriculum
+				$(document).find(".curriculum_angular_trigger").trigger("click");   
+				
+				// below is the angular trigger for curriculum subject
+				$(document).find(".curriculum_subject_angular_trigger").trigger("click");       
+				
+				// below is the angular trigger for curriculum section
+				$(document).find(".curriculum_section_angular_trigger").trigger("click");       
+				
+				// below is the trigger for the teachers 
+				$(document).find(".teacher_angular_trigger").trigger("click");     
+				
+				// below is the trigger for the teacher subjects 
+				$(document).find(".teacher_subject_angular_trigger").trigger("click");    
+				// below is the trigger for the teacher curriculum subjects 
+				$(document).find(".teacher_curriculum_subject_angular_trigger").trigger("click");      				
+				
+				// below is the trigger for the teacher subject sections
+				$(document).find(".teacher_subject_section_angular_trigger").trigger("click");     
+				// below is the trigger for the teacher subject curriculum section 
+				$(document).find(".teacher_subject_curriculum_section_angular_trigger").trigger("click"); 
+
+				// below is the trigger for the students 
+			
+				angular.element($("#student_angular_container")).scope().getUnenrolledStudents();   
+				angular.element($("#student_angular_container")).scope().getStudents(); 
+	
+			}
+		}     
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}; // end deleteFormSubmit 
 	
 	var academicListDeleteClick = function() {  
 		
