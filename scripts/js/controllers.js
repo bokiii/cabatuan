@@ -502,8 +502,6 @@ controllers.controller('studentAccountController', function($scope, $sce, $http)
 				$scope.students[a].viewAcademic = $sce.trustAsHtml($scope.students[a].viewAcademic);
 			}   
 			
-			console.log($scope.students);
-			
 		}); 
 	};          
 	
@@ -519,6 +517,8 @@ controllers.controller('studentAccountAcademic', function($scope, $sce, $http){
 	$scope.getStudentEnrolledAcademicData = function(studentId) {  
 	
 		var studentEnrolledAcademicListUrl = fullUrl + "/list_student_enrolled_academic?student_id=" + studentId;
+		
+		console.log(studentEnrolledAcademicListUrl);
 		
 		$scope.listAcademics;
 		
@@ -558,8 +558,29 @@ controllers.controller('currentEnrolledStudentController', function($scope, $sce
 		$scope.academicDatas = data.academic_datas;   
 	});
 	
+});      
+
+
+controllers.controller('currentEnrolledStudentControllerFullList', function($scope, $sce, $http){
 	
-});
+	var protocol = window.location.protocol + "//" + window.location.host;
+	var fullUrl = protocol + window.location.pathname + window.location.search;      
+	
+	var fullAcademicListUrl =  fullUrl.replace("get_student_academic_full_list", "list_student_enrolled_academic_revised");
+	
+	$scope.fullListAcademics; 
+	$scope.getFullListAcademics = function() { 
+		
+		$http.get(fullAcademicListUrl).success(function(data){
+			$scope.fullListAcademics = data;      
+		}); 
+	};      
+	
+	$scope.getFullListAcademics();
+	
+}); 
+
+
 
 // below are the controllers for the home
 controllers.controller('home_controller', function($scope, $sce, $http){

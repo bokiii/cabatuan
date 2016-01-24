@@ -39,17 +39,7 @@
 	</div>
 </div>  
 
-<!-- Modal for view Academic Status -->
 
-<div class="modal fade" id="academicStatusModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			
-		
-			
-		</div>
-	</div>
-</div>
 
 <!-- Modal for student update account -->     
 
@@ -113,7 +103,8 @@
 						<tbody>   
 							<tr ng-repeat="student in students | filter: query">
 								<td class="student_name">{{student.sur_name}}, {{student.first_name}} {{student.middle_name}}</td>   
-								<td ng-bind-html="student.viewAcademic"></td>      
+								<!--<td ng-bind-html="student.viewAcademic"></td>-->     
+								<td><a class="btn btn-info" href="<?php echo base_url(); ?>index.php/student_account_controller/get_student_academic_full_list" role="button">View Academic Status</a></td>
 								<td>
 									<button id="{{student.id}}" type="button" class="btn btn-{{student.button_type}} student_account">{{student.button_value}}</button>
 								</td>

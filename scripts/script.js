@@ -1073,6 +1073,7 @@ var studentModule = (function() {
 	
 	var viewAcademicStatusShow = function() {   
 		$(document).on("click", ".view_academic", function(){
+			
 			var studentId = $(this).attr("id");   
 			angular.element($("#view_academic")).scope().getStudentEnrolledAcademicData(studentId);  
 		});

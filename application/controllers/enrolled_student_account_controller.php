@@ -40,7 +40,16 @@ class Enrolled_student_account_controller extends CI_Controller {
 	
 		$data['academic_datas'] = $get_student_academic_data_by_enrolled_student_id; 
 		echo json_encode($data);
+	}    
+	
+	function get_full_list_student_academic_data() {   
+		
+		$enrolled_student_id = $this->input->get("enrolled_student_id");   
+		
+		
+	
 	}
+	
 
 
 

@@ -104,10 +104,7 @@ class Student_model extends CI_Model {
 	
 	}
 	
-	
-	
-	
-	
+
 	function get_student_enrolled_academic_list_by_student_id($student_id) {  
 		$this->db->select("enrolled_students.id, curriculums.curriculum, curriculum_sections.section, enrolled_students.school_year");   
 		$this->db->from("enrolled_students");      
@@ -116,7 +113,22 @@ class Student_model extends CI_Model {
 		$this->db->where('enrolled_students.student_id', $student_id);  
 		$query = $this->db->get(); 
 		return $query->result_array();
-	} 
+	}    
+	
+	function get_student_enrolled_academic_list_by_student_id_revised($student_id) {  
+		$this->db->select("enrolled_students.id, curriculums.curriculum, curriculum_sections.section, enrolled_students.school_year");   
+		$this->db->from("enrolled_students");      
+		$this->db->join("curriculums", "curriculums.id = enrolled_students.curriculum_id", "left");   
+		$this->db->join("curriculum_sections", "curriculum_sections.id = enrolled_students.section_id", "left"); 
+		$this->db->where('enrolled_students.student_id', $student_id);  
+		$query = $this->db->get(); 
+		return $query->result_array();
+	}      
+	
+	
+	
+	
+	
 
 }   
 

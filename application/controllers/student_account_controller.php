@@ -17,7 +17,8 @@ class Student_account_controller extends CI_Controller {
 		}      
 		
 		$this->load->model("student_model");   
-		$this->load->model("student_account_model");   
+		$this->load->model("student_account_model");     
+		$this->load->model("enrolled_student_model");
 		
 	}          
 	
@@ -57,9 +58,56 @@ class Student_account_controller extends CI_Controller {
 		$get_student_enrolled_academic_list_by_student_id = $this->student_model->get_student_enrolled_academic_list_by_student_id($student_id);
 	
 		$data['list_academics'] = $get_student_enrolled_academic_list_by_student_id;   
+		
 		echo json_encode($data);
+
+	}       
 	
+	public function list_student_enrolled_academic_revised() {   
+	
+		$data = array();
+		
+		$student_id = $this->session->userdata("student_id");   
+		$get_student_enrolled_academic_list_by_student_id = $this->student_model->get_student_enrolled_academic_list_by_student_id_revised($student_id);
+	
+		$data['list_academics'] = $get_student_enrolled_academic_list_by_student_id;   
+		
+		for($i = 0; $i < count($data['list_academics']); $i++) { 
+			
+			
+			$data['list_academics'][$i]['subjects_and_grades'] = array();  
+			
+			$get_student_academic_data_by_enrolled_student_id = $this->enrolled_student_model->get_student_academic_data_by_enrolled_student_id($data['list_academics'][$i]['id']);
+			
+			array_push($data['list_academics'][$i]['subjects_and_grades'], $get_student_academic_data_by_enrolled_student_id);
+			
+			//$this->debug($data['list_academics'][$i]);  
+		
+		}   
+		
+		//$this->debug($data);
+
+		echo json_encode($data);
+		
 	}
+	
+	
+	public function get_student_academic_full_list() { 
+		
+		
+		$get_student_by_current_student_id = $this->student_model->get_student_by_current_student_id($this->session->userdata("student_id"));
+		
+		foreach($get_student_by_current_student_id as $row) { 
+			$data['first_name'] = $row['first_name'];    
+			$data['last_name'] = $row['sur_name'];  
+			$data['middle_name'] = $row['middle_name'];
+		}     
+		
+		$data['main_content'] = "get_student_full_academic_full_list_view";
+		$this->load->view('template/student_content', $data);   
+	}
+	
+	
 	
 	function set_student_account() {  
 		$data = array();
