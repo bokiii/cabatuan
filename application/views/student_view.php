@@ -673,10 +673,21 @@
 						<div class="form-group">
 							<label class="sr-only" for="query">Query </label>
 							<input ng-model="query" type="text" class="form-control" placeholder="Search Student">
-						</div>      	
-					</form>     
-					
-				</div>  
+						</div>         
+						&nbsp;
+						<label for="query">Sort by Curriculum </label>
+						<select ng-model="curriculumQuery" class="form-control">
+							<option>Grade 7</option>
+							<option>Grade 8</option>
+							<option>Grade 9</option>
+							<option>Grade 10</option>
+							<option>Grade 11</option>
+						</select>
+
+						
+					</form>        
+				</div>        	
+				
 			</div>  
 		</div>   
 		
@@ -698,7 +709,7 @@
 								</tr>
 							</thead>   
 							<tbody>   
-								<tr ng-repeat="student in students | filter: query">
+								<tr ng-repeat="student in students | filter: query | filter: curriculumQuery">
 									<td class="has_student_id"><input type="checkbox" name="student_id[]" value="{{student.id}}" class="sub_check" /></td>
 									<td class="student_name">{{student.sur_name}}, {{student.first_name}} {{student.middle_name}}</td>   
 									<td>

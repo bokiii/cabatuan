@@ -63,14 +63,37 @@ class Student_model extends CI_Model {
 
 		$this->db->from("enrolled_students");     
 		$this->db->join("students", "students.id = enrolled_students.student_id", "left");   
+		
 		$this->db->group_by("enrolled_students.student_id");
 		
 		$query = $this->db->get();    
 
-		return $query->result_array();
+		return $query->result_array();   
 		
-	}
+	}   
 	
+	function get_enrolled_student_curriculums_by_enrolled_student_student_id($student_id) {  
+		$this->db->select("curriculum");  
+		$this->db->from("enrolled_students");    
+		$this->db->join('curriculums', 'curriculums.id = enrolled_students.curriculum_id');
+		$this->db->where("student_id", $student_id);  
+		
+		$query = $this->db->get();
+		return $query->result_array();   
+	}     
+	
+	function get_enrolled_student_sections_by_enrolled_student_student_id($student_id) {  
+		$this->db->select("section");  
+		$this->db->from("enrolled_students");   
+		$this->db->join('curriculum_sections', 'curriculum_sections.id = enrolled_students.section_id');
+		$this->db->where("student_id", $student_id);    
+		
+		$query = $this->db->get();
+		return $query->result_array();    
+		
+	}   
+	
+
 	function get_unenrolled_students() { 
 		
 		$this->db->select("students.id, students.sur_name, students.first_name, students.middle_name, students.lrn, students.sex, students.date_of_birth, students.place_of_birth, students.age, students.present_address, students.school_last_attended, students.school_address, students.grade_or_year_level, students.school_year, students.tve_specialization, students.father, students.mother, students.person_to_notify, students.address, students.contact_number, students.user_type, students.created, students.updated,    

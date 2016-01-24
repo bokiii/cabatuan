@@ -65,8 +65,9 @@ class Students_controller extends CI_Controller {
 	
 		$get_students = $this->student_model->get_enrolled_students();  
 		
-		$data['students'] = $get_students;        
+		$data['students'] = $get_students;      
 		
+
 		for($i = 0; $i < count($data["students"]); $i++) {  
 			$student_id = $data['students'][$i]['id'];   
 			$check_student_id = $this->student_account_model->check_student_id($student_id);  
@@ -76,10 +77,23 @@ class Students_controller extends CI_Controller {
 			} else {  
 				$data['students'][$i]['button_type'] = "default";   
 				$data['students'][$i]['button_value'] = "Create Account";   
-			}
+			}       
+
+			$data['students'][$i]['curriculums'] = array(); 
+			$data['students'][$i]['sections'] = array();   
+			
+			$get_enrolled_student_curriculums_by_enrolled_student_student_id = $this->student_model->get_enrolled_student_curriculums_by_enrolled_student_student_id($data['students'][$i]['id']);
+			$get_enrolled_student_sections_by_enrolled_student_student_id = $this->student_model->get_enrolled_student_sections_by_enrolled_student_student_id($data['students'][$i]['id']);
+		
+			array_push($data['students'][$i]['curriculums'], $get_enrolled_student_curriculums_by_enrolled_student_student_id);
+			array_push($data['students'][$i]['sections'], $get_enrolled_student_sections_by_enrolled_student_student_id);
+		
 		}
 		
-		echo json_encode($data);        
+		echo json_encode($data);       
+
+		//$this->debug($data);
+		
 	}    
 	
 	// below is to get unenrolled students 
